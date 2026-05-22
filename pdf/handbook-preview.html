@@ -1,0 +1,5130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Engineering Playbooks" />
+  <meta name="description" content="Build Any Production-Grade Application End-to-End — Complete Code, Diagrams, and Checklists for Freshers to Senior Engineers" />
+  <title>The Complete Software Engineering Handbook — Complete Edition</title>
+  <style>/* Software Engineering Handbook — Publication stylesheet (print + links) */
+
+@page {
+  size: A4;
+  margin: 14mm 0 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10.5pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body.book-root {
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.55;
+  color: #1a1a2e;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Clickable internal links (PDF + preview) */
+a.book-link,
+.content a[href^="#"] {
+  color: #0369a1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a.book-link:hover,
+.content a[href^="#"]:hover {
+  text-decoration: underline;
+}
+
+.pagenum-link {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========== FRONT / BACK MATTER ========== */
+.front-matter-page,
+.back-matter-page {
+  page-break-after: always;
+  min-height: 248mm;
+  padding: 20mm 18mm 22mm;
+  width: 100%;
+  max-width: 210mm;
+  margin: 0 auto;
+}
+
+.fm-heading {
+  font-size: 18pt;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #0ea5e9;
+  page-break-after: avoid;
+}
+
+.fm-sub {
+  font-size: 11pt;
+  color: #0c4a6e;
+  margin: 16px 0 8px;
+  page-break-after: avoid;
+}
+
+.fm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9pt;
+  margin: 12px 0 16px;
+  table-layout: fixed;
+}
+
+.fm-table th {
+  width: 42%;
+  background: #0f172a;
+  color: #fff;
+  font-weight: 600;
+}
+
+.fm-table th,
+.fm-table td {
+  border: 1px solid #cbd5e1;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.howto-tip {
+  font-size: 9pt;
+  background: #f0f9ff;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+.lof-hint,
+.index-intro {
+  font-size: 9pt;
+  color: #64748b;
+  margin: 0 0 14px;
+}
+
+/* Half title */
+.half-title-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.half-title-text {
+  font-size: 17pt;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Cover — full bleed */
+.cover-page {
+  min-height: 271mm;
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(155deg, #0f172a 0%, #1e3a5f 40%, #0c4a6e 70%, #0369a1 100%);
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cover-inner {
+  padding: 40mm 20mm 16mm;
+}
+
+.cover-series {
+  font-size: 9pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+  margin: 0 0 18px;
+}
+
+.cover-badge {
+  display: inline-block;
+  font-size: 8.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.14);
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.cover-main-title {
+  font-size: 32pt;
+  font-weight: 800;
+  line-height: 1.12;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.cover-subtitle {
+  font-size: 12.5pt;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 24px;
+  max-width: 100%;
+}
+
+.cover-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.cover-features li {
+  padding: 6px 0 6px 24px;
+  position: relative;
+  font-size: 10pt;
+  color: #cbd5e1;
+}
+
+.cover-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #38bdf8;
+  font-weight: bold;
+}
+
+.cover-audience {
+  font-size: 9.5pt;
+  color: #64748b;
+  font-style: italic;
+}
+
+.cover-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20mm 18mm;
+  font-size: 9pt;
+  color: #64748b;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Title page */
+.title-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.title-page-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 24mm;
+}
+
+.title-page-series {
+  font-size: 10pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0369a1;
+  margin-bottom: 20px;
+}
+
+.title-page-main {
+  font-size: 28pt;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+
+.title-page-sub {
+  font-size: 11pt;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0 auto 24px;
+  max-width: 92%;
+}
+
+.title-page-rule {
+  width: 50mm;
+  height: 3px;
+  background: linear-gradient(90deg, #0ea5e9, #0369a1);
+  margin: 0 auto 20px;
+}
+
+.title-page-edition {
+  font-size: 11pt;
+  font-weight: 600;
+  color: #0c4a6e;
+  margin: 0;
+}
+
+.title-page-version {
+  font-size: 10pt;
+  color: #64748b;
+  margin: 6px 0 0;
+}
+
+.title-page-publisher {
+  font-size: 10pt;
+  color: #475569;
+  padding-bottom: 4mm;
+}
+
+.title-page-publisher p {
+  margin: 4px 0;
+}
+
+/* Copyright */
+.copyright-page p,
+.copyright-page .legal-small {
+  font-size: 9.5pt;
+  color: #334155;
+  line-height: 1.55;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.copyright-main {
+  font-weight: 600;
+}
+
+.copyright-printed {
+  margin-top: 24px;
+  font-size: 8.5pt !important;
+  color: #94a3b8 !important;
+}
+
+/* ========== TABLE OF CONTENTS (aligned + linked) ========== */
+.toc-page {
+  padding-top: 16mm;
+}
+
+.toc-book-title {
+  font-size: 8.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin: 0 0 4px;
+}
+
+.toc-section-label {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0369a1;
+  margin: 16px 0 6px;
+  padding: 0;
+}
+
+.toc-entries {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  width: 100%;
+}
+
+.toc-entry {
+  margin: 0;
+  padding: 0;
+  border: none;
+  list-style: none;
+}
+
+.toc-link {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  width: 100%;
+  padding: 5px 0;
+  text-decoration: none !important;
+  color: #1a1a2e !important;
+  font-weight: inherit;
+  gap: 0;
+}
+
+.toc-link:hover {
+  color: #0369a1 !important;
+}
+
+.toc-entry-level-0 .toc-link {
+  font-weight: 700;
+  font-size: 10pt;
+  margin-top: 2px;
+}
+
+.toc-entry-level-1 .toc-link {
+  font-weight: 600;
+  font-size: 9.5pt;
+}
+
+.toc-entry-level-2 .toc-link {
+  font-weight: 400;
+  font-size: 9pt;
+  padding-left: 12px;
+  color: #475569 !important;
+}
+
+.toc-entry-title {
+  flex: 0 1 auto;
+  max-width: 78%;
+  text-align: left;
+  white-space: normal;
+  overflow: visible;
+  line-height: 1.35;
+}
+
+.toc-entry-leader {
+  flex: 1 1 auto;
+  min-width: 16px;
+  margin: 0 6px;
+  border-bottom: 1px dotted #94a3b8;
+  height: 0.65em;
+  align-self: flex-end;
+}
+
+.toc-entry-page {
+  flex: 0 0 auto;
+  min-width: 28px;
+  text-align: right;
+  font-weight: 600;
+  color: #0369a1 !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.toc-howto-note {
+  margin-top: 16px;
+  padding: 10px 12px;
+  background: #f0f9ff;
+  border-left: 4px solid #0ea5e9;
+  font-size: 8.5pt;
+  color: #0c4a6e;
+  line-height: 1.45;
+}
+
+/* List of figures / tables */
+.lof-table,
+.lot-table,
+.index-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9pt;
+  table-layout: auto;
+}
+
+.lof-table th,
+.lot-table th,
+.index-table th {
+  background: #f1f5f9;
+  color: #0f172a;
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 2px solid #cbd5e1;
+}
+
+.lof-table td,
+.lot-table td,
+.index-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.lof-num {
+  white-space: nowrap;
+  width: 1%;
+  padding-right: 14px;
+  color: #475569;
+  font-variant-numeric: tabular-nums;
+}
+
+.lof-pagenum {
+  white-space: nowrap;
+  width: 1%;
+  text-align: right !important;
+  padding-left: 14px;
+  font-weight: 600;
+  color: #0369a1;
+  font-variant-numeric: tabular-nums;
+}
+
+.lof-desc {
+  width: auto;
+}
+
+.lot-loc {
+  white-space: nowrap;
+  width: 1%;
+  padding-left: 14px;
+  text-align: left !important;
+}
+
+.idx-term {
+  white-space: nowrap;
+  width: 1%;
+  padding-right: 14px;
+  font-weight: 600;
+}
+
+.idx-ref {
+  width: auto;
+  text-align: left !important;
+}
+
+/* ========== MAIN BODY ========== */
+.body-start-banner {
+  page-break-before: always;
+  text-align: center;
+  padding: 32mm 18mm 28mm;
+  background: #f8fafc;
+  border-bottom: 4px solid #0ea5e9;
+  margin: 0;
+  width: 100%;
+  max-width: 210mm;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.body-start-banner h2 {
+  font-size: 15pt;
+  color: #0c4a6e;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.body-start-banner p {
+  color: #64748b;
+  font-size: 10pt;
+  margin-top: 8px;
+}
+
+.content {
+  padding: 6mm 18mm 14mm;
+  max-width: 210mm;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.content h1 {
+  font-size: 19pt;
+  color: #0f172a;
+  border-bottom: 3px solid #0ea5e9;
+  padding-bottom: 6px;
+  margin: 0 0 12px;
+  page-break-after: avoid;
+  clear: both;
+}
+
+.content h2 {
+  font-size: 13.5pt;
+  color: #0c4a6e;
+  margin-top: 22px;
+  margin-bottom: 8px;
+  page-break-after: avoid;
+  border-left: 4px solid #0ea5e9;
+  padding-left: 10px;
+  clear: both;
+}
+
+.content h3 {
+  font-size: 11pt;
+  color: #334155;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  page-break-after: avoid;
+  clear: both;
+}
+
+.content h4 {
+  font-size: 10pt;
+  color: #475569;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.content p {
+  margin: 0 0 8px;
+  text-align: left;
+  orphans: 3;
+  widows: 3;
+}
+
+.content blockquote {
+  margin: 10px 0;
+  padding: 10px 12px;
+  background: #f0f9ff;
+  border-left: 4px solid #0ea5e9;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0 14px;
+  font-size: 8.5pt;
+  table-layout: fixed;
+  page-break-inside: avoid;
+}
+
+.content thead {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.content th,
+.content td {
+  border: 1px solid #cbd5e1;
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.content tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.content ul,
+.content ol {
+  margin: 6px 0 12px;
+  padding-left: 20px;
+}
+
+.content li {
+  margin-bottom: 3px;
+}
+
+.content code {
+  font-family: "SF Mono", Consolas, monospace;
+  font-size: 7.5pt;
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 2px;
+  word-break: break-word;
+}
+
+.content pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 6.5pt;
+  line-height: 1.4;
+  margin: 10px 0 12px;
+  page-break-inside: avoid;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+.content pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.diagram {
+  display: block;
+  text-align: center;
+  margin: 12px auto 16px;
+  page-break-inside: avoid;
+  clear: both;
+  max-width: 100%;
+}
+
+.diagram img {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 185mm;
+  margin: 0 auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+
+.diagram-caption {
+  display: block;
+  font-size: 8pt;
+  color: #64748b;
+  margin-top: 6px;
+  font-style: italic;
+  text-align: center;
+}
+
+.content hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 18px 0;
+  clear: both;
+}
+
+/* Invisible break div emitted before every PART / Appendix heading.
+   Using page-break-after on a preceding element (instead of page-break-before
+   on the heading itself) ensures Chrome registers the PDF anchor destination
+   correctly at the top of the new page. */
+.part-break {
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  page-break-after: always;
+}
+
+/* Part / Appendix openers — visual style only (break lives on .part-break above) */
+.content h2.part-opener {
+  background: linear-gradient(90deg, #f0f9ff 0%, #fff 70%);
+  padding: 12px 12px 12px 14px;
+  margin-top: 0;
+  border-left: 6px solid #0284c7;
+}
+
+/* Back matter */
+.colophon-page {
+  text-align: center;
+}
+
+.colophon-page p {
+  font-size: 9.5pt;
+  color: #475569;
+  text-align: center;
+}
+
+.colophon-end {
+  margin-top: 32px !important;
+  font-size: 11pt !important;
+  font-weight: 600;
+  color: #0c4a6e !important;
+}
+
+/* Prevent a trailing blank page after the final section */
+section:last-of-type {
+  page-break-after: auto;
+}
+</style>
+</head>
+<body class="book-root">
+
+  <!-- ========== FRONT MATTER ========== -->
+  
+<section id="page-front-cover" class="front-matter-page cover-page" aria-label="Front cover">
+  <div class="cover-inner">
+    <p class="cover-series">Engineering Playbooks · Production Series</p>
+    <span class="cover-badge">First Edition · 2.0</span>
+    <h1 class="cover-main-title">The Complete Software Engineering Handbook</h1>
+    <p class="cover-subtitle">Build Any Production-Grade Application End-to-End — Complete Code, Diagrams, and Checklists for Freshers to Senior Engineers</p>
+    <ul class="cover-features">
+      <li>10-day zero → production build path</li>
+      <li>17 parts — every section has diagram → complete code → checklist</li>
+      <li>100% runnable, copy-paste TypeScript code (not code shapes)</li>
+      <li>Full stack: Next.js · Fastify · Prisma · PostgreSQL · Redis · Docker · AWS</li>
+      <li>25 troubleshooting fixes + Error Decoder appendix</li>
+    </ul>
+    <p class="cover-audience">For freshers, junior engineers, and anyone shipping real production software</p>
+  </div>
+  <div class="cover-footer">
+    <span>Engineering Playbooks</span>
+    <span>2026</span>
+  </div>
+</section>
+  
+<section id="page-half-title" class="front-matter-page half-title-page" aria-label="Half title">
+  <p class="half-title-text">The Complete Software Engineering Handbook</p>
+</section>
+  
+<section id="page-title" class="front-matter-page title-page" aria-label="Title page">
+  <div class="title-page-block">
+    <p class="title-page-series">Engineering Playbooks</p>
+    <h1 class="title-page-main">The Complete Software Engineering Handbook</h1>
+    <p class="title-page-sub">Build Any Production-Grade Application End-to-End — Complete Code, Diagrams, and Checklists for Freshers to Senior Engineers</p>
+    <div class="title-page-rule"></div>
+    <p class="title-page-edition">Complete Edition</p>
+    <p class="title-page-version">Version 2.0</p>
+  </div>
+  <div class="title-page-publisher">
+    <p><strong>Engineering Playbooks</strong></p>
+    <p>2026</p>
+  </div>
+</section>
+  
+<section id="page-copyright" class="front-matter-page copyright-page" aria-label="Copyright">
+  <h2 class="fm-heading">Copyright</h2>
+  <p class="copyright-main">
+    Copyright © 2026 Engineering Playbooks. All rights reserved.
+  </p>
+  <p>
+    No part of this publication may be reproduced, stored in a retrieval system, or transmitted
+    in any form or without prior written permission, except for brief quotations in reviews
+    or internal team training with attribution.
+  </p>
+  <p><strong>ISBN:</strong> 978-0-000000-00-0 (placeholder — assign before retail print)</p>
+  <p><strong>Edition:</strong> Complete Edition (2.0)</p>
+  <p><strong>Publisher:</strong> Engineering Playbooks</p>
+  <p><strong>Printed / distributed:</strong> Digital PDF — 2026</p>
+  <h3 class="fm-sub">Disclaimer</h3>
+  <p class="legal-small">
+    This handbook is for educational and engineering guidance. Stack choices, cloud pricing,
+    and security threats change over time. Always verify against your organization's policies,
+    compliance requirements, and official vendor documentation before production deployments.
+  </p>
+  <h3 class="fm-sub">Trademarks</h3>
+  <p class="legal-small">
+    All product names, frameworks, and tools mentioned are trademarks of their respective owners.
+    Next.js, React, PostgreSQL, Docker, Kubernetes, GitHub Actions, and others belong to their
+    respective companies.
+  </p>
+  <p class="copyright-printed">Printed in digital form · 2026</p>
+</section>
+  
+<section id="page-about" class="front-matter-page about-page" aria-label="About this book">
+  <h2 class="fm-heading">About This Book</h2>
+  <p>
+    <strong>The Complete Software Engineering Handbook</strong> is the definitive action-first guide for
+    building production-grade applications end-to-end — the same way senior engineers ship at real companies.
+    Every section follows the same pattern: <em>architecture diagram → complete runnable code → checklist</em>.
+  </p>
+  <p>
+    Unlike theory-heavy textbooks or guides that show you the "shape" of the answer, every code
+    block in this book is a complete, copy-paste-ready file with correct imports and TypeScript types.
+    Zero gap-filling required.
+  </p>
+  <h3 class="fm-sub">Who this book is for</h3>
+  <ul>
+    <li>Complete beginners with zero backend experience</li>
+    <li>Fresher and junior developers preparing for industry</li>
+    <li>Self-taught builders who want production discipline</li>
+    <li>Teams needing one shared engineering playbook</li>
+  </ul>
+  <h3 class="fm-sub">What you will be able to do after this book</h3>
+  <ul>
+    <li>Follow a 10-day plan from zero to a deployed production app</li>
+    <li>Build a full stack with Next.js, Fastify, Prisma, and PostgreSQL</li>
+    <li>Implement JWT auth with refresh tokens, bcrypt, and session management</li>
+    <li>Write unit, integration, and E2E tests with Vitest and Playwright</li>
+    <li>Containerize with multi-stage Docker, CI/CD with GitHub Actions</li>
+    <li>Deploy to Railway/Fly.io or AWS ECS with Terraform</li>
+    <li>Add observability with Pino logs and OpenTelemetry traces</li>
+    <li>Troubleshoot the 25 most common production failures</li>
+  </ul>
+  <h3 class="fm-sub">Technology stack</h3>
+  <p>Next.js 15 · TypeScript · Fastify · Prisma · PostgreSQL · Redis · Docker · GitHub Actions · AWS</p>
+</section>
+  
+<section id="page-howto" class="front-matter-page howto-page" aria-label="How to use">
+  <h2 class="fm-heading">How to Use This Handbook</h2>
+  <p class="howto-tip"><strong>Tip:</strong> In this PDF, blue links in the Table of Contents and Index jump to the section.</p>
+  <table class="fm-table">
+    <thead><tr><th>If you want to…</th><th>Start here</th></tr></thead>
+    <tbody>
+      <tr><td>Build your first app in 10 days</td><td><a href="#part-0">PART 0</a></td></tr>
+      <tr><td>Understand the full system</td><td><a href="#the-whole-system-in-one-picture">Architecture diagram</a></td></tr>
+      <tr><td>Fix a broken deploy or API</td><td><a href="#part-13">PART 13</a></td></tr>
+      <tr><td>Ship safely to users</td><td><a href="#part-12">PART 12</a></td></tr>
+      <tr><td>Copy terminal commands</td><td><a href="#appendix-a">Appendix A</a></td></tr>
+    </tbody>
+  </table>
+  <h3 class="fm-sub">Reading modes</h3>
+  <ol>
+    <li><strong>Fast path (recommended):</strong> Follow PART 0 day-by-day only. Skim the rest when stuck.</li>
+    <li><strong>Reference mode:</strong> Jump to the PART that matches your task (frontend, DB, DevOps).</li>
+    <li><strong>Visual mode:</strong> Study diagrams first, then read tables and checklists.</li>
+  </ol>
+</section>
+  
+<section id="page-toc" class="front-matter-page toc-page" aria-label="Table of contents">
+  <p class="toc-book-title">The Complete Software Engineering Handbook · Complete Edition</p>
+  <h2 class="fm-heading">Table of Contents</h2>
+  <p class="lof-hint">Click any title below to jump to that section.</p>
+
+  <p class="toc-section-label">Front Matter</p>
+  <ul class="toc-entries"><li class="toc-entry toc-entry-level-0">
+    <a href="#page-front-cover" class="toc-link book-link">
+      <span class="toc-entry-title">Front Cover</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">1</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-half-title" class="toc-link book-link">
+      <span class="toc-entry-title">Half Title</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">2</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-title" class="toc-link book-link">
+      <span class="toc-entry-title">Title Page</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">2</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-copyright" class="toc-link book-link">
+      <span class="toc-entry-title">Copyright</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">3</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-about" class="toc-link book-link">
+      <span class="toc-entry-title">About This Book</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">4</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-howto" class="toc-link book-link">
+      <span class="toc-entry-title">How to Use This Handbook</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">5</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-toc" class="toc-link book-link">
+      <span class="toc-entry-title">Table of Contents</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">6</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-list-of-figures" class="toc-link book-link">
+      <span class="toc-entry-title">List of Figures</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">7</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-list-of-tables" class="toc-link book-link">
+      <span class="toc-entry-title">List of Tables</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">8</span>
+    </a>
+  </li></ul>
+
+  <p class="toc-section-label">Body</p>
+  <ul class="toc-entries"><li class="toc-entry toc-entry-level-1">
+    <a href="#how-to-read-this-60-seconds" class="toc-link book-link">
+      <span class="toc-entry-title">How to read this (60 seconds)</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">10</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#the-whole-system-in-one-picture" class="toc-link book-link">
+      <span class="toc-entry-title">The whole system in one picture</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">11</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-0" class="toc-link book-link">
+      <span class="toc-entry-title">PART 0 — 10-Day Build Plan (Zero → Production)</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">11</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#day-1-scaffold-it-runs" class="toc-link book-link">
+      <span class="toc-entry-title">Day 1 — Scaffold (&quot;it runs&quot;)</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">12</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-1" class="toc-link book-link">
+      <span class="toc-entry-title">PART 1 — Local Development Setup</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">15</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#11-what-you-need-installed" class="toc-link book-link">
+      <span class="toc-entry-title">1.1 What you need installed</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">15</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-2" class="toc-link book-link">
+      <span class="toc-entry-title">PART 2 — Architecture &amp; Stack Selection</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">18</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#21-pick-your-app-shape-first" class="toc-link book-link">
+      <span class="toc-entry-title">2.1 Pick your app shape first</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">19</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-3" class="toc-link book-link">
+      <span class="toc-entry-title">PART 3 — Frontend Engineering</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">23</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#31-nextjs-rendering-which-mode" class="toc-link book-link">
+      <span class="toc-entry-title">3.1 Next.js rendering — which mode?</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">23</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-4" class="toc-link book-link">
+      <span class="toc-entry-title">PART 4 — Backend Engineering</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">28</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#41-backend-architecture-the-layers" class="toc-link book-link">
+      <span class="toc-entry-title">4.1 Backend architecture — the layers</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">28</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-5" class="toc-link book-link">
+      <span class="toc-entry-title">PART 5 — Database Engineering</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">34</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#51-prisma-schema-define-your-data" class="toc-link book-link">
+      <span class="toc-entry-title">5.1 Prisma schema — define your data</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">34</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-6" class="toc-link book-link">
+      <span class="toc-entry-title">PART 6 — Auth &amp; Security</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">38</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#61-jwt-auth-flow" class="toc-link book-link">
+      <span class="toc-entry-title">6.1 JWT auth flow</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">38</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-7" class="toc-link book-link">
+      <span class="toc-entry-title">PART 7 — Testing</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">42</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#71-the-testing-pyramid" class="toc-link book-link">
+      <span class="toc-entry-title">7.1 The testing pyramid</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">42</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-8" class="toc-link book-link">
+      <span class="toc-entry-title">PART 8 — DevOps &amp; CI/CD</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">45</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#81-why-docker" class="toc-link book-link">
+      <span class="toc-entry-title">8.1 Why Docker?</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">45</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-9" class="toc-link book-link">
+      <span class="toc-entry-title">PART 9 — Cloud &amp; Deploy</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">49</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#91-easiest-path-railway-or-flyio-start-here" class="toc-link book-link">
+      <span class="toc-entry-title">9.1 Easiest path — Railway or Fly.io (start here)</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">49</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-10" class="toc-link book-link">
+      <span class="toc-entry-title">PART 10 — Observability &amp; Monitoring</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">51</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#101-the-three-pillars" class="toc-link book-link">
+      <span class="toc-entry-title">10.1 The three pillars</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">51</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-11" class="toc-link book-link">
+      <span class="toc-entry-title">PART 11 — Performance</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">52</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#111-find-slowness-before-optimizing" class="toc-link book-link">
+      <span class="toc-entry-title">11.1 Find slowness before optimizing</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">53</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-12" class="toc-link book-link">
+      <span class="toc-entry-title">PART 12 — Production Launch Checklist</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">54</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#critical-must-be-green-before-shipping" class="toc-link book-link">
+      <span class="toc-entry-title">Critical (must be green before shipping)</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">55</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-13" class="toc-link book-link">
+      <span class="toc-entry-title">PART 13 — Troubleshooting (25 fixes)</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">56</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-14" class="toc-link book-link">
+      <span class="toc-entry-title">PART 14 — Real-World App Blueprints</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">58</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#blueprint-a-saas-mvp-the-standard-fresher-project" class="toc-link book-link">
+      <span class="toc-entry-title">Blueprint A — SaaS MVP (the standard fresher project)</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">58</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-15" class="toc-link book-link">
+      <span class="toc-entry-title">PART 15 — Team &amp; Git Workflow</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">60</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#branch-and-pr-rules" class="toc-link book-link">
+      <span class="toc-entry-title">Branch and PR rules</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">60</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-16" class="toc-link book-link">
+      <span class="toc-entry-title">PART 16 — Think Like a Senior Engineer</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">61</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-2">
+    <a href="#the-5-rules" class="toc-link book-link">
+      <span class="toc-entry-title">The 5 rules</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">61</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#part-17" class="toc-link book-link">
+      <span class="toc-entry-title">PART 17 — 90-Day Growth Path</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">62</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#appendix-a" class="toc-link book-link">
+      <span class="toc-entry-title">Appendix A — Copy-Paste Commands</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">62</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#appendix-b" class="toc-link book-link">
+      <span class="toc-entry-title">Appendix B — Environment Variables Reference</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">63</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#appendix-c" class="toc-link book-link">
+      <span class="toc-entry-title">Appendix C — Error Decoder</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">64</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#appendix-d" class="toc-link book-link">
+      <span class="toc-entry-title">Appendix D — Glossary</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">65</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-1">
+    <a href="#you-are-ready" class="toc-link book-link">
+      <span class="toc-entry-title">You are ready</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">66</span>
+    </a>
+  </li></ul>
+
+  <p class="toc-section-label">Back Matter</p>
+  <ul class="toc-entries"><li class="toc-entry toc-entry-level-0">
+    <a href="#page-index" class="toc-link book-link">
+      <span class="toc-entry-title">Index</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">67</span>
+    </a>
+  </li><li class="toc-entry toc-entry-level-0">
+    <a href="#page-colophon" class="toc-link book-link">
+      <span class="toc-entry-title">Colophon</span>
+      <span class="toc-entry-leader" aria-hidden="true"></span>
+      <span class="toc-entry-page">68</span>
+    </a>
+  </li></ul>
+
+  <div class="toc-howto-note">
+    <strong>Start here:</strong> <a href="#page-about" class="book-link">About This Book</a> →
+    <a href="#part-0" class="book-link">PART 0</a> (10-day plan).
+    All blue links are clickable in this PDF.
+  </div>
+</section>
+  
+<section id="page-list-of-figures" class="front-matter-page lof-page" aria-label="List of figures">
+  <h2 class="fm-heading">List of Figures</h2>
+  <p class="lof-hint">Click a figure title or page number to jump to that diagram.</p>
+  <table class="lof-table">
+    <thead><tr><th>No.</th><th>Description</th><th>Page</th></tr></thead>
+    <tbody><tr>
+        <td class="lof-num">Figure 1</td>
+        <td class="lof-desc"><a href="#figure-1" class="book-link">Architecture & flow diagram 1</a></td>
+        <td class="lof-pagenum"><a href="#figure-1" class="book-link pagenum-link">10</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 2</td>
+        <td class="lof-desc"><a href="#figure-2" class="book-link">Architecture & flow diagram 2</a></td>
+        <td class="lof-pagenum"><a href="#figure-2" class="book-link pagenum-link">11</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 3</td>
+        <td class="lof-desc"><a href="#figure-3" class="book-link">Architecture & flow diagram 3</a></td>
+        <td class="lof-pagenum"><a href="#figure-3" class="book-link pagenum-link">12</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 4</td>
+        <td class="lof-desc"><a href="#figure-4" class="book-link">Day 2 — CRUD (one feature end-to-end)</a></td>
+        <td class="lof-pagenum"><a href="#figure-4" class="book-link pagenum-link">12</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 5</td>
+        <td class="lof-desc"><a href="#figure-5" class="book-link">Day 4 — Auth (register / login / JWT)</a></td>
+        <td class="lof-pagenum"><a href="#figure-5" class="book-link pagenum-link">13</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 6</td>
+        <td class="lof-desc"><a href="#figure-6" class="book-link">Day 5 — Tests</a></td>
+        <td class="lof-pagenum"><a href="#figure-6" class="book-link pagenum-link">14</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 7</td>
+        <td class="lof-desc"><a href="#figure-7" class="book-link">Day 6 — Docker (multi-stage)</a></td>
+        <td class="lof-pagenum"><a href="#figure-7" class="book-link pagenum-link">14</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 8</td>
+        <td class="lof-desc"><a href="#figure-8" class="book-link">Day 7 — GitHub Actions CI</a></td>
+        <td class="lof-pagenum"><a href="#figure-8" class="book-link pagenum-link">15</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 9</td>
+        <td class="lof-desc"><a href="#figure-9" class="book-link">2.1 Pick your app shape first</a></td>
+        <td class="lof-pagenum"><a href="#figure-9" class="book-link pagenum-link">19</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 10</td>
+        <td class="lof-desc"><a href="#figure-10" class="book-link">2.2 Backend language decision tree</a></td>
+        <td class="lof-pagenum"><a href="#figure-10" class="book-link pagenum-link">19</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 11</td>
+        <td class="lof-desc"><a href="#figure-11" class="book-link">2.3 Frontend framework decision tree</a></td>
+        <td class="lof-pagenum"><a href="#figure-11" class="book-link pagenum-link">20</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 12</td>
+        <td class="lof-desc"><a href="#figure-12" class="book-link">2.4 Database decision tree</a></td>
+        <td class="lof-pagenum"><a href="#figure-12" class="book-link pagenum-link">21</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 13</td>
+        <td class="lof-desc"><a href="#figure-13" class="book-link">2.5 The 2026 production stack (opinionated defaults)</a></td>
+        <td class="lof-pagenum"><a href="#figure-13" class="book-link pagenum-link">22</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 14</td>
+        <td class="lof-desc"><a href="#figure-14" class="book-link">3.1 Next.js rendering — which mode?</a></td>
+        <td class="lof-pagenum"><a href="#figure-14" class="book-link pagenum-link">23</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 15</td>
+        <td class="lof-desc"><a href="#figure-15" class="book-link">3.3 State management — the full decision guide</a></td>
+        <td class="lof-pagenum"><a href="#figure-15" class="book-link pagenum-link">24</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 16</td>
+        <td class="lof-desc"><a href="#figure-16" class="book-link">4.1 Backend architecture — the layers</a></td>
+        <td class="lof-pagenum"><a href="#figure-16" class="book-link pagenum-link">28</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 17</td>
+        <td class="lof-desc"><a href="#figure-17" class="book-link">5.3 Indexing — speed up your queries</a></td>
+        <td class="lof-pagenum"><a href="#figure-17" class="book-link pagenum-link">36</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 18</td>
+        <td class="lof-desc"><a href="#figure-18" class="book-link">5.5 Migrations — never break production</a></td>
+        <td class="lof-pagenum"><a href="#figure-18" class="book-link pagenum-link">36</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 19</td>
+        <td class="lof-desc"><a href="#figure-19" class="book-link">6.1 JWT auth flow</a></td>
+        <td class="lof-pagenum"><a href="#figure-19" class="book-link pagenum-link">38</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 20</td>
+        <td class="lof-desc"><a href="#figure-20" class="book-link">7.1 The testing pyramid</a></td>
+        <td class="lof-pagenum"><a href="#figure-20" class="book-link pagenum-link">42</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 21</td>
+        <td class="lof-desc"><a href="#figure-21" class="book-link">8.1 Why Docker?</a></td>
+        <td class="lof-pagenum"><a href="#figure-21" class="book-link pagenum-link">45</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 22</td>
+        <td class="lof-desc"><a href="#figure-22" class="book-link">8.4 Deployment strategies</a></td>
+        <td class="lof-pagenum"><a href="#figure-22" class="book-link pagenum-link">48</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 23</td>
+        <td class="lof-desc"><a href="#figure-23" class="book-link">9.2 AWS — production-grade setup</a></td>
+        <td class="lof-pagenum"><a href="#figure-23" class="book-link pagenum-link">49</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 24</td>
+        <td class="lof-desc"><a href="#figure-24" class="book-link">10.1 The three pillars</a></td>
+        <td class="lof-pagenum"><a href="#figure-24" class="book-link pagenum-link">51</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 25</td>
+        <td class="lof-desc"><a href="#figure-25" class="book-link">11.1 Find slowness before optimizing</a></td>
+        <td class="lof-pagenum"><a href="#figure-25" class="book-link pagenum-link">53</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 26</td>
+        <td class="lof-desc"><a href="#figure-26" class="book-link">11.3 Caching layers</a></td>
+        <td class="lof-pagenum"><a href="#figure-26" class="book-link pagenum-link">53</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 27</td>
+        <td class="lof-desc"><a href="#figure-27" class="book-link">11.5 Performance checklist</a></td>
+        <td class="lof-pagenum"><a href="#figure-27" class="book-link pagenum-link">55</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 28</td>
+        <td class="lof-desc"><a href="#figure-28" class="book-link">Launch readiness score</a></td>
+        <td class="lof-pagenum"><a href="#figure-28" class="book-link pagenum-link">56</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 29</td>
+        <td class="lof-desc"><a href="#figure-29" class="book-link">Blueprint A — SaaS MVP (the standard fresher project)</a></td>
+        <td class="lof-pagenum"><a href="#figure-29" class="book-link pagenum-link">58</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 30</td>
+        <td class="lof-desc"><a href="#figure-30" class="book-link">Blueprint B — E-commerce (simplified)</a></td>
+        <td class="lof-pagenum"><a href="#figure-30" class="book-link pagenum-link">58</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 31</td>
+        <td class="lof-desc"><a href="#figure-31" class="book-link">System design thinking (for interviews + real work)</a></td>
+        <td class="lof-pagenum"><a href="#figure-31" class="book-link pagenum-link">59</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 32</td>
+        <td class="lof-desc"><a href="#figure-32" class="book-link">System design thinking (for interviews + real work)</a></td>
+        <td class="lof-pagenum"><a href="#figure-32" class="book-link pagenum-link">60</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 33</td>
+        <td class="lof-desc"><a href="#figure-33" class="book-link">The 5 rules</a></td>
+        <td class="lof-pagenum"><a href="#figure-33" class="book-link pagenum-link">61</a></td>
+      </tr><tr>
+        <td class="lof-num">Figure 34</td>
+        <td class="lof-desc"><a href="#figure-34" class="book-link">Architecture Decision Records (ADR)</a></td>
+        <td class="lof-pagenum"><a href="#figure-34" class="book-link pagenum-link">62</a></td>
+      </tr></tbody>
+  </table>
+</section>
+  
+<section id="page-list-of-tables" class="front-matter-page lot-page" aria-label="List of tables">
+  <h2 class="fm-heading">List of Tables</h2>
+  <p class="lof-hint">Click a location to jump to that section.</p>
+  <table class="lof-table lot-table">
+    <thead><tr><th>Topic</th><th>Location</th></tr></thead>
+    <tbody><tr><td>10-day build plan (day-by-day)</td><td class="lot-loc"><a href="#part-0" class="book-link">PART 0</a></td></tr><tr><td>Stack decision guide</td><td class="lot-loc"><a href="#part-2" class="book-link">PART 2</a></td></tr><tr><td>Node vs Python vs Go vs Java</td><td class="lot-loc"><a href="#part-2" class="book-link">PART 2</a></td></tr><tr><td>Frontend framework choice</td><td class="lot-loc"><a href="#part-2" class="book-link">PART 2</a></td></tr><tr><td>Best tools, packages & libraries (2026)</td><td class="lot-loc"><a href="#part-2" class="book-link">PART 2</a></td></tr><tr><td>HTTP methods cheat sheet</td><td class="lot-loc"><a href="#part-4" class="book-link">PART 4</a></td></tr><tr><td>SQL vs NoSQL decision</td><td class="lot-loc"><a href="#part-5" class="book-link">PART 5</a></td></tr><tr><td>Scaling ladder</td><td class="lot-loc"><a href="#part-11" class="book-link">PART 11</a></td></tr><tr><td>25 troubleshooting fixes</td><td class="lot-loc"><a href="#part-13" class="book-link">PART 13</a></td></tr><tr><td>Production launch checklist</td><td class="lot-loc"><a href="#part-12" class="book-link">PART 12</a></td></tr><tr><td>90-day growth path</td><td class="lot-loc"><a href="#part-17" class="book-link">PART 17</a></td></tr><tr><td>Environment variables reference</td><td class="lot-loc"><a href="#appendix-b" class="book-link">See topic</a></td></tr><tr><td>Error decoder (13 common errors)</td><td class="lot-loc"><a href="#appendix-c" class="book-link">See topic</a></td></tr><tr><td>Glossary</td><td class="lot-loc"><a href="#appendix-d" class="book-link">See topic</a></td></tr></tbody>
+  </table>
+</section>
+
+  <!-- ========== BODY ========== -->
+  <main class="content" role="main">
+    <h1 id="the-complete-software-engineering-handbook">The Complete Software Engineering Handbook</h1>
+<blockquote>
+<p><strong>Zero to Production — Everything a Fresher Needs to Build Any Real App</strong></p>
+</blockquote>
+<blockquote>
+<p>Every section gives you: <strong>the diagram first, then complete runnable code, then the checklist.</strong><br>No gaps. No &quot;fill this in yourself.&quot; Copy → paste → ship.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>I want to…</th>
+<th>Go to…</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Start today (day 0)</td>
+<td><a href="#part-0">PART 0 — 10-day plan</a></td>
+</tr>
+<tr>
+<td>Set up my machine</td>
+<td><a href="#part-1">PART 1 — Local setup</a></td>
+</tr>
+<tr>
+<td>Pick a stack</td>
+<td><a href="#part-2">PART 2 — Architecture &amp; stack</a></td>
+</tr>
+<tr>
+<td>Build the frontend</td>
+<td><a href="#part-3">PART 3 — Frontend</a></td>
+</tr>
+<tr>
+<td>Build the backend</td>
+<td><a href="#part-4">PART 4 — Backend</a></td>
+</tr>
+<tr>
+<td>Design the database</td>
+<td><a href="#part-5">PART 5 — Database</a></td>
+</tr>
+<tr>
+<td>Add auth &amp; security</td>
+<td><a href="#part-6">PART 6 — Auth &amp; security</a></td>
+</tr>
+<tr>
+<td>Write tests</td>
+<td><a href="#part-7">PART 7 — Testing</a></td>
+</tr>
+<tr>
+<td>Containerize + CI</td>
+<td><a href="#part-8">PART 8 — DevOps &amp; CI/CD</a></td>
+</tr>
+<tr>
+<td>Deploy to cloud</td>
+<td><a href="#part-9">PART 9 — Cloud &amp; deploy</a></td>
+</tr>
+<tr>
+<td>Add monitoring</td>
+<td><a href="#part-10">PART 10 — Observability</a></td>
+</tr>
+<tr>
+<td>Tune performance</td>
+<td><a href="#part-11">PART 11 — Performance</a></td>
+</tr>
+<tr>
+<td>Launch safely</td>
+<td><a href="#part-12">PART 12 — Launch checklist</a></td>
+</tr>
+<tr>
+<td>Fix something broken</td>
+<td><a href="#part-13">PART 13 — Troubleshooting</a></td>
+</tr>
+<tr>
+<td>See real app patterns</td>
+<td><a href="#part-14">PART 14 — Blueprints</a></td>
+</tr>
+<tr>
+<td>Work with a team</td>
+<td><a href="#part-15">PART 15 — Team &amp; Git</a></td>
+</tr>
+<tr>
+<td>Think like a senior</td>
+<td><a href="#part-16">PART 16 — Senior mindset</a></td>
+</tr>
+<tr>
+<td>Plan your growth</td>
+<td><a href="#part-17">PART 17 — 90-day path</a></td>
+</tr>
+<tr>
+<td>Copy-paste commands</td>
+<td><a href="#appendix-a">Appendix A</a></td>
+</tr>
+<tr>
+<td>Look up env vars</td>
+<td><a href="#appendix-b">Appendix B</a></td>
+</tr>
+<tr>
+<td>Decode an error</td>
+<td><a href="#appendix-c">Appendix C — Error decoder</a></td>
+</tr>
+<tr>
+<td>Learn a term</td>
+<td><a href="#appendix-d">Appendix D — Glossary</a></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="how-to-read-this-60-seconds">How to read this (60 seconds)</h2>
+<p><strong>Rules that save hours:</strong></p>
+<ol>
+<li><strong>Do before reading</strong> — follow PART 0 day-by-day; use other parts as reference</li>
+<li><strong>Diagrams + bold tables = must-read</strong> — long paragraphs = skim or skip</li>
+<li><strong>One working slice at a time</strong> — health check → CRUD → auth → tests → deploy</li>
+<li><strong>If stuck</strong> — go to PART 13 (Troubleshooting) or Appendix C (Error decoder)</li>
+</ol>
+<figure class="diagram" id="figure-1"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-01.png" alt="Figure 1" /><figcaption class="diagram-caption">Figure 1 — Architecture & flow diagram 1</figcaption></figure>
+
+
+
+<hr>
+<h2 id="the-whole-system-in-one-picture">The whole system in one picture</h2>
+<figure class="diagram" id="figure-2"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-02.png" alt="Figure 2" /><figcaption class="diagram-caption">Figure 2 — Architecture & flow diagram 2</figcaption></figure>
+
+
+
+<blockquote>
+<p>Save this diagram. When confused about where something lives, come back here.</p>
+</blockquote>
+<hr>
+<div class="part-break"></div><h2 id="part-0" class="part-opener">PART 0 — 10-Day Build Plan (Zero → Production)</h2>
+<blockquote>
+<p><strong>Outcome after 10 days:</strong> A deployed app with CRUD, auth, tests, Docker, CI, health checks, and basic monitoring.</p>
+</blockquote>
+<figure class="diagram" id="figure-3"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-03.png" alt="Figure 3" /><figcaption class="diagram-caption">Figure 3 — Architecture & flow diagram 3</figcaption></figure>
+
+
+
+<h3 id="day-1-scaffold-it-runs">Day 1 — Scaffold ("it runs")</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Done</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Clone / copy <code>starter-app/</code></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>cp .env.example .env</code></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>docker-compose up --build</code> — all green</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>curl http://localhost:4000/health</code> → <code>{&quot;status&quot;:&quot;ok&quot;}</code></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Open <code>http://localhost:3000</code> in browser</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>6</td>
+<td>First commit: <code>chore: initial scaffold</code></td>
+<td>☐</td>
+</tr>
+</tbody></table>
+<pre><code class="language-bash">cd starter-app
+cp .env.example .env
+docker-compose up --build
+
+# In another terminal:
+curl -s http://localhost:4000/health
+# Should print: {&quot;status&quot;:&quot;ok&quot;}
+</code></pre>
+<h3 id="day-2-crud-one-feature-end-to-end">Day 2 — CRUD (one feature end-to-end)</h3>
+<figure class="diagram" id="figure-4"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-04.png" alt="Figure 4" /><figcaption class="diagram-caption">Figure 4 — Day 2 — CRUD (one feature end-to-end)</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Done</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Add <code>todos(id, title, completed, created_at)</code> to DB schema</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>2</td>
+<td>API: <code>GET /todos</code>, <code>POST /todos</code>, <code>PATCH /todos/:id</code></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Frontend: list + form + toggle button</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Test with curl: create → list → toggle</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Commit: <code>feat: add todos CRUD</code></td>
+<td>☐</td>
+</tr>
+</tbody></table>
+<h3 id="day-3-validation-consistent-errors">Day 3 — Validation + consistent errors</h3>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Never trust client input</td>
+<td>Validate every write endpoint with Zod</td>
+</tr>
+<tr>
+<td>Same error shape</td>
+<td><code>{ &quot;error&quot;: &quot;message&quot;, &quot;code&quot;: &quot;VALIDATION_ERROR&quot; }</code></td>
+</tr>
+<tr>
+<td>Right HTTP code</td>
+<td><code>400</code> bad input · <code>401</code> no auth · <code>404</code> not found · <code>500</code> crash</td>
+</tr>
+</tbody></table>
+<pre><code class="language-typescript">// Every write route follows this pattern:
+const body = createTodoSchema.parse(request.body)
+// If parse fails, Zod throws → your error handler catches → 400
+</code></pre>
+<h3 id="day-4-auth-register-login-jwt">Day 4 — Auth (register / login / JWT)</h3>
+<figure class="diagram" id="figure-5"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-05.png" alt="Figure 5" /><figcaption class="diagram-caption">Figure 5 — Day 4 — Auth (register / login / JWT)</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Done</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><code>POST /auth/register</code> — hash password, return tokens</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>POST /auth/login</code> — verify hash, return tokens</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>GET /auth/me</code> — protected route, return user profile</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Auth middleware — reject missing/invalid JWT with 401</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Protect <code>/todos</code> routes — only your own todos</td>
+<td>☐</td>
+</tr>
+</tbody></table>
+<h3 id="day-5-tests">Day 5 — Tests</h3>
+<figure class="diagram" id="figure-6"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-06.png" alt="Figure 6" /><figcaption class="diagram-caption">Figure 6 — Day 5 — Tests</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Test</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unit</td>
+<td>Zod schema rejects empty title</td>
+<td><code>src/tests/validation.test.ts</code></td>
+</tr>
+<tr>
+<td>Integration</td>
+<td><code>POST /todos</code> → 201 with auth token</td>
+<td><code>src/tests/todos.test.ts</code></td>
+</tr>
+<tr>
+<td>E2E</td>
+<td>Login → create todo → see in list</td>
+<td><code>e2e/todos.spec.ts</code></td>
+</tr>
+</tbody></table>
+<h3 id="day-6-docker-multi-stage">Day 6 — Docker (multi-stage)</h3>
+<figure class="diagram" id="figure-7"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-07.png" alt="Figure 7" /><figcaption class="diagram-caption">Figure 7 — Day 6 — Docker (multi-stage)</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>☐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.dockerignore</code> excludes <code>node_modules</code> and <code>.env</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Multi-stage build — final image has no build tools</td>
+<td></td>
+</tr>
+<tr>
+<td>Non-root user: <code>USER node</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>HEALTHCHECK</code> hits <code>/health</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="day-7-github-actions-ci">Day 7 — GitHub Actions CI</h3>
+<figure class="diagram" id="figure-8"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-08.png" alt="Figure 8" /><figcaption class="diagram-caption">Figure 8 — Day 7 — GitHub Actions CI</figcaption></figure>
+
+
+
+<p>Goal: if <code>npm test</code> fails, the CI fails. Nobody merges broken code.</p>
+<h3 id="day-8-deploy-to-staging">Day 8 — Deploy to staging</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Set env secrets in hosting platform (never in git)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Run DB migrations BEFORE deploying new app version</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Smoke test: <code>curl https://staging.yourapp.com/health</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Document rollback: what image tag to redeploy</td>
+</tr>
+</tbody></table>
+<h3 id="day-9-observability-basics">Day 9 — Observability basics</h3>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Minimum for Day 9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logs</td>
+<td>JSON with <code>requestId</code>, <code>level</code>, <code>msg</code></td>
+</tr>
+<tr>
+<td>Health</td>
+<td><code>/health</code> checks DB connectivity</td>
+</tr>
+<tr>
+<td>Alert</td>
+<td>Slack/email on 5xx spike or health failure</td>
+</tr>
+</tbody></table>
+<h3 id="day-10-launch-checklist">Day 10 — Launch checklist</h3>
+<p>Run PART 12. If all critical boxes are green → <strong>ship</strong>.</p>
+<hr>
+<div class="part-break"></div><h2 id="part-1" class="part-opener">PART 1 — Local Development Setup</h2>
+<p><strong>Goal: running local environment in under 15 minutes.</strong></p>
+<h3 id="11-what-you-need-installed">1.1 What you need installed</h3>
+<pre><code class="language-bash"># Check versions
+node --version    # Need 20+
+docker --version  # Need 24+
+git --version     # Need 2.40+
+
+# Install on Mac (Homebrew)
+brew install node@22
+brew install --cask docker
+brew install git
+
+# Install global CLI tools
+npm install -g pnpm   # faster than npm (optional but recommended)
+</code></pre>
+<h3 id="12-project-folder-structure">1.2 Project folder structure</h3>
+<pre><code class="language-text">my-app/
+├── frontend/                 ← Next.js app
+│   ├── src/
+│   │   ├── app/              ← Next.js App Router
+│   │   ├── components/       ← Reusable UI components
+│   │   ├── hooks/            ← Custom React hooks
+│   │   ├── lib/              ← API client, utilities
+│   │   └── types/            ← TypeScript types
+│   ├── .env.local
+│   └── package.json
+│
+├── api/                      ← Fastify backend
+│   ├── src/
+│   │   ├── routes/           ← Route handlers (thin)
+│   │   ├── services/         ← Business logic
+│   │   ├── repositories/     ← Database queries
+│   │   ├── middleware/       ← Auth, rate limit, logging
+│   │   ├── plugins/          ← Fastify plugins
+│   │   ├── schemas/          ← Zod validation schemas
+│   │   └── index.ts          ← App entry point
+│   ├── prisma/
+│   │   ├── schema.prisma     ← DB schema
+│   │   └── migrations/       ← Migration files
+│   ├── .env
+│   └── package.json
+│
+├── docker-compose.yml        ← Local DB + all services
+├── .github/
+│   └── workflows/ci.yml      ← CI pipeline
+└── README.md
+</code></pre>
+<h3 id="13-docker-composeyml-start-all-local-services">1.3 docker-compose.yml — start all local services</h3>
+<pre><code class="language-yaml"># docker-compose.yml
+version: &#39;3.9&#39;
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: myapp
+      POSTGRES_PASSWORD: password
+    ports:
+      - &quot;5432:5432&quot;
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U myapp&quot;]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - &quot;6379:6379&quot;
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  api:
+    build: ./api
+    ports:
+      - &quot;4000:4000&quot;
+    environment:
+      DATABASE_URL: postgresql://myapp:password@postgres:5432/myapp
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: dev-secret-change-in-production
+      NODE_ENV: development
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - &quot;3000:3000&quot;
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+  redis_data:
+</code></pre>
+<pre><code class="language-bash"># Start everything
+docker-compose up --build
+
+# Stop everything
+docker-compose down
+
+# Wipe data and restart fresh
+docker-compose down -v &amp;&amp; docker-compose up --build
+</code></pre>
+<h3 id="14-environment-variables-never-get-this-wrong">1.4 Environment variables — never get this wrong</h3>
+<pre><code class="language-bash"># api/.env
+DATABASE_URL=&quot;postgresql://myapp:password@localhost:5432/myapp&quot;
+REDIS_URL=&quot;redis://localhost:6379&quot;
+JWT_SECRET=&quot;change-this-in-prod-use-crypto-random&quot;
+JWT_REFRESH_SECRET=&quot;also-change-this-in-prod&quot;
+PORT=4000
+NODE_ENV=development
+
+# Generate a secure secret:
+node -e &quot;console.log(require(&#39;crypto&#39;).randomBytes(32).toString(&#39;hex&#39;))&quot;
+</code></pre>
+<pre><code class="language-bash"># frontend/.env.local
+NEXT_PUBLIC_API_URL=http://localhost:4000
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+</code></pre>
+<blockquote>
+<p><strong>RULE:</strong> Never commit <code>.env</code> files. Always commit <code>.env.example</code> with empty values.</p>
+</blockquote>
+<pre><code class="language-bash"># Add to .gitignore
+echo &quot;.env&quot; &gt;&gt; .gitignore
+echo &quot;.env.local&quot; &gt;&gt; .gitignore
+echo &quot;.env.*.local&quot; &gt;&gt; .gitignore
+</code></pre>
+<h3 id="15-scaffold-the-frontend">1.5 Scaffold the frontend</h3>
+<pre><code class="language-bash">npx create-next-app@latest frontend \
+  --typescript \
+  --tailwind \
+  --eslint \
+  --app \
+  --src-dir \
+  --import-alias &quot;@/*&quot;
+
+cd frontend
+
+# Essential packages
+npm install @tanstack/react-query zustand
+npm install react-hook-form zod @hookform/resolvers
+npm install axios
+
+# Component library (saves weeks of UI work)
+npx shadcn-ui@latest init
+npx shadcn-ui@latest add button input form card table badge
+
+npm run dev
+# Open http://localhost:3000
+</code></pre>
+<h3 id="16-scaffold-the-backend">1.6 Scaffold the backend</h3>
+<pre><code class="language-bash">mkdir api &amp;&amp; cd api
+npm init -y
+
+# Core packages
+npm install fastify @fastify/cors @fastify/helmet
+npm install jsonwebtoken   # use jsonwebtoken directly — NOT @fastify/jwt
+npm install @prisma/client
+npm install zod
+npm install bcrypt jsonwebtoken ioredis
+npm install pino pino-pretty
+
+# Dev dependencies
+npm install -D typescript tsx ts-node @types/node prisma
+npm install -D @types/bcrypt @types/jsonwebtoken
+npm install -D vitest @vitest/coverage-v8
+
+# Initialize Prisma (creates prisma/schema.prisma)
+npx prisma init
+</code></pre>
+<h3 id="17-typescript-config-copy-this-dont-use-the-default">1.7 TypeScript config (copy this — don't use the default)</h3>
+<pre><code class="language-json">// api/tsconfig.json
+{
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;ES2022&quot;,
+    &quot;module&quot;: &quot;NodeNext&quot;,
+    &quot;moduleResolution&quot;: &quot;NodeNext&quot;,
+    &quot;outDir&quot;: &quot;dist&quot;,
+    &quot;rootDir&quot;: &quot;src&quot;,
+    &quot;strict&quot;: true,
+    &quot;esModuleInterop&quot;: true,
+    &quot;skipLibCheck&quot;: true,
+    &quot;resolveJsonModule&quot;: true,
+    &quot;declaration&quot;: true,
+    &quot;declarationMap&quot;: true,
+    &quot;sourceMap&quot;: true
+  },
+  &quot;include&quot;: [&quot;src&quot;],
+  &quot;exclude&quot;: [&quot;node_modules&quot;, &quot;dist&quot;]
+}
+</code></pre>
+<h3 id="18-packagejson-scripts-copy-this">1.8 package.json scripts (copy this)</h3>
+<pre><code class="language-json">// api/package.json (scripts section)
+{
+  &quot;type&quot;: &quot;module&quot;,
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;tsx watch src/index.ts&quot;,
+    &quot;build&quot;: &quot;tsc&quot;,
+    &quot;start&quot;: &quot;node dist/index.js&quot;,
+    &quot;test&quot;: &quot;vitest run&quot;,
+    &quot;test:watch&quot;: &quot;vitest&quot;,
+    &quot;test:coverage&quot;: &quot;vitest run --coverage&quot;,
+    &quot;db:migrate&quot;: &quot;prisma migrate dev&quot;,
+    &quot;db:deploy&quot;: &quot;prisma migrate deploy&quot;,
+    &quot;db:studio&quot;: &quot;prisma studio&quot;,
+    &quot;db:generate&quot;: &quot;prisma generate&quot;
+  }
+}
+</code></pre>
+<pre><code class="language-json">// frontend/package.json (scripts section)
+{
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;next dev&quot;,
+    &quot;build&quot;: &quot;next build&quot;,
+    &quot;start&quot;: &quot;next start&quot;,
+    &quot;lint&quot;: &quot;next lint&quot;,
+    &quot;type-check&quot;: &quot;tsc --noEmit&quot;
+  }
+}
+</code></pre>
+<blockquote>
+<p><strong>Why <code>tsx watch</code> for dev?</strong> It runs TypeScript directly without a compile step — changes reflect instantly. In production you compile to <code>dist/</code> with <code>tsc</code> and run <code>node dist/index.js</code>.</p>
+</blockquote>
+<pre><code class="language-bash">npm run dev
+# API runs at http://localhost:4000
+</code></pre>
+<hr>
+<div class="part-break"></div><h2 id="part-2" class="part-opener">PART 2 — Architecture & Stack Selection</h2>
+<h3 id="21-pick-your-app-shape-first">2.1 Pick your app shape first</h3>
+<figure class="diagram" id="figure-9"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-09.png" alt="Figure 9" /><figcaption class="diagram-caption">Figure 9 — 2.1 Pick your app shape first</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>When</th>
+<th>Fresher default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Modular monolith</strong></td>
+<td>MVP, small team</td>
+<td>✅ Start here always</td>
+</tr>
+<tr>
+<td><strong>Microservices</strong></td>
+<td>Large team, proven domains</td>
+<td>❌ Way later</td>
+</tr>
+<tr>
+<td><strong>Serverless</strong></td>
+<td>Spiky traffic, ops-light</td>
+<td>Optional for side projects</td>
+</tr>
+</tbody></table>
+<h3 id="22-backend-language-decision-tree">2.2 Backend language decision tree</h3>
+<figure class="diagram" id="figure-10"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-10.png" alt="Figure 10" /><figcaption class="diagram-caption">Figure 10 — 2.2 Backend language decision tree</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Choose when</th>
+<th>Speed to ship</th>
+<th>Hiring</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Node.js / TypeScript</strong></td>
+<td>Web APIs, SaaS, full-stack TS team</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>ML/AI, data pipelines, scripting</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td><strong>Go</strong></td>
+<td>High-throughput APIs, CLIs, infra tools</td>
+<td>⭐⭐⭐⭐</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Java / Kotlin</strong></td>
+<td>Enterprise, regulated, Spring shops</td>
+<td>⭐⭐⭐</td>
+<td>Medium</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Default for 90% of freshers:</strong> Node.js + TypeScript. One language front + back, massive ecosystem.</p>
+</blockquote>
+<h3 id="23-frontend-framework-decision-tree">2.3 Frontend framework decision tree</h3>
+<figure class="diagram" id="figure-11"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-11.png" alt="Figure 11" /><figcaption class="diagram-caption">Figure 11 — 2.3 Frontend framework decision tree</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Choose when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Next.js + React</strong></td>
+<td>Public site, SaaS, SEO, most jobs</td>
+</tr>
+<tr>
+<td><strong>Vite + React</strong></td>
+<td>Internal admin tool, no SEO needed</td>
+</tr>
+<tr>
+<td><strong>SvelteKit</strong></td>
+<td>Performance-first, tiny bundle</td>
+</tr>
+</tbody></table>
+<h3 id="24-database-decision-tree">2.4 Database decision tree</h3>
+<figure class="diagram" id="figure-12"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-12.png" alt="Figure 12" /><figcaption class="diagram-caption">Figure 12 — 2.4 Database decision tree</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Store</th>
+<th>Use for</th>
+<th>When to avoid</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PostgreSQL</strong></td>
+<td>Users, orders, any relational data</td>
+<td>Never avoid — this is your default</td>
+</tr>
+<tr>
+<td><strong>Redis</strong></td>
+<td>Cache, sessions, rate limits, queues</td>
+<td>Don&#39;t use as primary source of truth</td>
+</tr>
+<tr>
+<td><strong>MongoDB</strong></td>
+<td>Flexible documents, catalogs</td>
+<td>If data has relationships, use Postgres</td>
+</tr>
+</tbody></table>
+<h3 id="25-the-2026-production-stack-opinionated-defaults">2.5 The 2026 production stack (opinionated defaults)</h3>
+<figure class="diagram" id="figure-13"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-13.png" alt="Figure 13" /><figcaption class="diagram-caption">Figure 13 — 2.5 The 2026 production stack (opinionated defaults)</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Choice</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Frontend</td>
+<td>Next.js 15 + TypeScript</td>
+<td>SSR, SEO, App Router, largest job market</td>
+</tr>
+<tr>
+<td>Styling</td>
+<td>Tailwind CSS + shadcn/ui</td>
+<td>Fast UI, consistent design system</td>
+</tr>
+<tr>
+<td>Server state</td>
+<td>TanStack Query v5</td>
+<td>Cache, refetch, loading/error states</td>
+</tr>
+<tr>
+<td>Client state</td>
+<td>Zustand</td>
+<td>Simple, no boilerplate</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Fastify + TypeScript</td>
+<td>Fast, lightweight, plugin system</td>
+</tr>
+<tr>
+<td>Validation</td>
+<td>Zod</td>
+<td>Runtime + compile-time, shared front/back</td>
+</tr>
+<tr>
+<td>ORM</td>
+<td>Prisma</td>
+<td>Type-safe queries, automatic migrations</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>PostgreSQL 16</td>
+<td>Reliable, feature-rich, battle-tested</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>Redis 7</td>
+<td>Sessions, cache, rate limits</td>
+</tr>
+<tr>
+<td>Auth</td>
+<td>JWT + refresh tokens</td>
+<td>Stateless, scalable</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>Vitest + Playwright</td>
+<td>Fast unit + real browser E2E</td>
+</tr>
+<tr>
+<td>CI/CD</td>
+<td>GitHub Actions</td>
+<td>Integrated, free for public repos</td>
+</tr>
+<tr>
+<td>Deploy</td>
+<td>Railway / Fly.io / AWS ECS</td>
+<td>Managed, scales when needed</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>OpenTelemetry + Grafana</td>
+<td>Industry standard</td>
+</tr>
+<tr>
+<td>Errors</td>
+<td>Sentry</td>
+<td>Best error tracking with stack traces</td>
+</tr>
+</tbody></table>
+<pre><code class="language-bash"># Frontend — install the key packages
+npm install @tanstack/react-query zustand
+npm install react-hook-form zod @hookform/resolvers
+
+# Backend — install the key packages
+npm install fastify @fastify/cors @fastify/helmet
+npm install jsonwebtoken   # use jsonwebtoken directly — NOT @fastify/jwt
+npm install @prisma/client zod bcrypt jsonwebtoken ioredis pino
+npm install -D prisma vitest typescript tsx
+</code></pre>
+<hr>
+<div class="part-break"></div><h2 id="part-3" class="part-opener">PART 3 — Frontend Engineering</h2>
+<h3 id="31-nextjs-rendering-which-mode">3.1 Next.js rendering — which mode?</h3>
+<figure class="diagram" id="figure-14"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-14.png" alt="Figure 14" /><figcaption class="diagram-caption">Figure 14 — 3.1 Next.js rendering — which mode?</figcaption></figure>
+
+
+
+<blockquote>
+<p><strong>Rule:</strong> All components are Server Components by default in Next.js App Router. Add <code>&#39;use client&#39;</code> only when you need <code>useState</code>, <code>useEffect</code>, or event handlers.</p>
+</blockquote>
+<h3 id="32-server-component-vs-client-component">3.2 Server Component vs Client Component</h3>
+<pre><code class="language-typescript">// ✅ Server Component — runs on server, zero JS sent to browser
+// src/app/products/page.tsx
+async function getProducts() {
+  const res = await fetch(&#39;http://localhost:4000/products&#39;, {
+    next: { revalidate: 60 }, // Cache and refresh every 60s (ISR)
+  })
+  if (!res.ok) throw new Error(&#39;Failed to fetch products&#39;)
+  return res.json()
+}
+
+export default async function ProductsPage() {
+  const products = await getProducts()
+  return (
+    &lt;div className=&quot;grid grid-cols-3 gap-4 p-8&quot;&gt;
+      {products.map((p: { id: string; name: string; price: number }) =&gt; (
+        &lt;ProductCard key={p.id} product={p} /&gt;
+      ))}
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<pre><code class="language-typescript">// ✅ Client Component — handles user interactions
+// src/components/product-card.tsx
+&#39;use client&#39;
+
+import { useState } from &#39;react&#39;
+import { Button } from &#39;@/components/ui/button&#39;
+
+interface Product {
+  id: string
+  name: string
+  price: number
+}
+
+export function ProductCard({ product }: { product: Product }) {
+  const [added, setAdded] = useState(false)
+
+  const addToCart = async () =&gt; {
+    await fetch(&#39;/api/cart&#39;, {
+      method: &#39;POST&#39;,
+      headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },
+      body: JSON.stringify({ productId: product.id }),
+    })
+    setAdded(true)
+  }
+
+  return (
+    &lt;div className=&quot;border rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow&quot;&gt;
+      &lt;h3 className=&quot;font-semibold text-lg&quot;&gt;{product.name}&lt;/h3&gt;
+      &lt;p className=&quot;text-slate-600 mt-1&quot;&gt;${product.price}&lt;/p&gt;
+      &lt;Button
+        onClick={addToCart}
+        disabled={added}
+        className=&quot;mt-3 w-full&quot;
+        variant={added ? &#39;outline&#39; : &#39;default&#39;}
+      &gt;
+        {added ? &#39;Added ✓&#39; : &#39;Add to Cart&#39;}
+      &lt;/Button&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<h3 id="33-state-management-the-full-decision-guide">3.3 State management — the full decision guide</h3>
+<figure class="diagram" id="figure-15"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-15.png" alt="Figure 15" /><figcaption class="diagram-caption">Figure 15 — 3.3 State management — the full decision guide</figcaption></figure>
+
+
+
+<pre><code class="language-typescript">// ✅ Zustand — global state (auth, theme, shopping cart)
+// src/lib/store.ts
+import { create } from &#39;zustand&#39;
+import { persist } from &#39;zustand/middleware&#39;
+
+interface User {
+  id: string
+  email: string
+  name: string
+}
+
+interface AppStore {
+  user: User | null
+  accessToken: string | null
+  theme: &#39;light&#39; | &#39;dark&#39;
+  setUser: (user: User | null, token: string | null) =&gt; void
+  setTheme: (theme: &#39;light&#39; | &#39;dark&#39;) =&gt; void
+  logout: () =&gt; void
+}
+
+export const useAppStore = create&lt;AppStore&gt;()(
+  persist(
+    (set) =&gt; ({
+      user: null,
+      accessToken: null,
+      theme: &#39;light&#39;,
+      setUser: (user, accessToken) =&gt; set({ user, accessToken }),
+      setTheme: (theme) =&gt; set({ theme }),
+      logout: () =&gt; set({ user: null, accessToken: null }),
+    }),
+    { name: &#39;app-storage&#39; } // persists to localStorage
+  )
+)
+</code></pre>
+<pre><code class="language-typescript">// ✅ TanStack Query — server state (complete pattern)
+// src/hooks/use-todos.ts
+import { useQuery, useMutation, useQueryClient } from &#39;@tanstack/react-query&#39;
+import { useAppStore } from &#39;@/lib/store&#39;
+
+const API = process.env.NEXT_PUBLIC_API_URL
+
+interface Todo {
+  id: string
+  title: string
+  completed: boolean
+  priority: &#39;low&#39; | &#39;medium&#39; | &#39;high&#39;
+  createdAt: string
+}
+
+// Fetch all todos
+export function useTodos() {
+  const accessToken = useAppStore((s) =&gt; s.accessToken)
+
+  return useQuery({
+    queryKey: [&#39;todos&#39;],
+    queryFn: async (): Promise&lt;Todo[]&gt; =&gt; {
+      const res = await fetch(`${API}/todos`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      if (!res.ok) throw new Error(&#39;Failed to fetch todos&#39;)
+      return res.json()
+    },
+    enabled: !!accessToken, // only run if logged in
+    staleTime: 30_000,       // consider data fresh for 30 seconds
+  })
+}
+
+// Create a todo
+export function useCreateTodo() {
+  const queryClient = useQueryClient()
+  const accessToken = useAppStore((s) =&gt; s.accessToken)
+
+  return useMutation({
+    mutationFn: async (data: { title: string; priority: string }): Promise&lt;Todo&gt; =&gt; {
+      const res = await fetch(`${API}/todos`, {
+        method: &#39;POST&#39;,
+        headers: {
+          &#39;Content-Type&#39;: &#39;application/json&#39;,
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.error || &#39;Failed to create todo&#39;)
+      }
+      return res.json()
+    },
+    onSuccess: () =&gt; {
+      // Invalidate the todos list so it refetches
+      queryClient.invalidateQueries({ queryKey: [&#39;todos&#39;] })
+    },
+  })
+}
+
+// Toggle todo completion
+export function useToggleTodo() {
+  const queryClient = useQueryClient()
+  const accessToken = useAppStore((s) =&gt; s.accessToken)
+
+  return useMutation({
+    mutationFn: async ({ id, completed }: { id: string; completed: boolean }): Promise&lt;Todo&gt; =&gt; {
+      const res = await fetch(`${API}/todos/${id}`, {
+        method: &#39;PATCH&#39;,
+        headers: {
+          &#39;Content-Type&#39;: &#39;application/json&#39;,
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ completed }),
+      })
+      if (!res.ok) throw new Error(&#39;Failed to update todo&#39;)
+      return res.json()
+    },
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: [&#39;todos&#39;] })
+    },
+  })
+}
+</code></pre>
+<h3 id="34-forms-the-correct-pattern">3.4 Forms — the correct pattern</h3>
+<pre><code class="language-typescript">// ✅ React Hook Form + Zod — complete working form
+// src/components/create-todo-form.tsx
+&#39;use client&#39;
+
+import { useForm } from &#39;react-hook-form&#39;
+import { zodResolver } from &#39;@hookform/resolvers/zod&#39;
+import { z } from &#39;zod&#39;
+import { useCreateTodo } from &#39;@/hooks/use-todos&#39;
+
+const todoSchema = z.object({
+  title: z.string()
+    .min(1, &#39;Title is required&#39;)
+    .max(200, &#39;Title must be under 200 characters&#39;),
+  priority: z.enum([&#39;low&#39;, &#39;medium&#39;, &#39;high&#39;]).default(&#39;medium&#39;),
+})
+
+type TodoFormValues = z.infer&lt;typeof todoSchema&gt;
+
+export function CreateTodoForm() {
+  const { mutate: createTodo, isPending, error } = useCreateTodo()
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm&lt;TodoFormValues&gt;({
+    resolver: zodResolver(todoSchema),
+    defaultValues: { priority: &#39;medium&#39; },
+  })
+
+  const onSubmit = (data: TodoFormValues) =&gt; {
+    createTodo(data, {
+      onSuccess: () =&gt; reset(),
+    })
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)} className=&quot;space-y-3&quot;&gt;
+      {/* Server error */}
+      {error &amp;&amp; (
+        &lt;p className=&quot;text-sm text-red-600 bg-red-50 border border-red-200 rounded p-2&quot;&gt;
+          {error.message}
+        &lt;/p&gt;
+      )}
+
+      &lt;div className=&quot;flex gap-2&quot;&gt;
+        &lt;div className=&quot;flex-1&quot;&gt;
+          &lt;input
+            {...register(&#39;title&#39;)}
+            placeholder=&quot;What needs to be done?&quot;
+            className=&quot;w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500&quot;
+          /&gt;
+          {errors.title &amp;&amp; (
+            &lt;p className=&quot;text-sm text-red-500 mt-1&quot;&gt;{errors.title.message}&lt;/p&gt;
+          )}
+        &lt;/div&gt;
+
+        &lt;select
+          {...register(&#39;priority&#39;)}
+          className=&quot;border rounded-lg px-3 py-2 bg-white&quot;
+        &gt;
+          &lt;option value=&quot;low&quot;&gt;Low&lt;/option&gt;
+          &lt;option value=&quot;medium&quot;&gt;Medium&lt;/option&gt;
+          &lt;option value=&quot;high&quot;&gt;High&lt;/option&gt;
+        &lt;/select&gt;
+
+        &lt;button
+          type=&quot;submit&quot;
+          disabled={isPending}
+          className=&quot;bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors&quot;
+        &gt;
+          {isPending ? &#39;Adding...&#39; : &#39;Add Todo&#39;}
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  )
+}
+</code></pre>
+<h3 id="35-queryclient-setup-required-in-_apptsx-or-layouttsx">3.5 QueryClient setup (required in _app.tsx or layout.tsx)</h3>
+<pre><code class="language-typescript">// src/app/layout.tsx (App Router)
+&#39;use client&#39;
+
+import { useState } from &#39;react&#39;
+import { QueryClient, QueryClientProvider } from &#39;@tanstack/react-query&#39;
+import { ReactQueryDevtools } from &#39;@tanstack/react-query-devtools&#39;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // useState ensures each request gets its own QueryClient in SSR
+  const [queryClient] = useState(() =&gt; new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 1,
+        staleTime: 30_000,
+      },
+    },
+  }))
+
+  return (
+    &lt;html lang=&quot;en&quot;&gt;
+      &lt;body&gt;
+        &lt;QueryClientProvider client={queryClient}&gt;
+          {children}
+          &lt;ReactQueryDevtools initialIsOpen={false} /&gt;
+        &lt;/QueryClientProvider&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  )
+}
+</code></pre>
+<h3 id="36-frontend-checklist">3.6 Frontend checklist</h3>
+<ul>
+<li>☐  Every data view has: <strong>loading state</strong>, <strong>error state</strong>, <strong>empty state</strong></li>
+<li>☐  No API keys or secrets in client bundle (<code>NEXT_PUBLIC_</code> is public — only use for URLs)</li>
+<li>☐  API base URL from env variable, never hardcoded</li>
+<li>☐  Images use <code>next/image</code> (auto-optimized)</li>
+<li>☐  Forms show field-level validation errors</li>
+<li>☐  Buttons disabled during loading (prevent double-submit)</li>
+<li>☐  Accessibility: labels on inputs, tab order works</li>
+</ul>
+<h3 id="37-frontend-security-quick">3.7 Frontend security (quick)</h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>XSS</td>
+<td>React escapes by default. Never use <code>dangerouslySetInnerHTML</code></td>
+</tr>
+<tr>
+<td>Token in localStorage</td>
+<td>Prefer httpOnly cookies for refresh tokens</td>
+</tr>
+<tr>
+<td>CSRF</td>
+<td><code>SameSite=Lax</code> on cookies</td>
+</tr>
+<tr>
+<td>Secret leaks</td>
+<td><code>NEXT_PUBLIC_</code> prefix only for truly public values</td>
+</tr>
+</tbody></table>
+<hr>
+<div class="part-break"></div><h2 id="part-4" class="part-opener">PART 4 — Backend Engineering</h2>
+<h3 id="41-backend-architecture-the-layers">4.1 Backend architecture — the layers</h3>
+<figure class="diagram" id="figure-16"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-16.png" alt="Figure 16" /><figcaption class="diagram-caption">Figure 16 — 4.1 Backend architecture — the layers</figcaption></figure>
+
+
+
+<p><strong>The golden rule:</strong></p>
+<ul>
+<li><strong>Routes</strong> are thin — just call a service and return the result</li>
+<li><strong>Services</strong> contain all business logic — no HTTP, no direct DB</li>
+<li><strong>Repositories</strong> contain all DB queries — no business logic</li>
+</ul>
+<h3 id="42-complete-fastify-server-setup">4.2 Complete Fastify server setup</h3>
+<pre><code class="language-typescript">// api/src/index.ts
+import Fastify from &#39;fastify&#39;
+import cors from &#39;@fastify/cors&#39;
+import helmet from &#39;@fastify/helmet&#39;
+import { authRoutes } from &#39;./routes/auth&#39;
+import { todoRoutes } from &#39;./routes/todos&#39;
+import { authenticate } from &#39;./middleware/auth&#39;
+import { prisma } from &#39;./lib/prisma&#39;
+import { logger } from &#39;./lib/logger&#39;
+
+const server = Fastify({ logger: true })
+
+// Register plugins
+await server.register(helmet)  // Security headers
+
+await server.register(cors, {
+  origin: process.env.ALLOWED_ORIGINS?.split(&#39;,&#39;) ?? [&#39;http://localhost:3000&#39;],
+  credentials: true,
+})
+
+// Health check — always have this, no auth
+server.get(&#39;/health&#39;, async () =&gt; ({
+  status: &#39;ok&#39;,
+  timestamp: new Date().toISOString(),
+  db: await prisma.$queryRaw`SELECT 1`.then(() =&gt; &#39;ok&#39;).catch(() =&gt; &#39;error&#39;),
+}))
+
+// Routes
+await server.register(authRoutes, { prefix: &#39;/auth&#39; })
+await server.register(todoRoutes, { prefix: &#39;/todos&#39; })
+
+// Global error handler — no stack traces to clients in production
+server.setErrorHandler((error, request, reply) =&gt; {
+  logger.error({ error, url: request.url, method: request.method }, &#39;Request error&#39;)
+
+  // Zod validation error
+  if (error.name === &#39;ZodError&#39;) {
+    return reply.status(400).send({
+      error: &#39;Validation failed&#39;,
+      code: &#39;VALIDATION_ERROR&#39;,
+      details: JSON.parse(error.message),
+    })
+  }
+
+  const statusCode = error.statusCode ?? 500
+  return reply.status(statusCode).send({
+    error: statusCode === 500 ? &#39;Internal server error&#39; : error.message,
+    code: statusCode === 500 ? &#39;INTERNAL_ERROR&#39; : &#39;REQUEST_ERROR&#39;,
+  })
+})
+
+// Graceful shutdown — always handle SIGTERM
+const shutdown = async () =&gt; {
+  await server.close()
+  await prisma.$disconnect()
+  process.exit(0)
+}
+process.on(&#39;SIGTERM&#39;, shutdown)
+process.on(&#39;SIGINT&#39;, shutdown)
+
+// Start
+try {
+  await server.listen({ port: Number(process.env.PORT) || 4000, host: &#39;0.0.0.0&#39; })
+  logger.info(&#39;Server running on port 4000&#39;)
+} catch (err) {
+  server.log.error(err)
+  process.exit(1)
+}
+</code></pre>
+<h3 id="43-app-factory-the-key-to-testable-code">4.3 App factory — the key to testable code</h3>
+<blockquote>
+<p><strong>Why this matters:</strong> The <code>index.ts</code> above starts the server immediately. Tests can&#39;t use that — they need to create the app, run assertions, then close it cleanly. The solution is to split your code into two files: <code>app.ts</code> (creates and configures Fastify) and <code>index.ts</code> (calls <code>buildApp()</code> then listens).</p>
+</blockquote>
+<pre><code class="language-typescript">// api/src/app.ts  ← create this file
+import Fastify, { FastifyInstance } from &#39;fastify&#39;
+import cors from &#39;@fastify/cors&#39;
+import helmet from &#39;@fastify/helmet&#39;
+import { authRoutes } from &#39;./routes/auth&#39;
+import { todoRoutes } from &#39;./routes/todos&#39;
+import { authenticate } from &#39;./middleware/auth&#39;
+import { prisma } from &#39;./lib/prisma&#39;
+
+export async function buildApp(): Promise&lt;FastifyInstance&gt; {
+  const app = Fastify({
+    logger: process.env.NODE_ENV !== &#39;test&#39;, // silence logs during tests
+  })
+
+  await app.register(helmet)
+
+  await app.register(cors, {
+    origin: process.env.ALLOWED_ORIGINS?.split(&#39;,&#39;) ?? [&#39;http://localhost:3000&#39;],
+    credentials: true,
+  })
+
+  // Decorate with authenticate so routes can use it as preHandler
+  app.decorate(&#39;authenticate&#39;, authenticate)
+
+  // Health check
+  app.get(&#39;/health&#39;, async () =&gt; ({
+    status: &#39;ok&#39;,
+    timestamp: new Date().toISOString(),
+    db: await prisma.$queryRaw`SELECT 1`.then(() =&gt; &#39;ok&#39;).catch(() =&gt; &#39;error&#39;),
+  }))
+
+  await app.register(authRoutes, { prefix: &#39;/auth&#39; })
+  await app.register(todoRoutes, { prefix: &#39;/todos&#39; })
+
+  app.setErrorHandler((error, request, reply) =&gt; {
+    if (error.name === &#39;ZodError&#39;) {
+      return reply.status(400).send({
+        error: &#39;Validation failed&#39;,
+        code: &#39;VALIDATION_ERROR&#39;,
+        details: JSON.parse(error.message),
+      })
+    }
+    const statusCode = error.statusCode ?? 500
+    return reply.status(statusCode).send({
+      error: statusCode === 500 ? &#39;Internal server error&#39; : error.message,
+      code: statusCode === 500 ? &#39;INTERNAL_ERROR&#39; : &#39;REQUEST_ERROR&#39;,
+    })
+  })
+
+  return app
+}
+</code></pre>
+<pre><code class="language-typescript">// api/src/index.ts  ← now just starts the server
+import { buildApp } from &#39;./app&#39;
+import { prisma } from &#39;./lib/prisma&#39;
+
+const app = await buildApp()
+
+const shutdown = async () =&gt; {
+  await app.close()
+  await prisma.$disconnect()
+  process.exit(0)
+}
+process.on(&#39;SIGTERM&#39;, shutdown)
+process.on(&#39;SIGINT&#39;, shutdown)
+
+try {
+  await app.listen({ port: Number(process.env.PORT) || 4000, host: &#39;0.0.0.0&#39; })
+} catch (err) {
+  app.log.error(err)
+  process.exit(1)
+}
+</code></pre>
+<blockquote>
+<p><strong>The rule:</strong> <code>app.ts</code> = build and configure. <code>index.ts</code> = listen. Tests import <code>buildApp</code> from <code>app.ts</code> — they never touch <code>index.ts</code>.</p>
+</blockquote>
+<h3 id="44-complete-crud-routes">4.4 Complete CRUD routes</h3>
+<pre><code class="language-typescript">// api/src/routes/todos.ts
+import { FastifyPluginAsync } from &#39;fastify&#39;
+import { z } from &#39;zod&#39;
+import { TodoService } from &#39;../services/todo.service&#39;
+import { authenticate } from &#39;../middleware/auth&#39;
+
+const createTodoSchema = z.object({
+  title: z.string().min(1, &#39;Title required&#39;).max(200),
+  priority: z.enum([&#39;low&#39;, &#39;medium&#39;, &#39;high&#39;]).default(&#39;medium&#39;),
+})
+
+const updateTodoSchema = z.object({
+  title: z.string().min(1).max(200).optional(),
+  completed: z.boolean().optional(),
+  priority: z.enum([&#39;low&#39;, &#39;medium&#39;, &#39;high&#39;]).optional(),
+})
+
+export const todoRoutes: FastifyPluginAsync = async (fastify) =&gt; {
+  const todoService = new TodoService()
+
+  // GET /todos — list all todos for current user
+  fastify.get(&#39;/&#39;, { preHandler: [authenticate] }, async (request, reply) =&gt; {
+    const todos = await todoService.findAll(request.user.userId)
+    return reply.send(todos)
+  })
+
+  // GET /todos/:id
+  fastify.get(&#39;/:id&#39;, { preHandler: [authenticate] }, async (request, reply) =&gt; {
+    const { id } = request.params as { id: string }
+    const todo = await todoService.findById(id, request.user.userId)
+    if (!todo) return reply.status(404).send({ error: &#39;Todo not found&#39; })
+    return reply.send(todo)
+  })
+
+  // POST /todos
+  fastify.post(&#39;/&#39;, { preHandler: [authenticate] }, async (request, reply) =&gt; {
+    const body = createTodoSchema.parse(request.body)
+    const todo = await todoService.create({ ...body, userId: request.user.userId })
+    return reply.status(201).send(todo)
+  })
+
+  // PATCH /todos/:id
+  fastify.patch(&#39;/:id&#39;, { preHandler: [authenticate] }, async (request, reply) =&gt; {
+    const { id } = request.params as { id: string }
+    const body = updateTodoSchema.parse(request.body)
+    const todo = await todoService.update(id, request.user.userId, body)
+    if (!todo) return reply.status(404).send({ error: &#39;Todo not found&#39; })
+    return reply.send(todo)
+  })
+
+  // DELETE /todos/:id
+  fastify.delete(&#39;/:id&#39;, { preHandler: [authenticate] }, async (request, reply) =&gt; {
+    await todoService.delete(id, request.user.userId)
+    return reply.status(204).send()
+  })
+}
+</code></pre>
+<h3 id="44-service-layer-business-logic">4.4 Service layer — business logic</h3>
+<pre><code class="language-typescript">// api/src/services/todo.service.ts
+import { TodoRepository } from &#39;../repositories/todo.repository&#39;
+import { cache } from &#39;../lib/redis&#39;
+
+export class TodoService {
+  private repo = new TodoRepository()
+
+  async findAll(userId: string) {
+    const cacheKey = `todos:${userId}`
+    const cached = await cache.get&lt;Todo[]&gt;(cacheKey)
+    if (cached) return cached
+
+    const todos = await this.repo.findByUser(userId)
+    await cache.set(cacheKey, todos, 60) // cache 60 seconds
+    return todos
+  }
+
+  async findById(id: string, userId: string) {
+    return this.repo.findOne(id, userId)
+  }
+
+  async create(data: { title: string; priority: string; userId: string }) {
+    const todo = await this.repo.create(data)
+    await cache.del(`todos:${data.userId}`) // invalidate list cache
+    return todo
+  }
+
+  async update(id: string, userId: string, data: Partial&lt;{ title: string; completed: boolean; priority: string }&gt;) {
+    const todo = await this.repo.update(id, userId, data)
+    if (todo) await cache.del(`todos:${userId}`)
+    return todo
+  }
+
+  async delete(id: string, userId: string) {
+    await this.repo.delete(id, userId)
+    await cache.del(`todos:${userId}`)
+  }
+}
+</code></pre>
+<h3 id="45-repository-layer-database-queries">4.5 Repository layer — database queries</h3>
+<pre><code class="language-typescript">// api/src/repositories/todo.repository.ts
+import { prisma } from &#39;../lib/prisma&#39;
+
+export class TodoRepository {
+  findByUser(userId: string) {
+    return prisma.todo.findMany({
+      where: { userId },
+      orderBy: { createdAt: &#39;desc&#39; },
+    })
+  }
+
+  findOne(id: string, userId: string) {
+    return prisma.todo.findFirst({
+      where: { id, userId }, // ALWAYS filter by userId — security!
+    })
+  }
+
+  create(data: { title: string; priority: string; userId: string }) {
+    return prisma.todo.create({ data })
+  }
+
+  update(id: string, userId: string, data: object) {
+    return prisma.todo.update({
+      where: { id, userId },
+      data,
+    })
+  }
+
+  delete(id: string, userId: string) {
+    return prisma.todo.delete({
+      where: { id, userId },
+    })
+  }
+}
+</code></pre>
+<h3 id="46-http-status-codes-use-these-right">4.6 HTTP status codes — use these right</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>200 OK</code></td>
+<td>Success</td>
+<td>GET, PATCH, PUT worked</td>
+</tr>
+<tr>
+<td><code>201 Created</code></td>
+<td>Resource created</td>
+<td>POST that creates a row</td>
+</tr>
+<tr>
+<td><code>204 No Content</code></td>
+<td>Success, no body</td>
+<td>DELETE</td>
+</tr>
+<tr>
+<td><code>400 Bad Request</code></td>
+<td>Client sent bad data</td>
+<td>Validation failed</td>
+</tr>
+<tr>
+<td><code>401 Unauthorized</code></td>
+<td>Not authenticated</td>
+<td>No token or invalid token</td>
+</tr>
+<tr>
+<td><code>403 Forbidden</code></td>
+<td>Not authorized</td>
+<td>Has token but no permission</td>
+</tr>
+<tr>
+<td><code>404 Not Found</code></td>
+<td>Doesn&#39;t exist</td>
+<td>Row not found</td>
+</tr>
+<tr>
+<td><code>409 Conflict</code></td>
+<td>Duplicate</td>
+<td>Email already registered</td>
+</tr>
+<tr>
+<td><code>429 Too Many Requests</code></td>
+<td>Rate limited</td>
+<td>Too many requests</td>
+</tr>
+<tr>
+<td><code>500 Internal Error</code></td>
+<td>Server bug</td>
+<td>Unexpected crash</td>
+</tr>
+</tbody></table>
+<h3 id="47-rate-limiting">4.7 Rate limiting</h3>
+<pre><code class="language-typescript">// api/src/middleware/rate-limit.ts
+import { FastifyRequest, FastifyReply } from &#39;fastify&#39;
+import { redis } from &#39;../lib/redis&#39;
+
+export async function rateLimit(
+  request: FastifyRequest,
+  reply: FastifyReply,
+  options = { limit: 100, windowSeconds: 60 }
+) {
+  const identifier = request.headers[&#39;x-forwarded-for&#39;] as string || request.ip
+  const key = `ratelimit:${identifier}:${request.routerPath}`
+
+  const current = await redis.incr(key)
+  if (current === 1) await redis.expire(key, options.windowSeconds)
+
+  reply.header(&#39;X-RateLimit-Limit&#39;, options.limit)
+  reply.header(&#39;X-RateLimit-Remaining&#39;, Math.max(0, options.limit - current))
+
+  if (current &gt; options.limit) {
+    return reply.status(429).send({
+      error: &#39;Too many requests. Please slow down.&#39;,
+      code: &#39;RATE_LIMIT_EXCEEDED&#39;,
+    })
+  }
+}
+
+// Stricter limit for auth routes (prevent brute force)
+export const authRateLimit = (req: FastifyRequest, reply: FastifyReply) =&gt;
+  rateLimit(req, reply, { limit: 10, windowSeconds: 60 })
+</code></pre>
+<h3 id="48-background-jobs-send-emails-without-blocking-the-request">4.8 Background jobs (send emails without blocking the request)</h3>
+<pre><code class="language-typescript">// api/src/lib/queue.ts
+import { Queue, Worker } from &#39;bullmq&#39;
+import { redis } from &#39;./redis&#39;
+
+export const emailQueue = new Queue(&#39;email&#39;, { connection: redis })
+
+// Add a job (non-blocking — returns immediately)
+export async function queueWelcomeEmail(userId: string, email: string) {
+  await emailQueue.add(
+    &#39;welcome-email&#39;,
+    { userId, email },
+    {
+      attempts: 3,
+      backoff: { type: &#39;exponential&#39;, delay: 2000 },
+      removeOnComplete: true,
+    }
+  )
+}
+
+// Worker processes jobs in the background
+const emailWorker = new Worker(
+  &#39;email&#39;,
+  async (job) =&gt; {
+    if (job.name === &#39;welcome-email&#39;) {
+      const { userId, email } = job.data
+      // await sendWelcomeEmail(email, userId)
+      console.log(`Sending welcome email to ${email}`)
+    }
+  },
+  { connection: redis }
+)
+
+emailWorker.on(&#39;failed&#39;, (job, err) =&gt; {
+  console.error(`Job ${job?.id} failed:`, err.message)
+})
+</code></pre>
+<h3 id="49-backend-checklist">4.9 Backend checklist</h3>
+<ul>
+<li>☐  <code>GET /health</code> — no auth, checks DB connectivity</li>
+<li>☐  Global error handler — no raw stack traces to clients</li>
+<li>☐  CORS configured for frontend origin only</li>
+<li>☐  All write routes validate with Zod</li>
+<li>☐  DB uses connection pool (Prisma handles this automatically)</li>
+<li>☐  Graceful shutdown on SIGTERM</li>
+<li>☐  JSON structured logs</li>
+<li>☐  Rate limiting on auth endpoints</li>
+</ul>
+<hr>
+<div class="part-break"></div><h2 id="part-5" class="part-opener">PART 5 — Database Engineering</h2>
+<h3 id="51-prisma-schema-define-your-data">5.1 Prisma schema — define your data</h3>
+<pre><code class="language-prisma">// api/prisma/schema.prisma
+generator client {
+  provider = &quot;prisma-client-js&quot;
+}
+
+datasource db {
+  provider = &quot;postgresql&quot;
+  url      = env(&quot;DATABASE_URL&quot;)
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  passwordHash String
+  role         Role      @default(USER)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  todos        Todo[]
+  sessions     Session[]
+
+  @@index([email])
+}
+
+model Todo {
+  id        String    @id @default(cuid())
+  title     String
+  completed Boolean   @default(false)
+  priority  Priority  @default(MEDIUM)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, completed])  -- compound index for common filter
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  refreshToken String   @unique
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([refreshToken])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+</code></pre>
+<pre><code class="language-bash"># Run migration in development (creates migration file + applies it)
+npx prisma migrate dev --name init
+
+# Apply migrations in production (CI/CD)
+npx prisma migrate deploy
+
+# View your data in browser
+npx prisma studio
+
+# Regenerate the Prisma client after schema changes
+npx prisma generate
+</code></pre>
+<h3 id="52-prisma-client-setup">5.2 Prisma client setup</h3>
+<pre><code class="language-typescript">// api/src/lib/prisma.ts
+import { PrismaClient } from &#39;@prisma/client&#39;
+
+const prisma = new PrismaClient({
+  log: process.env.NODE_ENV === &#39;development&#39;
+    ? [&#39;query&#39;, &#39;warn&#39;, &#39;error&#39;]
+    : [&#39;warn&#39;, &#39;error&#39;],
+})
+
+// Log queries slower than 1 second
+prisma.$on(&#39;query&#39; as never, (e: any) =&gt; {
+  if (e.duration &gt; 1000) {
+    console.warn(`Slow query (${e.duration}ms):`, e.query.substring(0, 200))
+  }
+})
+
+export { prisma }
+</code></pre>
+<h3 id="53-indexing-speed-up-your-queries">5.3 Indexing — speed up your queries</h3>
+<figure class="diagram" id="figure-17"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-17.png" alt="Figure 17" /><figcaption class="diagram-caption">Figure 17 — 5.3 Indexing — speed up your queries</figcaption></figure>
+
+
+
+<blockquote>
+<p><strong>Rule:</strong> Add an index on any column you <code>WHERE</code>, <code>JOIN ON</code>, or <code>ORDER BY</code>.</p>
+</blockquote>
+<pre><code class="language-sql">-- Add these after creating your tables
+CREATE INDEX idx_todos_user_id ON todos(user_id);
+CREATE INDEX idx_todos_user_completed ON todos(user_id, completed);
+CREATE INDEX idx_users_email ON users(email);
+
+-- Find slow queries (run in psql)
+EXPLAIN ANALYZE SELECT * FROM todos WHERE user_id = &#39;abc&#39; AND completed = false;
+</code></pre>
+<blockquote>
+<p><strong>Watch out:</strong> Don&#39;t index every column — indexes slow down writes. Index only columns you actually query.</p>
+</blockquote>
+<h3 id="54-fix-the-n1-query-problem">5.4 Fix the N+1 query problem</h3>
+<pre><code class="language-typescript">// ❌ N+1 problem — runs 1 query for users + N queries for todos
+const users = await prisma.user.findMany()
+for (const user of users) {
+  user.todos = await prisma.todo.findMany({ where: { userId: user.id } })
+  // This makes 1 DB trip per user!
+}
+
+// ✅ Fix with include — runs just 1 query total
+const users = await prisma.user.findMany({
+  include: { todos: true },
+})
+
+// ✅ Fix with JOIN in raw SQL
+const users = await prisma.$queryRaw`
+  SELECT u.*, json_agg(t.*) as todos
+  FROM users u
+  LEFT JOIN todos t ON t.user_id = u.id
+  GROUP BY u.id
+`
+</code></pre>
+<h3 id="55-migrations-never-break-production">5.5 Migrations — never break production</h3>
+<figure class="diagram" id="figure-18"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-18.png" alt="Figure 18" /><figcaption class="diagram-caption">Figure 18 — 5.5 Migrations — never break production</figcaption></figure>
+
+
+
+<p><strong>Zero-downtime migration rules:</strong></p>
+<ul>
+<li>Add columns as <code>nullable</code> first, then backfill, then add constraint</li>
+<li>Never rename columns directly — add new, copy data, remove old</li>
+<li>Add indexes with <code>CREATE INDEX CONCURRENTLY</code> (no table lock)</li>
+<li>Run <code>prisma migrate deploy</code> BEFORE deploying the new app version</li>
+</ul>
+<h3 id="56-redis-caching">5.6 Redis caching</h3>
+<pre><code class="language-typescript">// api/src/lib/redis.ts
+import Redis from &#39;ioredis&#39;
+
+export const redis = new Redis(process.env.REDIS_URL!, {
+  maxRetriesPerRequest: 3,
+  retryStrategy: (times) =&gt; Math.min(times * 50, 2000),
+})
+
+redis.on(&#39;error&#39;, (err) =&gt; console.error(&#39;Redis error:&#39;, err.message))
+
+export const cache = {
+  async get&lt;T&gt;(key: string): Promise&lt;T | null&gt; {
+    const val = await redis.get(key)
+    return val ? JSON.parse(val) : null
+  },
+
+  async set(key: string, value: unknown, ttlSeconds = 300) {
+    await redis.setex(key, ttlSeconds, JSON.stringify(value))
+  },
+
+  async del(key: string) {
+    await redis.del(key)
+  },
+
+  async invalidatePattern(pattern: string) {
+    const keys = await redis.keys(pattern)
+    if (keys.length &gt; 0) await redis.del(...keys)
+  },
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Cache?</th>
+<th>TTL</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User profile</td>
+<td>Yes</td>
+<td>5-10 min</td>
+<td>Rarely changes</td>
+</tr>
+<tr>
+<td>Product list</td>
+<td>Yes</td>
+<td>1-5 min</td>
+<td>High read traffic</td>
+</tr>
+<tr>
+<td>Shopping cart</td>
+<td>No</td>
+<td>—</td>
+<td>Must be real-time</td>
+</tr>
+<tr>
+<td>Auth sessions</td>
+<td>Yes (Redis)</td>
+<td>= token expiry</td>
+<td>Fast lookup</td>
+</tr>
+<tr>
+<td>Search results</td>
+<td>Yes</td>
+<td>1 min</td>
+<td>Expensive queries</td>
+</tr>
+</tbody></table>
+<h3 id="57-database-checklist">5.7 Database checklist</h3>
+<ul>
+<li>☐  Indexes on foreign keys and frequent <code>WHERE</code> columns</li>
+<li>☐  Automated backups enabled + restore tested once</li>
+<li>☐  No <code>SELECT *</code> in hot paths — select specific columns</li>
+<li>☐  Connection pool configured (Prisma: default 10, set <code>connection_limit</code>)</li>
+<li>☐  Migrations run before app deploys</li>
+<li>☐  Slow query logging enabled</li>
+</ul>
+<hr>
+<div class="part-break"></div><h2 id="part-6" class="part-opener">PART 6 — Auth & Security</h2>
+<h3 id="61-jwt-auth-flow">6.1 JWT auth flow</h3>
+<figure class="diagram" id="figure-19"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-19.png" alt="Figure 19" /><figcaption class="diagram-caption">Figure 19 — 6.1 JWT auth flow</figcaption></figure>
+
+
+
+<h3 id="62-complete-auth-routes">6.2 Complete auth routes</h3>
+<pre><code class="language-typescript">// api/src/routes/auth.ts
+import bcrypt from &#39;bcrypt&#39;
+import { FastifyPluginAsync } from &#39;fastify&#39;
+import { z } from &#39;zod&#39;
+import { prisma } from &#39;../lib/prisma&#39;
+import { generateTokens } from &#39;../lib/jwt&#39;
+import { authenticate } from &#39;../middleware/auth&#39;
+
+const registerSchema = z.object({
+  email: z.string().email(&#39;Invalid email&#39;),
+  password: z.string().min(8, &#39;Password must be at least 8 characters&#39;),
+  name: z.string().min(1).max(100),
+})
+
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+})
+
+export const authRoutes: FastifyPluginAsync = async (fastify) =&gt; {
+
+  // POST /auth/register
+  fastify.post(&#39;/register&#39;, async (request, reply) =&gt; {
+    const { email, password, name } = registerSchema.parse(request.body)
+
+    const existing = await prisma.user.findUnique({ where: { email } })
+    if (existing) {
+      return reply.status(409).send({ error: &#39;Email already in use&#39;, code: &#39;EMAIL_TAKEN&#39; })
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12)
+
+    const user = await prisma.user.create({
+      data: { email, passwordHash, name },
+    })
+
+    const { accessToken, refreshToken } = await generateTokens(user.id)
+
+    return reply.status(201).send({
+      user: { id: user.id, email: user.email, name: user.name },
+      accessToken,
+      refreshToken,
+    })
+  })
+
+  // POST /auth/login
+  fastify.post(&#39;/login&#39;, async (request, reply) =&gt; {
+    const { email, password } = loginSchema.parse(request.body)
+
+    const user = await prisma.user.findUnique({ where: { email } })
+
+    // Constant-time comparison — don&#39;t reveal if email exists
+    const validPassword = user
+      ? await bcrypt.compare(password, user.passwordHash)
+      : await bcrypt.compare(password, &#39;$2b$12$invalidhashfortimingattack&#39;)
+
+    if (!user || !validPassword) {
+      return reply.status(401).send({
+        error: &#39;Invalid email or password&#39;,
+        code: &#39;INVALID_CREDENTIALS&#39;,
+      })
+    }
+
+    const { accessToken, refreshToken } = await generateTokens(user.id)
+
+    return reply.send({
+      user: { id: user.id, email: user.email, name: user.name },
+      accessToken,
+      refreshToken,
+    })
+  })
+
+  // POST /auth/refresh
+  fastify.post(&#39;/refresh&#39;, async (request, reply) =&gt; {
+    const { refreshToken } = request.body as { refreshToken: string }
+
+    if (!refreshToken) {
+      return reply.status(400).send({ error: &#39;Refresh token required&#39; })
+    }
+
+    const session = await prisma.session.findUnique({
+      where: { refreshToken },
+      include: { user: true },
+    })
+
+    if (!session || session.expiresAt &lt; new Date()) {
+      if (session) await prisma.session.delete({ where: { id: session.id } })
+      return reply.status(401).send({ error: &#39;Invalid or expired refresh token&#39; })
+    }
+
+    const { accessToken } = await generateTokens(session.userId)
+    return reply.send({ accessToken })
+  })
+
+  // POST /auth/logout
+  fastify.post(&#39;/logout&#39;, async (request, reply) =&gt; {
+    const { refreshToken } = request.body as { refreshToken: string }
+    if (refreshToken) {
+      await prisma.session.deleteMany({ where: { refreshToken } })
+    }
+    return reply.send({ message: &#39;Logged out&#39; })
+  })
+
+  // GET /auth/me — protected
+  fastify.get(&#39;/me&#39;, { preHandler: [authenticate] }, async (request, reply) =&gt; {
+    const user = await prisma.user.findUnique({
+      where: { id: request.user.userId },
+      select: { id: true, email: true, name: true, role: true, createdAt: true },
+    })
+    if (!user) return reply.status(404).send({ error: &#39;User not found&#39; })
+    return reply.send(user)
+  })
+}
+</code></pre>
+<h3 id="63-jwt-utilities">6.3 JWT utilities</h3>
+<pre><code class="language-typescript">// api/src/lib/jwt.ts
+import jwt from &#39;jsonwebtoken&#39;
+import { prisma } from &#39;./prisma&#39;
+
+const ACCESS_SECRET = process.env.JWT_SECRET!
+const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!
+
+if (!ACCESS_SECRET || !REFRESH_SECRET) {
+  throw new Error(&#39;JWT_SECRET and JWT_REFRESH_SECRET must be set&#39;)
+}
+
+export function generateAccessToken(userId: string): string {
+  return jwt.sign({ userId }, ACCESS_SECRET, { expiresIn: &#39;15m&#39; })
+}
+
+export async function generateTokens(userId: string) {
+  const accessToken = generateAccessToken(userId)
+  const refreshToken = jwt.sign({ userId }, REFRESH_SECRET, { expiresIn: &#39;7d&#39; })
+
+  await prisma.session.create({
+    data: {
+      userId,
+      refreshToken,
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    },
+  })
+
+  return { accessToken, refreshToken }
+}
+</code></pre>
+<h3 id="64-auth-middleware">6.4 Auth middleware</h3>
+<pre><code class="language-typescript">// api/src/middleware/auth.ts
+import { FastifyRequest, FastifyReply } from &#39;fastify&#39;
+import jwt from &#39;jsonwebtoken&#39;
+
+declare module &#39;fastify&#39; {
+  interface FastifyRequest {
+    user: { userId: string }
+  }
+}
+
+export async function authenticate(request: FastifyRequest, reply: FastifyReply) {
+  const authHeader = request.headers.authorization
+  if (!authHeader?.startsWith(&#39;Bearer &#39;)) {
+    return reply.status(401).send({ error: &#39;Authorization token required&#39;, code: &#39;NO_TOKEN&#39; })
+  }
+
+  const token = authHeader.replace(&#39;Bearer &#39;, &#39;&#39;)
+
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string }
+    request.user = { userId: payload.userId }
+  } catch (err) {
+    if (err instanceof jwt.TokenExpiredError) {
+      return reply.status(401).send({ error: &#39;Token expired — please refresh&#39;, code: &#39;TOKEN_EXPIRED&#39; })
+    }
+    return reply.status(401).send({ error: &#39;Invalid token&#39;, code: &#39;INVALID_TOKEN&#39; })
+  }
+}
+</code></pre>
+<h3 id="65-token-storage-where-to-put-tokens-in-the-browser">6.5 Token storage (where to put tokens in the browser)</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Where to store</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Access token (15min)</td>
+<td>JavaScript memory or short-lived cookie</td>
+<td>Short lifetime, okay to lose on refresh</td>
+</tr>
+<tr>
+<td>Refresh token (7 days)</td>
+<td><code>httpOnly Secure SameSite=Strict</code> cookie</td>
+<td>Can&#39;t be read by JS — XSS protection</td>
+</tr>
+</tbody></table>
+<pre><code class="language-typescript">// On login, set refresh token as httpOnly cookie:
+reply.setCookie(&#39;refreshToken&#39;, refreshToken, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === &#39;production&#39;,
+  sameSite: &#39;strict&#39;,
+  maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
+  path: &#39;/auth/refresh&#39;,
+})
+</code></pre>
+<h3 id="66-security-checklist-non-negotiable">6.6 Security checklist (non-negotiable)</h3>
+<ul>
+<li>☐  HTTPS everywhere (never HTTP in production)</li>
+<li>☐  Passwords hashed with bcrypt (rounds=12, NEVER store plain text)</li>
+<li>☐  JWT secrets in env/secret manager, never in code</li>
+<li>☐  <code>httpOnly</code> cookie for refresh tokens</li>
+<li>☐  Input validation with Zod on every write endpoint</li>
+<li>☐  Auth middleware on every private route</li>
+<li>☐  Rate limiting on <code>/auth/login</code> and <code>/auth/register</code></li>
+<li>☐  Dependency scanning in CI (Dependabot or Snyk)</li>
+<li>☐  CORS configured for your frontend origin only</li>
+<li>☐  Helmet security headers registered</li>
+<li>☐  SQL via Prisma (no string concatenation — no SQL injection)</li>
+</ul>
+<hr>
+<div class="part-break"></div><h2 id="part-7" class="part-opener">PART 7 — Testing</h2>
+<h3 id="71-the-testing-pyramid">7.1 The testing pyramid</h3>
+<figure class="diagram" id="figure-20"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-20.png" alt="Figure 20" /><figcaption class="diagram-caption">Figure 20 — 7.1 The testing pyramid</figcaption></figure>
+
+
+
+<blockquote>
+<p><strong>Start with:</strong> unit tests for your Zod schemas (quick wins), then integration tests for each route.</p>
+</blockquote>
+<h3 id="72-unit-tests-validate-your-schemas">7.2 Unit tests — validate your schemas</h3>
+<pre><code class="language-typescript">// api/src/tests/validation.test.ts
+import { describe, it, expect } from &#39;vitest&#39;
+import { z } from &#39;zod&#39;
+
+const createTodoSchema = z.object({
+  title: z.string().min(1, &#39;Title required&#39;).max(200),
+  priority: z.enum([&#39;low&#39;, &#39;medium&#39;, &#39;high&#39;]).default(&#39;medium&#39;),
+})
+
+describe(&#39;createTodoSchema&#39;, () =&gt; {
+  it(&#39;accepts valid todo&#39;, () =&gt; {
+    const result = createTodoSchema.parse({ title: &#39;Buy milk&#39;, priority: &#39;high&#39; })
+    expect(result.title).toBe(&#39;Buy milk&#39;)
+    expect(result.priority).toBe(&#39;high&#39;)
+  })
+
+  it(&#39;rejects empty title&#39;, () =&gt; {
+    expect(() =&gt; createTodoSchema.parse({ title: &#39;&#39; })).toThrow()
+  })
+
+  it(&#39;rejects title over 200 chars&#39;, () =&gt; {
+    expect(() =&gt; createTodoSchema.parse({ title: &#39;x&#39;.repeat(201) })).toThrow()
+  })
+
+  it(&#39;defaults priority to medium&#39;, () =&gt; {
+    const result = createTodoSchema.parse({ title: &#39;Test&#39; })
+    expect(result.priority).toBe(&#39;medium&#39;)
+  })
+
+  it(&#39;rejects invalid priority&#39;, () =&gt; {
+    expect(() =&gt; createTodoSchema.parse({ title: &#39;Test&#39;, priority: &#39;critical&#39; })).toThrow()
+  })
+})
+
+const registerSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+  name: z.string().min(1),
+})
+
+describe(&#39;registerSchema&#39;, () =&gt; {
+  it(&#39;accepts valid user&#39;, () =&gt; {
+    expect(() =&gt; registerSchema.parse({
+      email: &#39;user@example.com&#39;,
+      password: &#39;secret123&#39;,
+      name: &#39;Alice&#39;,
+    })).not.toThrow()
+  })
+
+  it(&#39;rejects bad email&#39;, () =&gt; {
+    expect(() =&gt; registerSchema.parse({
+      email: &#39;notanemail&#39;,
+      password: &#39;secret123&#39;,
+      name: &#39;Alice&#39;,
+    })).toThrow()
+  })
+
+  it(&#39;rejects short password&#39;, () =&gt; {
+    expect(() =&gt; registerSchema.parse({
+      email: &#39;user@example.com&#39;,
+      password: &#39;short&#39;,
+      name: &#39;Alice&#39;,
+    })).toThrow()
+  })
+})
+</code></pre>
+<h3 id="73-integration-tests-test-your-api-routes">7.3 Integration tests — test your API routes</h3>
+<pre><code class="language-typescript">// api/src/tests/health.test.ts
+import { describe, it, expect, beforeAll, afterAll } from &#39;vitest&#39;
+import { buildApp } from &#39;../app&#39;
+import type { FastifyInstance } from &#39;fastify&#39;
+
+describe(&#39;Health endpoint&#39;, () =&gt; {
+  let app: FastifyInstance
+
+  beforeAll(async () =&gt; {
+    app = await buildApp()
+  })
+
+  afterAll(async () =&gt; {
+    await app.close()
+  })
+
+  it(&#39;GET /health returns 200&#39;, async () =&gt; {
+    const res = await app.inject({
+      method: &#39;GET&#39;,
+      url: &#39;/health&#39;,
+    })
+    expect(res.statusCode).toBe(200)
+    expect(JSON.parse(res.body)).toMatchObject({ status: &#39;ok&#39; })
+  })
+})
+
+// api/src/tests/todos.test.ts
+import { describe, it, expect, beforeAll, afterAll } from &#39;vitest&#39;
+import { buildApp } from &#39;../app&#39;
+import { prisma } from &#39;../lib/prisma&#39;
+import { generateAccessToken } from &#39;../lib/jwt&#39;
+
+describe(&#39;Todos API&#39;, () =&gt; {
+  let app: Awaited&lt;ReturnType&lt;typeof buildApp&gt;&gt;
+  let token: string
+  let userId: string
+
+  beforeAll(async () =&gt; {
+    app = await buildApp()
+
+    // Create test user
+    const user = await prisma.user.create({
+      data: {
+        email: `test-${Date.now()}@test.com`,
+        passwordHash: &#39;hashed&#39;,
+        name: &#39;Test User&#39;,
+      },
+    })
+    userId = user.id
+    token = generateAccessToken(userId)
+  })
+
+  afterAll(async () =&gt; {
+    await prisma.user.delete({ where: { id: userId } })
+    await app.close()
+  })
+
+  it(&#39;GET /todos returns empty array for new user&#39;, async () =&gt; {
+    const res = await app.inject({
+      method: &#39;GET&#39;,
+      url: &#39;/todos&#39;,
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    expect(res.statusCode).toBe(200)
+    expect(JSON.parse(res.body)).toEqual([])
+  })
+
+  it(&#39;POST /todos creates a todo&#39;, async () =&gt; {
+    const res = await app.inject({
+      method: &#39;POST&#39;,
+      url: &#39;/todos&#39;,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        &#39;Content-Type&#39;: &#39;application/json&#39;,
+      },
+      body: JSON.stringify({ title: &#39;Test todo&#39;, priority: &#39;high&#39; }),
+    })
+    expect(res.statusCode).toBe(201)
+    const todo = JSON.parse(res.body)
+    expect(todo.title).toBe(&#39;Test todo&#39;)
+    expect(todo.userId).toBe(userId)
+  })
+
+  it(&#39;POST /todos returns 401 without auth token&#39;, async () =&gt; {
+    const res = await app.inject({
+      method: &#39;POST&#39;,
+      url: &#39;/todos&#39;,
+      headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },
+      body: JSON.stringify({ title: &#39;Test&#39; }),
+    })
+    expect(res.statusCode).toBe(401)
+  })
+
+  it(&#39;POST /todos returns 400 with empty title&#39;, async () =&gt; {
+    const res = await app.inject({
+      method: &#39;POST&#39;,
+      url: &#39;/todos&#39;,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        &#39;Content-Type&#39;: &#39;application/json&#39;,
+      },
+      body: JSON.stringify({ title: &#39;&#39; }),
+    })
+    expect(res.statusCode).toBe(400)
+  })
+})
+</code></pre>
+<h3 id="74-e2e-tests-test-like-a-real-user">7.4 E2E tests — test like a real user</h3>
+<pre><code class="language-typescript">// frontend/e2e/todos.spec.ts
+import { test, expect } from &#39;@playwright/test&#39;
+
+test.describe(&#39;Todo App&#39;, () =&gt; {
+  test.beforeEach(async ({ page }) =&gt; {
+    await page.goto(&#39;/login&#39;)
+    await page.fill(&#39;[name=email]&#39;, &#39;e2e@test.com&#39;)
+    await page.fill(&#39;[name=password]&#39;, &#39;password123&#39;)
+    await page.click(&#39;[type=submit]&#39;)
+    await page.waitForURL(&#39;/dashboard&#39;)
+  })
+
+  test(&#39;can create a new todo&#39;, async ({ page }) =&gt; {
+    await page.goto(&#39;/dashboard&#39;)
+    await page.fill(&#39;[placeholder=&quot;What needs to be done?&quot;]&#39;, &#39;Buy groceries&#39;)
+    await page.click(&#39;[type=submit]&#39;)
+    await expect(page.getByText(&#39;Buy groceries&#39;)).toBeVisible()
+  })
+
+  test(&#39;can mark todo as complete&#39;, async ({ page }) =&gt; {
+    await page.goto(&#39;/dashboard&#39;)
+    await page.click(&#39;[data-testid=&quot;todo-toggle&quot;]&#39;)
+    await expect(page.locator(&#39;[data-testid=&quot;todo-item&quot;]&#39;).first())
+      .toHaveClass(/completed/)
+  })
+})
+</code></pre>
+<pre><code class="language-typescript">// playwright.config.ts
+import { defineConfig } from &#39;@playwright/test&#39;
+
+export default defineConfig({
+  testDir: &#39;./e2e&#39;,
+  use: {
+    baseURL: &#39;http://localhost:3000&#39;,
+    screenshot: &#39;only-on-failure&#39;,
+  },
+  webServer: {
+    command: &#39;npm run dev&#39;,
+    url: &#39;http://localhost:3000&#39;,
+    reuseExistingServer: !process.env.CI,
+  },
+})
+</code></pre>
+<h3 id="75-vitest-config">7.5 Vitest config</h3>
+<pre><code class="language-typescript">// api/vitest.config.ts
+import { defineConfig } from &#39;vitest/config&#39;
+
+export default defineConfig({
+  test: {
+    environment: &#39;node&#39;,
+    globals: true,
+    coverage: {
+      provider: &#39;v8&#39;,
+      reporter: [&#39;text&#39;, &#39;json&#39;, &#39;html&#39;],
+    },
+  },
+})
+</code></pre>
+<pre><code class="language-bash">npm test              # Run once
+npm run test:watch    # Watch mode
+npm run test:coverage # Coverage report
+</code></pre>
+<h3 id="76-testing-checklist">7.6 Testing checklist</h3>
+<ul>
+<li>☐  CI fails if tests fail (enforced in GitHub Actions)</li>
+<li>☐  Test DB isolated from dev (separate <code>DATABASE_URL</code> in CI)</li>
+<li>☐  Unit tests for all Zod schemas</li>
+<li>☐  Integration test for every route (at least happy path + 401)</li>
+<li>☐  One E2E test for the most important user journey</li>
+<li>☐  No flaky <code>sleep()</code> — use <code>waitFor</code> in E2E</li>
+</ul>
+<hr>
+<div class="part-break"></div><h2 id="part-8" class="part-opener">PART 8 — DevOps & CI/CD</h2>
+<h3 id="81-why-docker">8.1 Why Docker?</h3>
+<figure class="diagram" id="figure-21"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-21.png" alt="Figure 21" /><figcaption class="diagram-caption">Figure 21 — 8.1 Why Docker?</figcaption></figure>
+
+
+
+<h3 id="82-dockerfiles-multi-stage-the-production-pattern">8.2 Dockerfiles (multi-stage — the production pattern)</h3>
+<pre><code class="language-dockerfile"># api/Dockerfile
+# Stage 1: Build
+FROM node:22-alpine AS builder
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
+COPY prisma ./prisma
+RUN npx prisma generate
+
+COPY . .
+RUN npm run build
+
+# Stage 2: Production image (smaller — no build tools)
+FROM node:22-alpine AS runner
+WORKDIR /app
+
+# Non-root user — security best practice
+RUN addgroup -g 1001 -S nodejs &amp;&amp; adduser -S nodeapp -u 1001
+
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/prisma ./prisma
+
+USER nodeapp
+EXPOSE 4000
+HEALTHCHECK --interval=30s --timeout=5s CMD wget -qO- http://localhost:4000/health || exit 1
+CMD [&quot;node&quot;, &quot;dist/index.js&quot;]
+</code></pre>
+<pre><code class="language-javascript">// frontend/next.config.js  ← required for the Dockerfile to work
+/** @type {import(&#39;next&#39;).NextConfig} */
+const nextConfig = {
+  output: &#39;standalone&#39;, // ← THIS LINE — without it, .next/standalone won&#39;t exist
+                        //   and the production Docker image will crash at startup
+  images: {
+    remotePatterns: [
+      // Add domains for any external images you load, e.g.:
+      // { protocol: &#39;https&#39;, hostname: &#39;avatars.githubusercontent.com&#39; },
+    ],
+  },
+}
+
+module.exports = nextConfig
+</code></pre>
+<blockquote>
+<p><strong>Why <code>output: &#39;standalone&#39;</code>?</strong> Next.js by default produces output that requires the full <code>node_modules</code> folder to run. With <code>standalone</code>, it bundles only what is actually used into a single <code>server.js</code> — making the Docker image 80–90% smaller and startup much faster.</p>
+</blockquote>
+<pre><code class="language-dockerfile"># frontend/Dockerfile
+FROM node:22-alpine AS builder
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+FROM node:22-alpine AS runner
+WORKDIR /app
+
+RUN addgroup --system --gid 1001 nodejs &amp;&amp; adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+EXPOSE 3000
+CMD [&quot;node&quot;, &quot;server.js&quot;]
+</code></pre>
+<pre><code class="language-text"># .dockerignore (create this — critical for build speed and security)
+node_modules
+.git
+.env
+.env.local
+.next
+dist
+coverage
+*.log
+</code></pre>
+<h3 id="83-github-actions-cicd-pipeline-full">8.3 GitHub Actions CI/CD pipeline (full)</h3>
+<pre><code class="language-yaml"># .github/workflows/ci.yml
+name: CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  test:
+    name: Test &amp; Lint
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: myapp_test
+          POSTGRES_USER: myapp
+          POSTGRES_PASSWORD: password
+        ports: [&#39;5432:5432&#39;]
+        options: &gt;-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports: [&#39;6379:6379&#39;]
+
+    defaults:
+      run:
+        working-directory: api
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: &#39;22&#39;
+          cache: &#39;npm&#39;
+          cache-dependency-path: api/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run database migrations
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: postgresql://myapp:password@localhost:5432/myapp_test
+
+      - name: Run tests
+        run: npm test
+        env:
+          DATABASE_URL: postgresql://myapp:password@localhost:5432/myapp_test
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: test-secret-key-for-ci
+          JWT_REFRESH_SECRET: test-refresh-secret-key-for-ci
+          NODE_ENV: test
+
+      - name: Build
+        run: npm run build
+
+  test-frontend:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: &#39;22&#39;
+          cache: &#39;npm&#39;
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+      - run: npm run build
+
+  build-and-push:
+    name: Build &amp; Push Docker Images
+    needs: [test, test-frontend]
+    runs-on: ubuntu-latest
+    if: github.ref == &#39;refs/heads/main&#39;
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push API
+        uses: docker/build-push-action@v5
+        with:
+          context: ./api
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-api:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-api:${{ github.sha }}
+
+      - name: Build and push frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
+
+  deploy-staging:
+    name: Deploy to Staging
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Deploy to staging
+        run: echo &quot;Deploy ${{ github.sha }} to staging&quot;
+        # Replace with: railway up, fly deploy, aws ecs update-service, etc.
+
+      - name: Smoke test
+        run: |
+          sleep 20
+          curl -f https://staging.myapp.com/health || exit 1
+</code></pre>
+<h3 id="84-deployment-strategies">8.4 Deployment strategies</h3>
+<figure class="diagram" id="figure-22"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-22.png" alt="Figure 22" /><figcaption class="diagram-caption">Figure 22 — 8.4 Deployment strategies</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Use when</th>
+<th>Rollback speed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rolling</td>
+<td>Default for most apps</td>
+<td>Minutes</td>
+</tr>
+<tr>
+<td>Blue-Green</td>
+<td>Need instant rollback, database migrations are risky</td>
+<td>Seconds</td>
+</tr>
+<tr>
+<td>Canary</td>
+<td>High-risk changes, large user base</td>
+<td>Minutes</td>
+</tr>
+</tbody></table>
+<h3 id="85-cicd-checklist">8.5 CI/CD checklist</h3>
+<ul>
+<li>☐  <code>npm test</code> runs and fails CI if tests fail</li>
+<li>☐  Docker images tagged with git SHA (not just <code>latest</code>)</li>
+<li>☐  Images scanned for vulnerabilities (Trivy or Snyk)</li>
+<li>☐  Staging deploys automatically on <code>main</code> merge</li>
+<li>☐  Production deployment requires manual approval</li>
+<li>☐  Rollback = redeploy previous image tag (documented)</li>
+<li>☐  DB migrations run BEFORE app deploys</li>
+</ul>
+<hr>
+<div class="part-break"></div><h2 id="part-9" class="part-opener">PART 9 — Cloud & Deploy</h2>
+<h3 id="91-easiest-path-railway-or-flyio-start-here">9.1 Easiest path — Railway or Fly.io (start here)</h3>
+<pre><code class="language-bash"># Railway (simplest — web UI + CLI)
+npm install -g @railway/cli
+railway login
+railway init
+railway up
+
+# Set env vars (never in code)
+railway variables set DATABASE_URL=...
+railway variables set JWT_SECRET=...
+
+# Fly.io (great for global deploys)
+brew install flyctl
+flyctl auth login
+flyctl launch
+flyctl deploy
+flyctl secrets set JWT_SECRET=...
+</code></pre>
+<h3 id="92-aws-production-grade-setup">9.2 AWS — production-grade setup</h3>
+<figure class="diagram" id="figure-23"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-23.png" alt="Figure 23" /><figcaption class="diagram-caption">Figure 23 — 9.2 AWS — production-grade setup</figcaption></figure>
+
+
+
+<h3 id="93-terraform-infrastructure-as-code">9.3 Terraform (Infrastructure as Code)</h3>
+<pre><code class="language-hcl"># infrastructure/main.tf
+terraform {
+  required_providers {
+    aws = { source = &quot;hashicorp/aws&quot;, version = &quot;~&gt; 5.0&quot; }
+  }
+
+  backend &quot;s3&quot; {
+    bucket = &quot;my-app-tf-state&quot;
+    key    = &quot;prod/terraform.tfstate&quot;
+    region = &quot;us-east-1&quot;
+  }
+}
+
+provider &quot;aws&quot; {
+  region = &quot;us-east-1&quot;
+}
+
+# VPC with public/private subnets
+module &quot;vpc&quot; {
+  source  = &quot;terraform-aws-modules/vpc/aws&quot;
+  version = &quot;5.0&quot;
+
+  name            = &quot;my-app-vpc&quot;
+  cidr            = &quot;10.0.0.0/16&quot;
+  azs             = [&quot;us-east-1a&quot;, &quot;us-east-1b&quot;]
+  private_subnets = [&quot;10.0.1.0/24&quot;, &quot;10.0.2.0/24&quot;]
+  public_subnets  = [&quot;10.0.101.0/24&quot;, &quot;10.0.102.0/24&quot;]
+  enable_nat_gateway = true
+}
+
+# RDS PostgreSQL
+resource &quot;aws_db_instance&quot; &quot;main&quot; {
+  identifier        = &quot;myapp-postgres&quot;
+  engine            = &quot;postgres&quot;
+  engine_version    = &quot;16.1&quot;
+  instance_class    = &quot;db.t3.medium&quot;
+  allocated_storage = 20
+  storage_encrypted = true
+
+  db_name  = &quot;myapp&quot;
+  username = &quot;myapp&quot;
+  password = var.db_password  # from Secrets Manager
+
+  multi_az                = true  # high availability
+  backup_retention_period = 7
+  skip_final_snapshot     = false
+
+  vpc_security_group_ids = [aws_security_group.rds.id]
+  db_subnet_group_name   = aws_db_subnet_group.main.name
+}
+</code></pre>
+<pre><code class="language-bash">terraform init    # Download providers
+terraform plan    # Preview what will change
+terraform apply   # Apply changes (confirm yes)
+# Never run terraform destroy on production without a backup
+</code></pre>
+<h3 id="94-environments">9.4 Environments</h3>
+<table>
+<thead>
+<tr>
+<th>Env</th>
+<th>Purpose</th>
+<th>Data</th>
+<th>Who deploys</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>local</strong></td>
+<td>Your laptop</td>
+<td>Fake / seed</td>
+<td>You</td>
+</tr>
+<tr>
+<td><strong>staging</strong></td>
+<td>Pre-prod testing</td>
+<td>Anonymized copy</td>
+<td>CI automatically</td>
+</tr>
+<tr>
+<td><strong>production</strong></td>
+<td>Real users</td>
+<td>Real data</td>
+<td>Manual approval</td>
+</tr>
+</tbody></table>
+<h3 id="95-deploy-checklist">9.5 Deploy checklist</h3>
+<ul>
+<li>☐  Secrets set in hosting platform, not in <code>.env</code> file in repo</li>
+<li>☐  Custom domain with HTTPS certificate</li>
+<li>☐  DB automated backups enabled</li>
+<li>☐  Health check endpoint live: <code>GET /health</code></li>
+<li>☐  Rollback plan documented (which image tag to redeploy)</li>
+<li>☐  Staging smoke test passing before promoting to production</li>
+</ul>
+<hr>
+<div class="part-break"></div><h2 id="part-10" class="part-opener">PART 10 — Observability & Monitoring</h2>
+<h3 id="101-the-three-pillars">10.1 The three pillars</h3>
+<figure class="diagram" id="figure-24"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-24.png" alt="Figure 24" /><figcaption class="diagram-caption">Figure 24 — 10.1 The three pillars</figcaption></figure>
+
+
+
+<h3 id="102-structured-logging-always-json">10.2 Structured logging (always JSON)</h3>
+<pre><code class="language-typescript">// api/src/lib/logger.ts
+import pino from &#39;pino&#39;
+
+export const logger = pino({
+  level: process.env.LOG_LEVEL || &#39;info&#39;,
+  transport: process.env.NODE_ENV === &#39;development&#39;
+    ? { target: &#39;pino-pretty&#39; } // human-readable in dev
+    : undefined,                 // raw JSON in production
+  base: {
+    service: &#39;my-backend&#39;,
+    version: process.env.APP_VERSION || &#39;1.0.0&#39;,
+    env: process.env.NODE_ENV,
+  },
+})
+
+// ✅ Good log — has context
+logger.info({ userId: &#39;123&#39;, action: &#39;todo.created&#39;, todoId: &#39;abc&#39; }, &#39;Todo created&#39;)
+logger.error({ err, userId: &#39;123&#39;, url: &#39;/todos&#39; }, &#39;Failed to fetch todos&#39;)
+
+// ❌ Bad log — no context, can&#39;t debug from this
+console.log(&#39;Todo created&#39;)
+</code></pre>
+<h3 id="103-request-logging-in-fastify">10.3 Request logging in Fastify</h3>
+<pre><code class="language-typescript">// Fastify has pino built in — every request is automatically logged:
+// { &quot;reqId&quot;: &quot;1&quot;, &quot;req&quot;: { &quot;method&quot;: &quot;POST&quot;, &quot;url&quot;: &quot;/todos&quot; }, ... }
+
+// Add request IDs to every log via hooks:
+server.addHook(&#39;onRequest&#39;, (request, reply, done) =&gt; {
+  request.log.info({ method: request.method, url: request.url }, &#39;Incoming request&#39;)
+  done()
+})
+
+server.addHook(&#39;onResponse&#39;, (request, reply, done) =&gt; {
+  request.log.info(
+    { method: request.method, url: request.url, statusCode: reply.statusCode, duration: reply.elapsedTime },
+    &#39;Request completed&#39;
+  )
+  done()
+})
+</code></pre>
+<h3 id="104-opentelemetry-distributed-tracing">10.4 OpenTelemetry — distributed tracing</h3>
+<pre><code class="language-typescript">// api/src/lib/telemetry.ts — import this FIRST in index.ts
+import { NodeSDK } from &#39;@opentelemetry/sdk-node&#39;
+import { OTLPTraceExporter } from &#39;@opentelemetry/exporter-trace-otlp-http&#39;
+import { Resource } from &#39;@opentelemetry/resources&#39;
+import { SemanticResourceAttributes } from &#39;@opentelemetry/semantic-conventions&#39;
+import { HttpInstrumentation } from &#39;@opentelemetry/instrumentation-http&#39;
+
+const sdk = new NodeSDK({
+  resource: new Resource({
+    [SemanticResourceAttributes.SERVICE_NAME]: &#39;my-backend&#39;,
+    [SemanticResourceAttributes.SERVICE_VERSION]: process.env.APP_VERSION || &#39;1.0.0&#39;,
+  }),
+  traceExporter: new OTLPTraceExporter({
+    url: process.env.OTEL_ENDPOINT || &#39;http://localhost:4318/v1/traces&#39;,
+  }),
+  instrumentations: [new HttpInstrumentation()],
+})
+
+sdk.start()
+process.on(&#39;SIGTERM&#39;, () =&gt; sdk.shutdown())
+</code></pre>
+<h3 id="105-alerts-get-notified-before-users-complain">10.5 Alerts — get notified before users complain</h3>
+<table>
+<thead>
+<tr>
+<th>Alert</th>
+<th>Threshold</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5xx rate</td>
+<td>&gt; 1% of requests</td>
+<td>Page on-call immediately</td>
+</tr>
+<tr>
+<td>Health check down</td>
+<td>2 consecutive fails</td>
+<td>Page on-call immediately</td>
+</tr>
+<tr>
+<td>p99 latency</td>
+<td>&gt; 2 seconds</td>
+<td>Investigate within 1 hour</td>
+</tr>
+<tr>
+<td>DB connections</td>
+<td>&gt; 80% of pool</td>
+<td>Scale DB or add connection pooler</td>
+</tr>
+<tr>
+<td>Disk usage</td>
+<td>&gt; 85%</td>
+<td>Add storage or rotate logs</td>
+</tr>
+</tbody></table>
+<h3 id="106-minimum-viable-observability-checklist">10.6 Minimum viable observability checklist</h3>
+<ul>
+<li>☐  JSON logs to stdout (hosting platform aggregates them)</li>
+<li>☐  <code>GET /health</code> returns DB connectivity status</li>
+<li>☐  Dashboard: RPS, error rate, p95 latency</li>
+<li>☐  Alert on: health check down, 5xx spike</li>
+<li>☐  At least one alerting channel (Slack webhook or email)</li>
+</ul>
+<hr>
+<div class="part-break"></div><h2 id="part-11" class="part-opener">PART 11 — Performance</h2>
+<h3 id="111-find-slowness-before-optimizing">11.1 Find slowness before optimizing</h3>
+<figure class="diagram" id="figure-25"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-25.png" alt="Figure 25" /><figcaption class="diagram-caption">Figure 25 — 11.1 Find slowness before optimizing</figcaption></figure>
+
+
+
+<blockquote>
+<p><strong>Rule:</strong> Measure first. Never add caching without proving the query is slow.</p>
+</blockquote>
+<h3 id="112-core-web-vitals">11.2 Core Web Vitals</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LCP (Largest Contentful Paint)</td>
+<td>&lt; 2.5s</td>
+<td>Preload hero image, use CDN, optimize images</td>
+</tr>
+<tr>
+<td>INP (Interaction to Next Paint)</td>
+<td>&lt; 200ms</td>
+<td>Code split, reduce JS bundle</td>
+</tr>
+<tr>
+<td>CLS (Cumulative Layout Shift)</td>
+<td>&lt; 0.1</td>
+<td>Set width/height on images and iframes</td>
+</tr>
+</tbody></table>
+<pre><code class="language-typescript">// ✅ Always use Next.js Image (auto-optimized)
+import Image from &#39;next/image&#39;
+&lt;Image src=&quot;/hero.jpg&quot; alt=&quot;Hero&quot; width={1200} height={600} priority /&gt;
+
+// ✅ Lazy load heavy components
+import dynamic from &#39;next/dynamic&#39;
+const HeavyChart = dynamic(() =&gt; import(&#39;@/components/chart&#39;), {
+  loading: () =&gt; &lt;p&gt;Loading...&lt;/p&gt;,
+  ssr: false,
+})
+</code></pre>
+<h3 id="113-caching-layers">11.3 Caching layers</h3>
+<figure class="diagram" id="figure-26"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-26.png" alt="Figure 26" /><figcaption class="diagram-caption">Figure 26 — 11.3 Caching layers</figcaption></figure>
+
+
+
+<h3 id="114-scaling-ladder">11.4 Scaling ladder</h3>
+<table>
+<thead>
+<tr>
+<th>Users (concurrent)</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt; 500</td>
+<td>Optimize queries, add missing indexes</td>
+</tr>
+<tr>
+<td>500–2k</td>
+<td>Cache hot reads in Redis</td>
+</tr>
+<tr>
+<td>2k–10k</td>
+<td>Read replica, more API replicas + load balancer</td>
+</tr>
+<tr>
+<td>10k+</td>
+<td>Split domains, queue heavy work</td>
+</tr>
+</tbody></table>
+<h3 id="115-performance-checklist">11.5 Performance checklist</h3>
+<ul>
+<li>☐  <code>EXPLAIN ANALYZE</code> checked for queries on tables &gt; 10k rows</li>
+<li>☐  Indexes on all <code>WHERE</code> columns (foreign keys, email, status)</li>
+<li>☐  No <code>SELECT *</code> on hot paths — select specific columns</li>
+<li>☐  Images: next/image or CDN, not raw <code>&lt;img&gt;</code></li>
+<li>☐  JS bundle: check <code>npm run build</code> output, no accidental huge imports</li>
+<li>☐  Redis cache for repeated, expensive reads</li>
+</ul>
+<hr>
+<div class="part-break"></div><h2 id="part-12" class="part-opener">PART 12 — Production Launch Checklist</h2>
+<figure class="diagram" id="figure-27"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-27.png" alt="Figure 27" /><figcaption class="diagram-caption">Figure 27 — 11.5 Performance checklist</figcaption></figure>
+
+
+
+<h3 id="critical-must-be-green-before-shipping">Critical (must be green before shipping)</h3>
+<p><strong>Frontend</strong></p>
+<ul>
+<li>☐  Loading, error, and empty states on every data view</li>
+<li>☐  Env vars set in hosting platform (not hardcoded)</li>
+<li>☐  No API keys or secrets in client bundle</li>
+<li>☐  Forms: disabled during submit, validation errors shown</li>
+</ul>
+<p><strong>Backend</strong></p>
+<ul>
+<li>☐  Auth enforced on all private routes</li>
+<li>☐  Input validation on all write endpoints</li>
+<li>☐  <code>GET /health</code> endpoint returns 200</li>
+<li>☐  Global error handler — no stack traces to clients</li>
+<li>☐  Graceful shutdown on SIGTERM</li>
+</ul>
+<p><strong>Database</strong></p>
+<ul>
+<li>☐  Migrations applied successfully</li>
+<li>☐  Automated backups enabled</li>
+<li>☐  Indexes on columns used in <code>WHERE</code> and <code>JOIN</code></li>
+<li>☐  Connection pool size set appropriately</li>
+</ul>
+<p><strong>Security</strong></p>
+<ul>
+<li>☐  HTTPS with valid certificate</li>
+<li>☐  Secrets in env/vault, not in code or git</li>
+<li>☐  Rate limiting on auth endpoints</li>
+<li>☐  CORS allowing only your frontend origin</li>
+<li>☐  Helmet security headers</li>
+</ul>
+<p><strong>Observability</strong></p>
+<ul>
+<li>☐  Logs visible in log aggregator</li>
+<li>☐  Alert on 5xx spike and health check failure</li>
+<li>☐  On-call knows how to rollback</li>
+</ul>
+<p><strong>Deploy</strong></p>
+<ul>
+<li>☐  Rollback procedure documented (previous image tag)</li>
+<li>☐  Staging smoke test: health + login + create item</li>
+<li>☐  DB migration ran BEFORE app deployed</li>
+</ul>
+<h3 id="launch-readiness-score">Launch readiness score</h3>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Score 1–5</th>
+<th>Blocker if &lt; 3?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Frontend UX</td>
+<td></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Backend API</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Database</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Security</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Deploy safety</td>
+<td></td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<p><strong>Ship when:</strong> all &quot;Yes&quot; domains score 4+, nothing at 1–2 without mitigation.</p>
+<hr>
+<div class="part-break"></div><h2 id="part-13" class="part-opener">PART 13 — Troubleshooting (25 fixes)</h2>
+<figure class="diagram" id="figure-28"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-28.png" alt="Figure 28" /><figcaption class="diagram-caption">Figure 28 — Launch readiness score</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Cannot find module &#39;fastify-cors&#39;</code></td>
+<td>Wrong package name</td>
+<td>Change to <code>@fastify/cors</code> — the old package is abandoned</td>
+</tr>
+<tr>
+<td>API not responding at all</td>
+<td>CORS blocked</td>
+<td>Register <code>@fastify/cors</code> with your frontend origin</td>
+</tr>
+<tr>
+<td>Frontend can&#39;t reach API</td>
+<td>Wrong URL in env</td>
+<td>Set <code>NEXT_PUBLIC_API_URL=http://localhost:4000</code></td>
+</tr>
+<tr>
+<td><code>Error: listen EADDRINUSE :3000</code></td>
+<td>Port already in use</td>
+<td><code>lsof -ti:3000 | xargs kill -9</code></td>
+</tr>
+<tr>
+<td>DB connection fails</td>
+<td>Postgres not running</td>
+<td><code>docker-compose up postgres</code></td>
+</tr>
+<tr>
+<td><code>Error: .env file missing</code></td>
+<td>No env file</td>
+<td><code>cp .env.example .env</code> then fill in values</td>
+</tr>
+<tr>
+<td>Docker build fails slowly</td>
+<td>No <code>.dockerignore</code></td>
+<td>Add <code>.dockerignore</code> excluding <code>node_modules</code></td>
+</tr>
+<tr>
+<td><code>401 Unauthorized</code> on every request</td>
+<td>JWT secret wrong</td>
+<td>Check <code>JWT_SECRET</code> matches between signing and verifying</td>
+</tr>
+<tr>
+<td><code>401 Unauthorized</code> after 15 minutes</td>
+<td>Access token expired</td>
+<td>Implement refresh token flow</td>
+</tr>
+<tr>
+<td>Migration failed in production</td>
+<td>Wrong order</td>
+<td>Restore backup, fix migration, retry</td>
+</tr>
+<tr>
+<td>API slow on list endpoint</td>
+<td>No index</td>
+<td><code>CREATE INDEX idx_todos_user_id ON todos(user_id)</code></td>
+</tr>
+<tr>
+<td>No logs in production</td>
+<td>Wrong log format</td>
+<td>Log JSON to stdout — platform collects stdout</td>
+</tr>
+<tr>
+<td>Docker image is 1GB+</td>
+<td>Single-stage Dockerfile</td>
+<td>Use multi-stage build — only copy <code>dist/</code></td>
+</tr>
+<tr>
+<td>Tests pass locally, fail in CI</td>
+<td>Different env vars</td>
+<td>Add <code>.env.test</code> + set CI env variables</td>
+</tr>
+<tr>
+<td>Secret committed to git</td>
+<td>Panic</td>
+<td>Rotate secret immediately, add to <code>.gitignore</code>, use <code>git filter-repo</code> to purge</td>
+</tr>
+<tr>
+<td>Random 502 Bad Gateway</td>
+<td>App crashing on unhandled error</td>
+<td>Add global error handler, fix the bug</td>
+</tr>
+<tr>
+<td>Stale deploy (new code not live)</td>
+<td>Cached Docker image</td>
+<td>Tag with <code>$(git rev-parse --short HEAD)</code></td>
+</tr>
+<tr>
+<td>HTTPS cert error</td>
+<td>Cert expired</td>
+<td>Renew cert in load balancer / cert-manager</td>
+</tr>
+<tr>
+<td>Disk full in production</td>
+<td>Unbounded logs</td>
+<td>Set log rotation policy + retention</td>
+</tr>
+<tr>
+<td>Flaky E2E tests</td>
+<td>Race condition</td>
+<td>Use <code>await expect(locator).toBeVisible()</code> not sleep</td>
+</tr>
+<tr>
+<td>CORS preflight failing</td>
+<td>Missing OPTIONS method</td>
+<td>Add <code>methods: [&#39;GET&#39;, &#39;POST&#39;, &#39;PUT&#39;, &#39;PATCH&#39;, &#39;DELETE&#39;]</code> to CORS config</td>
+</tr>
+<tr>
+<td>Postgres connection pool exhausted</td>
+<td>Too many connections</td>
+<td>Set <code>connection_limit</code> in DATABASE_URL or use PgBouncer</td>
+</tr>
+<tr>
+<td><code>PrismaClientKnownRequestError P2025</code></td>
+<td>Record not found</td>
+<td>Add null check before using result</td>
+</tr>
+<tr>
+<td><code>TypeError: Cannot read property of undefined</code></td>
+<td>Missing loading state</td>
+<td>Add <code>if (isLoading) return</code> in your component</td>
+</tr>
+<tr>
+<td>E2E test can&#39;t log in</td>
+<td>Test user not seeded</td>
+<td>Add seed script or create user in <code>beforeAll</code></td>
+</tr>
+</tbody></table>
+<hr>
+<div class="part-break"></div><h2 id="part-14" class="part-opener">PART 14 — Real-World App Blueprints</h2>
+<h3 id="blueprint-a-saas-mvp-the-standard-fresher-project">Blueprint A — SaaS MVP (the standard fresher project)</h3>
+<figure class="diagram" id="figure-29"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-29.png" alt="Figure 29" /><figcaption class="diagram-caption">Figure 29 — Blueprint A — SaaS MVP (the standard fresher project)</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Week</th>
+<th>What to build</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Auth + organization + user model</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Core entity CRUD (the thing users do)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Email notifications + billing (Stripe)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Admin dashboard + analytics</td>
+</tr>
+</tbody></table>
+<h3 id="blueprint-b-e-commerce-simplified">Blueprint B — E-commerce (simplified)</h3>
+<figure class="diagram" id="figure-30"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-30.png" alt="Figure 30" /><figcaption class="diagram-caption">Figure 30 — Blueprint B — E-commerce (simplified)</figcaption></figure>
+
+
+
+<p><strong>Key tables:</strong> <code>users</code>, <code>products</code>, <code>carts</code>, <code>cart_items</code>, <code>orders</code>, <code>order_items</code>, <code>payments</code></p>
+<h3 id="blueprint-c-realtime-chat">Blueprint C — Realtime chat</h3>
+<ul>
+<li>WebSocket server via <code>ws</code> package or managed (Pusher, Ably)</li>
+<li>Redis pub/sub for distributing messages across API instances</li>
+<li>Postgres for message history, Redis for recent messages cache</li>
+</ul>
+<h3 id="blueprint-d-internal-admin-tool">Blueprint D — Internal admin tool</h3>
+<pre><code class="language-text">Week 1: Next.js + Fastify + Postgres — list views and edit forms
+Week 2: Auth with SSO (NextAuth + Google/GitHub)
+Week 3: Data export (CSV), audit log
+Week 4: Role-based permissions (ADMIN vs USER)
+</code></pre>
+<h3 id="system-design-thinking-for-interviews-real-work">System design thinking (for interviews + real work)</h3>
+<figure class="diagram" id="figure-31"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-31.png" alt="Figure 31" /><figcaption class="diagram-caption">Figure 31 — System design thinking (for interviews + real work)</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Questions to ask</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Clarify</td>
+<td>Who uses it? Read-heavy or write-heavy? Consistency needed?</td>
+</tr>
+<tr>
+<td>Estimate</td>
+<td>100 users vs 1M users changes the design</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>Boxes: client, API, DB, cache, queue</td>
+</tr>
+<tr>
+<td>Bottlenecks</td>
+<td>Single points of failure? Slow queries? N+1?</td>
+</tr>
+</tbody></table>
+<hr>
+<div class="part-break"></div><h2 id="part-15" class="part-opener">PART 15 — Team & Git Workflow</h2>
+<figure class="diagram" id="figure-32"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-32.png" alt="Figure 32" /><figcaption class="diagram-caption">Figure 32 — System design thinking (for interviews + real work)</figcaption></figure>
+
+
+
+<h3 id="branch-and-pr-rules">Branch and PR rules</h3>
+<table>
+<thead>
+<tr>
+<th>Practice</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Branch naming</td>
+<td><code>feature/short-description</code>, <code>fix/bug-name</code>, <code>chore/dependency-update</code></td>
+</tr>
+<tr>
+<td>PR size</td>
+<td>&lt; 400 lines ideal — smaller = faster reviews</td>
+</tr>
+<tr>
+<td>Merging</td>
+<td>1 approval + CI green = merge</td>
+</tr>
+<tr>
+<td>Commits</td>
+<td><code>feat:</code>, <code>fix:</code>, <code>chore:</code>, <code>docs:</code> prefixes + why in body</td>
+</tr>
+</tbody></table>
+<h3 id="commit-message-format">Commit message format</h3>
+<pre><code class="language-text">feat: add priority field to todos
+
+Users need to distinguish urgent tasks. Added &#39;priority&#39; enum
+(low, medium, high) to todos table, API, and UI filter.
+
+Closes #42
+</code></pre>
+<h3 id="pr-checklist">PR checklist</h3>
+<ul>
+<li>☐  Tests added or updated for the change</li>
+<li>☐  No secrets committed (double-check <code>.env</code>)</li>
+<li>☐  Screenshots/GIF for UI changes</li>
+<li>☐  Migration noted in description if DB schema changed</li>
+<li>☐  Breaking changes documented</li>
+</ul>
+<h3 id="code-review-rules">Code review rules</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Author</td>
+<td>Small PRs, clear description, tests included</td>
+</tr>
+<tr>
+<td>Reviewer</td>
+<td>Review within 24h, suggest not demand, approve when logic is sound</td>
+</tr>
+</tbody></table>
+<hr>
+<div class="part-break"></div><h2 id="part-16" class="part-opener">PART 16 — Think Like a Senior Engineer</h2>
+<h3 id="the-5-rules">The 5 rules</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Rule</th>
+<th>Junior vs Senior</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>Ship small</strong></td>
+<td>Junior: 3-week branch. Senior: working PR daily</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Measure before optimizing</strong></td>
+<td>Junior: adds Redis &quot;for scale&quot;. Senior: runs <code>EXPLAIN ANALYZE</code> first</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Automate everything repetitive</strong></td>
+<td>Junior: deploys by hand. Senior: CI/CD, zero manual steps</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Simple &gt; clever</strong></td>
+<td>Junior: fancy abstractions. Senior: readable code that works</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Secure by default</strong></td>
+<td>Junior: &quot;we&#39;ll add auth later&quot;. Senior: auth is Day 4</td>
+</tr>
+</tbody></table>
+<figure class="diagram" id="figure-33"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-33.png" alt="Figure 33" /><figcaption class="diagram-caption">Figure 33 — The 5 rules</figcaption></figure>
+
+
+
+<h3 id="architecture-decision-records-adr">Architecture Decision Records (ADR)</h3>
+<p>When you make a significant technical decision, write it down. One paragraph each:</p>
+<pre><code class="language-markdown"># ADR 001: Use JWT + refresh tokens for auth
+
+## Status: Accepted
+
+## Decision
+Use JWT access tokens (15min) + refresh tokens stored in sessions table.
+
+## Why
+- Access tokens are stateless — no DB lookup on every request
+- Refresh tokens in DB allow logout/revocation
+- 15min access token limits damage if stolen
+
+## Trade-offs
+- Slightly more complex than sessions
+- Refresh token rotation required
+- DB lookup only on token refresh (acceptable)
+</code></pre>
+<hr>
+<div class="part-break"></div><h2 id="part-17" class="part-opener">PART 17 — 90-Day Growth Path</h2>
+<figure class="diagram" id="figure-34"><img src="file:///Users/balareddysatish.k/Documents/project helper/pdf-build/diagrams/diagram-34.png" alt="Figure 34" /><figcaption class="diagram-caption">Figure 34 — Architecture Decision Records (ADR)</figcaption></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Month</th>
+<th>Focus</th>
+<th>Proof</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>First app live with real URL</td>
+<td>Deployed URL + monitoring dashboard</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Code quality</td>
+<td>Tests added, fewer regressions</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Design thinking</td>
+<td>Architecture diagram for next feature</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Advanced topics</td>
+<td>OAuth, Prisma, queue, cloud deploy</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Observability</td>
+<td>Prometheus + Grafana dashboard running</td>
+</tr>
+<tr>
+<td>6</td>
+<td>System design</td>
+<td>Second service: payments, notifications</td>
+</tr>
+</tbody></table>
+<p><strong>Learning advice:</strong> Deployed beats perfect. One working app beats ten half-started ones.</p>
+<hr>
+<div class="part-break"></div><h2 id="appendix-a" class="part-opener">Appendix A — Copy-Paste Commands</h2>
+<pre><code class="language-bash"># === BOOTSTRAP A NEW PROJECT ===
+
+# Frontend
+npx create-next-app@latest frontend \
+  --typescript --tailwind --eslint --app --src-dir --import-alias &quot;@/*&quot;
+cd frontend
+npm install @tanstack/react-query zustand react-hook-form zod @hookform/resolvers
+npx shadcn-ui@latest init &amp;&amp; npx shadcn-ui@latest add button input card
+
+# Backend
+mkdir api &amp;&amp; cd api &amp;&amp; npm init -y
+npm install fastify @fastify/cors @fastify/helmet
+npm install jsonwebtoken   # use jsonwebtoken directly — NOT @fastify/jwt
+npm install @prisma/client zod bcrypt jsonwebtoken ioredis pino pino-pretty
+npm install -D typescript tsx @types/node @types/bcrypt @types/jsonwebtoken prisma vitest
+
+# Init prisma
+npx prisma init
+npx prisma migrate dev --name init
+
+# === DOCKER ===
+docker-compose up --build              # Start everything
+docker-compose down                    # Stop
+docker-compose down -v                 # Stop + wipe data
+docker build -t my-api:$(git rev-parse --short HEAD) ./api
+docker push ghcr.io/YOUR_ORG/my-api:$(git rev-parse --short HEAD)
+
+# === DATABASE ===
+npx prisma migrate dev --name add-feature    # New migration
+npx prisma migrate deploy                     # Apply in production
+npx prisma studio                             # Open data browser
+npx prisma db seed                            # Run seed script
+
+# === TESTING ===
+cd api &amp;&amp; npm test                     # Run tests once
+npm run test:watch                     # Watch mode
+npm run test:coverage                  # Coverage report
+npx playwright test                    # E2E tests
+
+# === GENERATE SECRETS ===
+node -e &quot;console.log(require(&#39;crypto&#39;).randomBytes(32).toString(&#39;hex&#39;))&quot;
+
+# === PORTS ===
+lsof -ti:3000 | xargs kill -9          # Kill process on port 3000
+lsof -ti:4000 | xargs kill -9          # Kill process on port 4000
+
+# === HEALTH CHECK ===
+curl -sf http://localhost:4000/health &amp;&amp; echo &quot;API OK&quot;
+
+# === AUTH FLOW (curl examples) ===
+# Register
+curl -s -X POST http://localhost:4000/auth/register \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;email&quot;:&quot;you@test.com&quot;,&quot;password&quot;:&quot;secret123&quot;,&quot;name&quot;:&quot;Test User&quot;}&#39; | jq .
+
+# Login
+TOKEN=$(curl -s -X POST http://localhost:4000/auth/login \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;email&quot;:&quot;you@test.com&quot;,&quot;password&quot;:&quot;secret123&quot;}&#39; | jq -r &#39;.accessToken&#39;)
+
+# Access protected route
+curl -s http://localhost:4000/auth/me \
+  -H &quot;Authorization: Bearer $TOKEN&quot; | jq .
+</code></pre>
+<hr>
+<div class="part-break"></div><h2 id="appendix-b" class="part-opener">Appendix B — Environment Variables Reference</h2>
+<pre><code class="language-bash"># === API (.env) ===
+DATABASE_URL=&quot;postgresql://user:pass@localhost:5432/myapp&quot;
+REDIS_URL=&quot;redis://localhost:6379&quot;
+JWT_SECRET=&quot;generate-with-crypto-random-32-bytes&quot;
+JWT_REFRESH_SECRET=&quot;different-generate-with-crypto-random-32-bytes&quot;
+PORT=4000
+NODE_ENV=development                      # development | production | test
+ALLOWED_ORIGINS=&quot;http://localhost:3000&quot;   # comma-separated
+LOG_LEVEL=info                            # debug | info | warn | error
+APP_VERSION=1.0.0
+OTEL_ENDPOINT=http://localhost:4318/v1/traces   # optional, for tracing
+
+# === FRONTEND (.env.local) ===
+NEXT_PUBLIC_API_URL=http://localhost:4000
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# === CI / Production extras ===
+DATABASE_URL=&quot;postgresql://user:pass@rds-host:5432/myapp&quot;
+REDIS_URL=&quot;redis://elasticache-host:6379&quot;
+ALLOWED_ORIGINS=&quot;https://myapp.com&quot;
+NODE_ENV=production
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Never commit <code>.env</code></td>
+<td>Add to <code>.gitignore</code> on day 1</td>
+</tr>
+<tr>
+<td>Always commit <code>.env.example</code></td>
+<td>Empty values as documentation</td>
+</tr>
+<tr>
+<td><code>NEXT_PUBLIC_</code> is public</td>
+<td>Only use for URLs, never secrets</td>
+</tr>
+<tr>
+<td>Rotate <code>JWT_SECRET</code> periodically</td>
+<td>Rotating invalidates all tokens — warn users</td>
+</tr>
+<tr>
+<td>Use secret manager in prod</td>
+<td>AWS Secrets Manager, Vault, Railway secrets</td>
+</tr>
+</tbody></table>
+<hr>
+<div class="part-break"></div><h2 id="appendix-c" class="part-opener">Appendix C — Error Decoder</h2>
+<table>
+<thead>
+<tr>
+<th>Error message</th>
+<th>What it means</th>
+<th>How to fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Cannot find module &#39;@fastify/cors&#39;</code></td>
+<td>Package not installed</td>
+<td><code>npm install @fastify/cors</code></td>
+</tr>
+<tr>
+<td><code>Cannot find module &#39;fastify-cors&#39;</code></td>
+<td>Old abandoned package</td>
+<td>Change to <code>@fastify/cors</code> in package.json and import</td>
+</tr>
+<tr>
+<td><code>EADDRINUSE 0.0.0.0:4000</code></td>
+<td>Port 4000 already in use</td>
+<td><code>lsof -ti:4000 | xargs kill -9</code></td>
+</tr>
+<tr>
+<td><code>ECONNREFUSED 127.0.0.1:5432</code></td>
+<td>Postgres not running</td>
+<td><code>docker-compose up postgres</code></td>
+</tr>
+<tr>
+<td><code>P2002: Unique constraint failed</code></td>
+<td>Duplicate email/value</td>
+<td>Return 409 with <code>Email already in use</code></td>
+</tr>
+<tr>
+<td><code>P2025: Record not found</code></td>
+<td>Prisma can&#39;t find the row</td>
+<td>Add null check: <code>if (!result) return 404</code></td>
+</tr>
+<tr>
+<td><code>JsonWebTokenError: invalid signature</code></td>
+<td>Wrong <code>JWT_SECRET</code></td>
+<td>Verify same secret used for sign and verify</td>
+</tr>
+<tr>
+<td><code>TokenExpiredError: jwt expired</code></td>
+<td>Token is too old</td>
+<td>Return 401 with <code>TOKEN_EXPIRED</code> — client should refresh</td>
+</tr>
+<tr>
+<td><code>invalid input syntax for type uuid</code></td>
+<td>Passing non-UUID as ID</td>
+<td>Validate ID format with Zod before DB query</td>
+</tr>
+<tr>
+<td><code>CORS error: No &#39;Access-Control-Allow-Origin&#39;</code></td>
+<td>CORS not set up</td>
+<td>Register <code>@fastify/cors</code> with frontend origin</td>
+</tr>
+<tr>
+<td><code>Hydration mismatch</code></td>
+<td>Server and client render different HTML</td>
+<td>Add <code>suppressHydrationWarning</code> or move to Client Component</td>
+</tr>
+<tr>
+<td><code>useQuery is not a function</code></td>
+<td>Missing QueryClientProvider</td>
+<td>Wrap your app in <code>&lt;QueryClientProvider&gt;</code></td>
+</tr>
+<tr>
+<td><code>prisma.todo.findMany is not a function</code></td>
+<td>Prisma client not generated</td>
+<td>Run <code>npx prisma generate</code></td>
+</tr>
+<tr>
+<td><code>Can&#39;t reach database server at postgres:5432</code></td>
+<td>Wrong DB host in Docker</td>
+<td>Use service name <code>postgres</code> not <code>localhost</code> in docker-compose</td>
+</tr>
+<tr>
+<td><code>TypeError: Cannot read properties of undefined (reading &#39;map&#39;)</code></td>
+<td>Data is undefined before fetch</td>
+<td>Add <code>const { data = [] }</code> or loading check</td>
+</tr>
+<tr>
+<td><code>npm ERR! peer dep missing</code></td>
+<td>Incompatible package versions</td>
+<td>Check peer deps, use <code>--legacy-peer-deps</code> as last resort</td>
+</tr>
+</tbody></table>
+<hr>
+<div class="part-break"></div><h2 id="appendix-d" class="part-opener">Appendix D — Glossary</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning (30 seconds)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>API</strong></td>
+<td>Backend HTTP service that your UI calls</td>
+</tr>
+<tr>
+<td><strong>CRUD</strong></td>
+<td>Create, Read, Update, Delete — the four database operations</td>
+</tr>
+<tr>
+<td><strong>JWT</strong></td>
+<td>Signed token proving who the user is without hitting DB every time</td>
+</tr>
+<tr>
+<td><strong>bcrypt</strong></td>
+<td>Algorithm for hashing passwords so you never store plain text</td>
+</tr>
+<tr>
+<td><strong>ORM</strong></td>
+<td>Library (Prisma) that lets you query DB with TypeScript instead of raw SQL</td>
+</tr>
+<tr>
+<td><strong>Migration</strong></td>
+<td>A versioned change to your DB schema, run in order</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Packages your app + all dependencies into a container that runs identically everywhere</td>
+</tr>
+<tr>
+<td><strong>CI/CD</strong></td>
+<td>Automated pipeline: test → build → deploy on every push</td>
+</tr>
+<tr>
+<td><strong>CORS</strong></td>
+<td>Browser security that blocks frontend from calling a different-origin API unless allowed</td>
+</tr>
+<tr>
+<td><strong>Rate limiting</strong></td>
+<td>Block users who send too many requests (prevents brute force and abuse)</td>
+</tr>
+<tr>
+<td><strong>N+1 query</strong></td>
+<td>Bug: fetching 10 users then 10 separate queries for their todos = 11 queries. Use JOIN instead</td>
+</tr>
+<tr>
+<td><strong>Index</strong></td>
+<td>DB data structure that makes lookups fast. Add to columns you filter on</td>
+</tr>
+<tr>
+<td><strong>p95 latency</strong></td>
+<td>95% of requests are faster than this. p99 = 99th percentile</td>
+</tr>
+<tr>
+<td><strong>Rollback</strong></td>
+<td>Deploy the previous known-good version of your app</td>
+</tr>
+<tr>
+<td><strong>Staging</strong></td>
+<td>Production-like environment for testing before real users see changes</td>
+</tr>
+<tr>
+<td><strong>TTL</strong></td>
+<td>Time-To-Live — how long a cache entry stays before expiring</td>
+</tr>
+<tr>
+<td><strong>Idempotent</strong></td>
+<td>Same request twice = same result (safe to retry)</td>
+</tr>
+<tr>
+<td><strong>Load balancer</strong></td>
+<td>Distributes incoming requests across multiple API instances</td>
+</tr>
+<tr>
+<td><strong>Connection pool</strong></td>
+<td>Reuses DB connections instead of opening one per request</td>
+</tr>
+<tr>
+<td><strong>Structured logs</strong></td>
+<td>JSON logs with fields (userId, action, level) instead of plain text strings</td>
+</tr>
+<tr>
+<td><strong>Graceful shutdown</strong></td>
+<td>Finish in-flight requests before stopping the server on SIGTERM</td>
+</tr>
+<tr>
+<td><strong>Health check</strong></td>
+<td><code>GET /health</code> endpoint that returns 200 when app is ready</td>
+</tr>
+<tr>
+<td><strong>ADR</strong></td>
+<td>Architecture Decision Record — a short doc explaining why you made a technical choice</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="you-are-ready">You are ready</h2>
+<p>You now have everything to ship a production-grade app from scratch:</p>
+<ul>
+<li><strong>PART 0</strong> — 10-day checklist from zero to live</li>
+<li><strong>PARTS 1-5</strong> — Complete setup, architecture, frontend, backend, database code</li>
+<li><strong>PART 6</strong> — Full auth with JWT + refresh tokens</li>
+<li><strong>PARTS 7-10</strong> — Tests, Docker, CI/CD, cloud deploy, monitoring</li>
+<li><strong>PARTS 11-12</strong> — Performance tuning + launch checklist</li>
+<li><strong>PART 13</strong> — 25 troubleshooting fixes with exact commands</li>
+<li><strong>PARTS 14-17</strong> — Blueprints, Git workflow, senior mindset, growth path</li>
+<li><strong>Appendices</strong> — Commands, env vars, error decoder, glossary</li>
+</ul>
+<h3 id="next-steps-right-now">Next steps right now</h3>
+<ol>
+<li>Open <code>starter-app/</code> and run <code>docker-compose up --build</code></li>
+<li>Follow PART 0 day by day — check every box</li>
+<li>Deploy to staging on Day 8</li>
+<li>Run PART 12 launch checklist before shipping</li>
+<li>Build your second feature without re-reading everything — use the table of contents at the top</li>
+</ol>
+<hr>
+<p><em>Every senior engineer shipped a broken toy app first. Yours is next. Ship small. Measure. Repeat.</em></p>
+<p><em>Version 3.0 — The Complete Edition. Stack: Next.js · Fastify · PostgreSQL · Prisma · Redis · Docker · GitHub Actions.</em></p>
+
+  </main>
+
+  <!-- ========== BACK MATTER ========== -->
+  
+<section id="page-index" class="back-matter-page index-page" aria-label="Index">
+  <h2 class="fm-heading">Index</h2>
+  <p class="index-intro">Click any term to jump to that section in the book.</p>
+  <table class="index-table">
+    <thead><tr><th>Term</th><th>Jump to</th></tr></thead>
+    <tbody><tr><td class="idx-term"><a href="#part-0" class="book-link idx-link">10-day build plan</a></td><td class="idx-ref"><a href="#part-0" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-6" class="book-link idx-link">Authentication (JWT + bcrypt)</a></td><td class="idx-ref"><a href="#part-6" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-9" class="book-link idx-link">AWS ECS + Terraform</a></td><td class="idx-ref"><a href="#part-9" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-6" class="book-link idx-link">bcrypt</a></td><td class="idx-ref"><a href="#part-6" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-4" class="book-link idx-link">BullMQ (background jobs)</a></td><td class="idx-ref"><a href="#part-4" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-8" class="book-link idx-link">CI/CD pipeline</a></td><td class="idx-ref"><a href="#part-8" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-4" class="book-link idx-link">CRUD routes</a></td><td class="idx-ref"><a href="#part-4" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-8" class="book-link idx-link">Docker multi-stage</a></td><td class="idx-ref"><a href="#part-8" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#appendix-c" class="book-link idx-link">Error decoder</a></td><td class="idx-ref"><a href="#appendix-c" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-7" class="book-link idx-link">E2E tests (Playwright)</a></td><td class="idx-ref"><a href="#part-7" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-4" class="book-link idx-link">Fastify</a></td><td class="idx-ref"><a href="#part-4" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-8" class="book-link idx-link">GitHub Actions</a></td><td class="idx-ref"><a href="#part-8" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#appendix-d" class="book-link idx-link">Glossary</a></td><td class="idx-ref"><a href="#appendix-d" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-6" class="book-link idx-link">JWT refresh tokens</a></td><td class="idx-ref"><a href="#part-6" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-12" class="book-link idx-link">Launch checklist</a></td><td class="idx-ref"><a href="#part-12" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-2" class="book-link idx-link">Microservices</a></td><td class="idx-ref"><a href="#part-2" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-5" class="book-link idx-link">Migrations (Prisma)</a></td><td class="idx-ref"><a href="#part-5" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-5" class="book-link idx-link">N+1 query problem</a></td><td class="idx-ref"><a href="#part-5" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-3" class="book-link idx-link">Next.js 15 (App Router)</a></td><td class="idx-ref"><a href="#part-3" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-2" class="book-link idx-link">Node.js</a></td><td class="idx-ref"><a href="#part-2" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-5" class="book-link idx-link">NoSQL vs SQL</a></td><td class="idx-ref"><a href="#part-5" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-10" class="book-link idx-link">Observability</a></td><td class="idx-ref"><a href="#part-10" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-10" class="book-link idx-link">OpenTelemetry (tracing)</a></td><td class="idx-ref"><a href="#part-10" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-10" class="book-link idx-link">Pino (structured logging)</a></td><td class="idx-ref"><a href="#part-10" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-5" class="book-link idx-link">PostgreSQL</a></td><td class="idx-ref"><a href="#part-5" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-5" class="book-link idx-link">Prisma ORM</a></td><td class="idx-ref"><a href="#part-5" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-3" class="book-link idx-link">React Query (TanStack v5)</a></td><td class="idx-ref"><a href="#part-3" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-5" class="book-link idx-link">Redis (caching)</a></td><td class="idx-ref"><a href="#part-5" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-4" class="book-link idx-link">Repository pattern</a></td><td class="idx-ref"><a href="#part-4" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-6" class="book-link idx-link">Security (OWASP, CORS, CSP)</a></td><td class="idx-ref"><a href="#part-6" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-3" class="book-link idx-link">Server Components (RSC)</a></td><td class="idx-ref"><a href="#part-3" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-4" class="book-link idx-link">Service layer pattern</a></td><td class="idx-ref"><a href="#part-4" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-9" class="book-link idx-link">Terraform (AWS infra)</a></td><td class="idx-ref"><a href="#part-9" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-7" class="book-link idx-link">Testing (Vitest)</a></td><td class="idx-ref"><a href="#part-7" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-13" class="book-link idx-link">Troubleshooting 25 fixes</a></td><td class="idx-ref"><a href="#part-13" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-2" class="book-link idx-link">TypeScript</a></td><td class="idx-ref"><a href="#part-2" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-4" class="book-link idx-link">Validation (Zod)</a></td><td class="idx-ref"><a href="#part-4" class="book-link">Go to section →</a></td></tr><tr><td class="idx-term"><a href="#part-3" class="book-link idx-link">Zustand (state management)</a></td><td class="idx-ref"><a href="#part-3" class="book-link">Go to section →</a></td></tr></tbody>
+  </table>
+</section>
+
+<section id="page-colophon" class="back-matter-page colophon-page" aria-label="Colophon">
+  <h2 class="fm-heading">Colophon</h2>
+  <p>
+    This book was produced from structured Markdown source with automated diagram rendering
+    (Mermaid), professional print CSS, and PDF generation for consistent team distribution.
+  </p>
+  <p><strong>Typeface:</strong> System UI stack optimized for screen and print.</p>
+  <p><strong>Diagrams:</strong> All figures rendered at publication resolution.</p>
+  <p><strong>Source:</strong> the-complete-handbook.md</p>
+  <p><strong>Complete Edition</strong> · Version 2.0 · 2026</p>
+  <p class="colophon-end">— End of book —</p>
+</section>
+
+</body>
+</html>

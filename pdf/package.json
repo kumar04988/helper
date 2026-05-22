@@ -1,0 +1,13 @@
+{
+  "name": "software-engineering-handbook-pdf",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build-pdf.mjs"
+  },
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.2",
+    "marked": "^15.0.7",
+    "puppeteer": "^24.2.1"
+  }
+}

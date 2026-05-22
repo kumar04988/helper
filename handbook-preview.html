@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Complete Software Engineering Handbook</title>
+
+  <!-- Mermaid.js — renders architecture diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <!-- Prism.js — syntax highlighting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-one-dark.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-docker.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-hcl.min.js"></script>
+
+  <style>
+    /* ── Reset & base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f1117;
+      --surface:  #1a1d27;
+      --border:   #2a2d3e;
+      --text:     #e2e8f0;
+      --muted:    #8892a4;
+      --accent:   #6366f1;
+      --accent2:  #22d3ee;
+      --green:    #4ade80;
+      --yellow:   #fbbf24;
+      --red:      #f87171;
+      --sidebar-w: 280px;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ── Sidebar ────────────────────────────────────────────── */
+    #sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 24px 0;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    #sidebar-header {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    #sidebar-header .logo {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    #sidebar-header .subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .nav-section {
+      padding: 4px 0;
+    }
+
+    .nav-section-title {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding: 8px 20px 4px;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 7px 20px;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background: rgba(99, 102, 241, 0.08);
+      border-left-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── Main content ───────────────────────────────────────── */
+    #content {
+      margin-left: var(--sidebar-w);
+      min-height: 100vh;
+    }
+
+    /* ── Top bar ────────────────────────────────────────────── */
+    #topbar {
+      position: sticky;
+      top: 0;
+      background: rgba(15, 17, 23, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 50;
+    }
+
+    #topbar .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover { background: #4f46e5; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      background: var(--surface);
+      border-color: var(--accent);
+    }
+
+    /* ── Article ────────────────────────────────────────────── */
+    article {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 40px 100px;
+    }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #1a1d27 0%, #0f1117 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 56px 48px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-stat .value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .hero-stat .label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── Quick nav table ──────────────────────────────────── */
+    .quick-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .quick-nav-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .quick-nav-item:hover {
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .quick-nav-item .icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .quick-nav-item .nav-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .quick-nav-item .nav-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── Typography ─────────────────────────────────────────── */
+    h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 56px 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: 70px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 36px 0 14px;
+      scroll-margin-top: 70px;
+    }
+
+    h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent2);
+      margin: 24px 0 10px;
+    }
+
+    p {
+      margin: 12px 0;
+      color: var(--text);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    strong { color: #fff; font-weight: 600; }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 12px 20px;
+      background: rgba(99, 102, 241, 0.06);
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    blockquote strong { color: var(--accent2); font-style: normal; }
+
+    /* ── Code blocks ────────────────────────────────────────── */
+    pre[class*="language-"] {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin: 20px 0;
+      font-size: 13px;
+      line-height: 1.6;
+      font-family: var(--font-mono);
+      position: relative;
+      background: #11131c !important;
+    }
+
+    pre[class*="language-"]::before {
+      content: attr(data-lang);
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-family: var(--font-body);
+    }
+
+    code:not([class*="language-"]) {
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--accent2);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-family: var(--font-mono);
+    }
+
+    /* ── Tables ─────────────────────────────────────────────── */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    th {
+      background: var(--surface);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(42, 45, 62, 0.5);
+      color: var(--text);
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(99, 102, 241, 0.03); }
+
+    td code { background: rgba(99, 102, 241, 0.1); padding: 1px 6px; border-radius: 4px; }
+
+    /* ── Checklists ──────────────────────────────────────────── */
+    ul, ol { padding-left: 24px; margin: 12px 0; }
+    li { margin: 6px 0; color: var(--text); }
+
+    li input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      vertical-align: middle;
+    }
+
+    /* ── Mermaid diagrams ────────────────────────────────────── */
+    .mermaid-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ── Callout boxes ───────────────────────────────────────── */
+    .callout {
+      display: flex;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .callout-tip {
+      background: rgba(34, 211, 238, 0.06);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      color: #a5f3fc;
+    }
+
+    .callout-warning {
+      background: rgba(251, 191, 36, 0.06);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      color: #fde68a;
+    }
+
+    .callout-danger {
+      background: rgba(248, 113, 113, 0.06);
+      border: 1px solid rgba(248, 113, 113, 0.2);
+      color: #fca5a5;
+    }
+
+    .callout-success {
+      background: rgba(74, 222, 128, 0.06);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      color: #a7f3d0;
+    }
+
+    /* ── Day card ────────────────────────────────────────────── */
+    .day-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .day-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--accent);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Section header ──────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(90deg, rgba(99,102,241,0.08) 0%, transparent 100%);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 24px;
+      margin: 48px 0 24px;
+    }
+
+    .section-number {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      min-width: 36px;
+    }
+
+    .section-title-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── Horizontal rule ─────────────────────────────────────── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ── Progress tracker ────────────────────────────────────── */
+    .progress-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .progress-track {
+      display: flex;
+      gap: 4px;
+      margin-top: 12px;
+    }
+
+    .progress-day {
+      flex: 1;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .progress-day.done { background: var(--green); }
+    .progress-day.active { background: var(--accent); }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      #sidebar { transform: translateX(-100%); }
+      #sidebar.open { transform: translateX(0); }
+      #content { margin-left: 0; }
+      article { padding: 24px 20px 80px; }
+      .hero { padding: 32px 24px; }
+      .hero h1 { font-size: 28px; }
+      .hero-meta { flex-wrap: wrap; gap: 16px; }
+    }
+
+    /* ── Print / PDF ─────────────────────────────────────────── */
+    @media print {
+      @page {
+        size: A4;
+        margin: 18mm 16mm;
+        @top-center {
+          content: "The Complete Software Engineering Handbook";
+          font-size: 9pt;
+          color: #888;
+        }
+        @bottom-right {
+          content: counter(page);
+          font-size: 9pt;
+          color: #888;
+        }
+      }
+
+      #sidebar, #topbar, #menu-toggle, .no-print { display: none !important; }
+      #content { margin-left: 0; }
+      body { background: white; color: #1a1a2e; font-size: 11pt; }
+      article { max-width: 100%; padding: 0; }
+
+      .hero {
+        background: linear-gradient(135deg, #f0f1ff 0%, #e8eaf6 100%);
+        page-break-after: always;
+        border: 1px solid #c5cae9;
+      }
+
+      .hero h1 {
+        background: linear-gradient(135deg, #3f51b5 0%, #9c27b0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      h2 { color: #1a1a2e; font-size: 18pt; page-break-before: auto; }
+      h3 { color: #2c2c54; font-size: 13pt; }
+      p, li, td { color: #2c2c54; }
+      blockquote { border-color: #3f51b5; background: #f5f5ff; color: #555; }
+      code:not([class*="language-"]) { background: #f0f0ff; color: #3f51b5; }
+      pre[class*="language-"] { background: #f8f8ff !important; border: 1px solid #ddd; }
+      .callout { border: 1px solid #ccc; background: #f9f9f9; color: #444; }
+      .mermaid-wrapper { background: #fafafa; border: 1px solid #ddd; }
+      table { font-size: 10pt; }
+      th { background: #e8eaf6; color: #3f51b5; }
+      td { border-bottom: 1px solid #eee; }
+      a { color: #3f51b5; }
+
+      pre, .mermaid-wrapper, .day-card, .callout {
+        page-break-inside: avoid;
+      }
+
+      .section-header {
+        background: linear-gradient(90deg, #e8eaf6 0%, transparent 100%);
+        border-left-color: #3f51b5;
+        page-break-after: avoid;
+      }
+
+      .section-number { color: #3f51b5; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Sidebar ────────────────────────────────────────────── -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo">Complete Handbook</div>
+    <div class="subtitle">Zero → Production · 2026</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Start here</div>
+    <a class="nav-link" href="#top">Introduction</a>
+    <a class="nav-link" href="#part-0">PART 0 — 10-Day Plan</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Setup & Architecture</div>
+    <a class="nav-link" href="#part-1">PART 1 — Local Setup</a>
+    <a class="nav-link" href="#part-2">PART 2 — Stack Selection</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Building</div>
+    <a class="nav-link" href="#part-3">PART 3 — Frontend</a>
+    <a class="nav-link" href="#part-4">PART 4 — Backend</a>
+    <a class="nav-link" href="#part-5">PART 5 — Database</a>
+    <a class="nav-link" href="#part-6">PART 6 — Auth & Security</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Quality & Ship</div>
+    <a class="nav-link" href="#part-7">PART 7 — Testing</a>
+    <a class="nav-link" href="#part-8">PART 8 — DevOps & CI/CD</a>
+    <a class="nav-link" href="#part-9">PART 9 — Cloud & Deploy</a>
+    <a class="nav-link" href="#part-10">PART 10 — Observability</a>
+    <a class="nav-link" href="#part-11">PART 11 — Performance</a>
+    <a class="nav-link" href="#part-12">PART 12 — Launch Checklist</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Reference</div>
+    <a class="nav-link" href="#part-13">PART 13 — Troubleshooting</a>
+    <a class="nav-link" href="#part-14">PART 14 — Blueprints</a>
+    <a class="nav-link" href="#part-15">PART 15 — Team & Git</a>
+    <a class="nav-link" href="#part-16">PART 16 — Senior Mindset</a>
+    <a class="nav-link" href="#part-17">PART 17 — 90-Day Path</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Appendices</div>
+    <a class="nav-link" href="#appendix-a">A — Commands</a>
+    <a class="nav-link" href="#appendix-b">B — Env Vars</a>
+    <a class="nav-link" href="#appendix-c">C — Error Decoder</a>
+    <a class="nav-link" href="#appendix-d">D — Glossary</a>
+  </div>
+</nav>
+
+<!-- ── Content ──────────────────────────────────────────────── -->
+<div id="content">
+
+  <!-- Topbar -->
+  <div id="topbar">
+    <button id="menu-toggle" class="btn btn-outline no-print" onclick="toggleSidebar()">☰ Menu</button>
+    <div class="title">The Complete Software Engineering Handbook</div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-outline no-print" onclick="window.print()">🖨 Print / PDF</button>
+      <a class="btn btn-primary no-print" href="the-complete-handbook.md">View .md</a>
+    </div>
+  </div>
+
+  <article id="top">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-badge">✦ Production Guide 2026</div>
+      <h1>The Complete Software<br>Engineering Handbook</h1>
+      <p>Zero to production-grade app — everything a fresher needs to build, test, deploy, and operate any real application end-to-end.</p>
+      <div class="hero-meta">
+        <div class="hero-stat">
+          <div class="value">17</div>
+          <div class="label">Parts</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value">10</div>
+          <div class="label">Day build plan</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value">25</div>
+          <div class="label">Troubleshooting fixes</div>
+        </div>
+        <div class="hero-stat">
+          <div class="value">100%</div>
+          <div class="label">Runnable code</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick nav -->
+    <div class="quick-nav">
+      <a class="quick-nav-item" href="#part-0"><div class="icon">🚀</div><div class="nav-title">10-Day Plan</div><div class="nav-desc">Zero to production</div></a>
+      <a class="quick-nav-item" href="#part-1"><div class="icon">🛠</div><div class="nav-title">Local Setup</div><div class="nav-desc">Docker + env + scaffold</div></a>
+      <a class="quick-nav-item" href="#part-3"><div class="icon">🖥</div><div class="nav-title">Frontend</div><div class="nav-desc">Next.js + React Query</div></a>
+      <a class="quick-nav-item" href="#part-4"><div class="icon">⚙️</div><div class="nav-title">Backend</div><div class="nav-desc">Fastify + full CRUD</div></a>
+      <a class="quick-nav-item" href="#part-5"><div class="icon">💾</div><div class="nav-title">Database</div><div class="nav-desc">Prisma + Redis</div></a>
+      <a class="quick-nav-item" href="#part-6"><div class="icon">🔐</div><div class="nav-title">Auth & Security</div><div class="nav-desc">JWT + bcrypt</div></a>
+      <a class="quick-nav-item" href="#part-7"><div class="icon">🧪</div><div class="nav-title">Testing</div><div class="nav-desc">Unit + Integration + E2E</div></a>
+      <a class="quick-nav-item" href="#part-8"><div class="icon">🐳</div><div class="nav-title">DevOps & CI/CD</div><div class="nav-desc">Docker + GitHub Actions</div></a>
+      <a class="quick-nav-item" href="#part-9"><div class="icon">☁️</div><div class="nav-title">Cloud & Deploy</div><div class="nav-desc">Railway / AWS / Terraform</div></a>
+      <a class="quick-nav-item" href="#part-12"><div class="icon">✅</div><div class="nav-title">Launch Checklist</div><div class="nav-desc">Before you go live</div></a>
+      <a class="quick-nav-item" href="#part-13"><div class="icon">🔥</div><div class="nav-title">Troubleshooting</div><div class="nav-desc">25 exact fixes</div></a>
+      <a class="quick-nav-item" href="#appendix-c"><div class="icon">💬</div><div class="nav-title">Error Decoder</div><div class="nav-desc">What the error means</div></a>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div><strong>How to use this guide:</strong> Follow PART 0 day-by-day for your first app. Every other part is a reference — jump to whichever matches what you're building right now. If something breaks, go to PART 13 or Appendix C.</div>
+    </div>
+
+    <!-- ── PART 0 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-0">
+      <div class="section-number">0</div>
+      <div>
+        <div class="section-title-text">10-Day Build Plan — Zero to Production</div>
+        <div class="section-subtitle">Follow these 10 checklists in order. Ship something real by Day 10.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-success">
+      <div class="callout-icon">🎯</div>
+      <div><strong>Outcome:</strong> A deployed app with CRUD, auth, tests, Docker, CI, health checks, and basic monitoring.</div>
+    </div>
+
+    <div class="mermaid-wrapper">
+      <div class="mermaid">
+gantt
+  title 10-Day Production Path
+  dateFormat  YYYY-MM-DD
+  section Build
+  Scaffold + health           :d1, 2026-01-01, 1d
+  CRUD API + UI               :d2, 2026-01-02, 1d
+  Validation + errors         :d3, 2026-01-03, 1d
+  Auth login + JWT            :d4, 2026-01-04, 1d
+  Tests unit + integration    :d5, 2026-01-05, 1d
+  Docker multi-stage          :d6, 2026-01-06, 1d
+  GitHub Actions CI           :d7, 2026-01-07, 1d
+  Deploy to staging           :d8, 2026-01-08, 1d
+  Logs + metrics + alerts     :d9, 2026-01-09, 1d
+  Launch checklist + ship     :d10, 2026-01-10, 1d
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 1 — Scaffold</div>
+      <p>Goal: <strong>it runs</strong> on your machine.</p>
+      <ul>
+        <li><input type="checkbox"> Clone / copy <code>starter-app/</code></li>
+        <li><input type="checkbox"> <code>cp .env.example .env</code></li>
+        <li><input type="checkbox"> <code>docker-compose up --build</code> — all services green</li>
+        <li><input type="checkbox"> <code>curl http://localhost:4000/health</code> → <code>{"status":"ok"}</code></li>
+        <li><input type="checkbox"> Open <code>http://localhost:3000</code> in browser</li>
+        <li><input type="checkbox"> First commit: <code>chore: initial scaffold</code></li>
+      </ul>
+      <pre class="language-bash" data-lang="bash"><code class="language-bash">cd starter-app
+cp .env.example .env
+docker-compose up --build
+
+# In another terminal — verify API is up:
+curl -s http://localhost:4000/health
+# Should print: {"status":"ok","timestamp":"..."}</code></pre>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 2 — CRUD</div>
+      <p>Goal: one feature end-to-end (database → API → UI).</p>
+      <div class="mermaid-wrapper">
+        <div class="mermaid">
+sequenceDiagram
+  participant U as User
+  participant UI as Next.js
+  participant API as Fastify
+  participant DB as Postgres
+  U->>UI: Fill form + click Add
+  UI->>API: POST /todos { title }
+  API->>API: Validate with Zod
+  API->>DB: INSERT INTO todos
+  DB-->>API: New row
+  API-->>UI: 201 + { id, title }
+  UI-->>U: List refreshes
+        </div>
+      </div>
+      <ul>
+        <li><input type="checkbox"> DB table: <code>todos(id, title, completed, created_at)</code></li>
+        <li><input type="checkbox"> API: <code>GET /todos</code>, <code>POST /todos</code>, <code>PATCH /todos/:id</code></li>
+        <li><input type="checkbox"> Frontend: list + form + toggle button</li>
+        <li><input type="checkbox"> Test with curl: create → list → toggle</li>
+      </ul>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 3 — Validation + Errors</div>
+      <div class="table-wrapper"><table>
+        <tr><th>Rule</th><th>What to do</th></tr>
+        <tr><td>Never trust client input</td><td>Validate every write endpoint with Zod</td></tr>
+        <tr><td>Same error shape</td><td><code>{ "error": "message", "code": "VALIDATION_ERROR" }</code></td></tr>
+        <tr><td>Right HTTP codes</td><td>400 bad input · 401 no auth · 404 not found · 500 crash</td></tr>
+      </table></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 4 — Auth</div>
+      <ul>
+        <li><input type="checkbox"> <code>POST /auth/register</code> — hash password, return tokens</li>
+        <li><input type="checkbox"> <code>POST /auth/login</code> — verify hash, return tokens</li>
+        <li><input type="checkbox"> <code>GET /auth/me</code> — protected route</li>
+        <li><input type="checkbox"> Auth middleware — reject missing/invalid JWT with 401</li>
+        <li><input type="checkbox"> Protect todos routes — users only see their own</li>
+      </ul>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 5 — Tests</div>
+      <ul>
+        <li><input type="checkbox"> Unit test: Zod schema rejects empty title</li>
+        <li><input type="checkbox"> Integration: <code>POST /todos</code> → 201 with valid token</li>
+        <li><input type="checkbox"> Integration: <code>POST /todos</code> → 401 without token</li>
+        <li><input type="checkbox"> <code>npm test</code> passes and is in CI</li>
+      </ul>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 6 — Docker</div>
+      <ul>
+        <li><input type="checkbox"> Multi-stage Dockerfile for API and frontend</li>
+        <li><input type="checkbox"> <code>.dockerignore</code> excludes <code>node_modules</code> and <code>.env</code></li>
+        <li><input type="checkbox"> Non-root user: <code>USER node</code> in final stage</li>
+        <li><input type="checkbox"> <code>HEALTHCHECK</code> on API container</li>
+      </ul>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 7 — CI</div>
+      <ul>
+        <li><input type="checkbox"> GitHub Actions: install → test → build on every push</li>
+        <li><input type="checkbox"> CI fails if tests fail — no merge possible</li>
+        <li><input type="checkbox"> Images tagged with git SHA</li>
+      </ul>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 8 — Deploy</div>
+      <ul>
+        <li><input type="checkbox"> Env secrets set in hosting platform (not git)</li>
+        <li><input type="checkbox"> DB migrations run before app deploys</li>
+        <li><input type="checkbox"> <code>curl https://staging.myapp.com/health</code> returns 200</li>
+        <li><input type="checkbox"> Rollback plan documented</li>
+      </ul>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 9 — Observability</div>
+      <ul>
+        <li><input type="checkbox"> JSON logs to stdout with <code>requestId</code> and <code>level</code></li>
+        <li><input type="checkbox"> <code>/health</code> checks DB connectivity</li>
+        <li><input type="checkbox"> Alert: Slack or email on 5xx spike</li>
+      </ul>
+    </div>
+
+    <div class="day-card">
+      <div class="day-badge">Day 10 — Ship</div>
+      <p>Goal: <strong>production is live</strong> and you can sleep at night.</p>
+      <ul>
+        <li><input type="checkbox"> Run <a href="#part-12">PART 12 — Launch Checklist</a> — all critical boxes green</li>
+        <li><input type="checkbox"> Secrets rotated: real <code>JWT_SECRET</code>, no dev values in prod</li>
+        <li><input type="checkbox"> <code>curl https://yourdomain.com/health</code> → <code>200 OK</code></li>
+        <li><input type="checkbox"> At least one alert wired up (5xx spike, health down)</li>
+        <li><input type="checkbox"> Rollback tested: you know how to revert in under 5 minutes</li>
+        <li><input type="checkbox"> First real user can register, log in, and use the core feature</li>
+        <li><input type="checkbox"> Commit: <code>chore: production launch v1.0</code> — tag <code>v1.0.0</code></li>
+      </ul>
+      <div class="callout callout-success">
+        <div class="callout-icon">🚀</div>
+        <div><strong>You shipped.</strong> Now iterate. Read <a href="#part-14">PART 14 — Blueprints</a> and <a href="#part-17">PART 17 — 90-Day Growth Path</a> for what comes next.</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ── PART 1 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-1">
+      <div class="section-number">1</div>
+      <div>
+        <div class="section-title-text">Local Development Setup</div>
+        <div class="section-subtitle">Running environment in under 15 minutes.</div>
+      </div>
+    </div>
+
+    <h3>Install these tools first</h3>
+    <pre class="language-bash" data-lang="bash"><code class="language-bash"># Check versions
+node --version    # Need 20+
+docker --version  # Need 24+
+git --version     # Need 2.40+
+
+# Install on Mac
+brew install node@22
+brew install --cask docker
+brew install git
+
+# Generate a secure secret (use for JWT_SECRET)
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"</code></pre>
+
+    <h3>Project structure</h3>
+    <pre class="language-bash" data-lang="text"><code class="language-bash">my-app/
+├── frontend/           ← Next.js app
+│   ├── src/app/        ← Pages (App Router)
+│   ├── src/components/ ← UI components
+│   ├── src/hooks/      ← Custom React hooks
+│   ├── src/lib/        ← API client, utilities
+│   └── .env.local
+├── api/                ← Fastify backend
+│   ├── src/routes/     ← Route handlers (thin)
+│   ├── src/services/   ← Business logic
+│   ├── src/repositories/ ← DB queries
+│   ├── src/middleware/ ← Auth, rate limit
+│   ├── prisma/         ← Schema + migrations
+│   └── .env
+├── docker-compose.yml  ← Local databases
+└── .github/workflows/  ← CI pipeline</code></pre>
+
+    <h3>docker-compose.yml — start everything locally</h3>
+    <pre class="language-yaml" data-lang="yaml"><code class="language-yaml">version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: myapp
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myapp"]
+      interval: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+
+  api:
+    build: ./api
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: postgresql://myapp:password@postgres:5432/myapp
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: dev-secret-change-in-production
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:</code></pre>
+
+    <div class="callout callout-warning">
+      <div class="callout-icon">⚠️</div>
+      <div><strong>Never commit <code>.env</code></strong> — add it to <code>.gitignore</code> on day 1. Always commit <code>.env.example</code> with empty values.</div>
+    </div>
+
+    <hr>
+
+    <!-- ── PART 2 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-2">
+      <div class="section-number">2</div>
+      <div>
+        <div class="section-title-text">Architecture & Stack Selection</div>
+        <div class="section-subtitle">Decisions that affect everything. Get these right first.</div>
+      </div>
+    </div>
+
+    <h3>System architecture — the full picture</h3>
+    <div class="mermaid-wrapper">
+      <div class="mermaid">
+graph TB
+  subgraph Users
+    U[Browser / Mobile]
+  end
+  subgraph Edge
+    CDN[CDN + TLS]
+    LB[Load Balancer]
+  end
+  subgraph App
+    FE[Next.js Frontend]
+    API[Fastify Backend]
+  end
+  subgraph Data
+    PG[(PostgreSQL)]
+    RD[(Redis)]
+  end
+  subgraph Platform
+    CI[GitHub Actions]
+    K8s[ECS / Railway / Fly]
+  end
+  subgraph Observe
+    DASH[Grafana Dashboards]
+  end
+  U --> CDN --> FE
+  CDN --> LB --> API
+  API --> PG
+  API --> RD
+  CI --> K8s --> API
+  API --> DASH
+      </div>
+    </div>
+
+    <h3>The 2026 default stack</h3>
+    <div class="table-wrapper"><table>
+      <tr><th>Layer</th><th>Choice</th><th>Why</th></tr>
+      <tr><td>Frontend</td><td>Next.js 15 + TypeScript</td><td>SSR, SEO, App Router, largest job market</td></tr>
+      <tr><td>Styling</td><td>Tailwind CSS + shadcn/ui</td><td>Fast UI, consistent design</td></tr>
+      <tr><td>Server state</td><td>TanStack Query v5</td><td>Cache, loading, error states built-in</td></tr>
+      <tr><td>Client state</td><td>Zustand</td><td>Simple, no boilerplate</td></tr>
+      <tr><td>Backend</td><td>Fastify + TypeScript</td><td>Fast, lightweight, plugin system</td></tr>
+      <tr><td>Validation</td><td>Zod</td><td>Shared front/back, TypeScript-first</td></tr>
+      <tr><td>ORM</td><td>Prisma</td><td>Type-safe queries, auto migrations</td></tr>
+      <tr><td>Database</td><td>PostgreSQL 16</td><td>Reliable, feature-rich, battle-tested</td></tr>
+      <tr><td>Cache</td><td>Redis 7</td><td>Sessions, cache, rate limits</td></tr>
+      <tr><td>Auth</td><td>JWT + refresh tokens</td><td>Stateless, scalable</td></tr>
+      <tr><td>Testing</td><td>Vitest + Playwright</td><td>Fast unit + real browser E2E</td></tr>
+      <tr><td>CI/CD</td><td>GitHub Actions</td><td>Integrated, free for public repos</td></tr>
+      <tr><td>Deploy</td><td>Railway / Fly.io / AWS ECS</td><td>Managed, scales when needed</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- ── PART 3 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-3">
+      <div class="section-number">3</div>
+      <div>
+        <div class="section-title-text">Frontend Engineering</div>
+        <div class="section-subtitle">Next.js + React Query + forms — complete code patterns.</div>
+      </div>
+    </div>
+
+    <h3>Server vs Client Component</h3>
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div>All components are <strong>Server Components by default</strong> in Next.js App Router. Add <code>'use client'</code> only when you need <code>useState</code>, <code>useEffect</code>, or event handlers.</div>
+    </div>
+
+    <pre class="language-typescript" data-lang="tsx"><code class="language-typescript">// ✅ Server Component — runs on server, no JS sent to browser
+// src/app/products/page.tsx
+async function getProducts() {
+  const res = await fetch('http://localhost:4000/products', {
+    next: { revalidate: 60 }, // Cache and ISR refresh every 60s
+  })
+  return res.json()
+}
+
+export default async function ProductsPage() {
+  const products = await getProducts()
+  return (
+    &lt;div className="grid grid-cols-3 gap-4 p-8"&gt;
+      {products.map((p) => (
+        &lt;ProductCard key={p.id} product={p} /&gt;
+      ))}
+    &lt;/div&gt;
+  )
+}</code></pre>
+
+    <pre class="language-typescript" data-lang="tsx"><code class="language-typescript">// ✅ Client Component — handles user interactions
+// src/components/product-card.tsx
+'use client'
+
+import { useState } from 'react'
+
+export function ProductCard({ product }: { product: { id: string; name: string; price: number } }) {
+  const [added, setAdded] = useState(false)
+
+  const addToCart = async () => {
+    await fetch('/api/cart', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ productId: product.id }),
+    })
+    setAdded(true)
+  }
+
+  return (
+    &lt;div className="border rounded-xl p-4 shadow-sm"&gt;
+      &lt;h3 className="font-semibold"&gt;{product.name}&lt;/h3&gt;
+      &lt;p className="text-slate-600"&gt;${product.price}&lt;/p&gt;
+      &lt;button
+        onClick={addToCart}
+        disabled={added}
+        className="mt-3 w-full bg-blue-600 text-white py-2 rounded-lg disabled:opacity-50"
+      &gt;
+        {added ? 'Added ✓' : 'Add to Cart'}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+
+    <h3>React Query — fetch data the right way</h3>
+    <pre class="language-typescript" data-lang="tsx"><code class="language-typescript">// src/hooks/use-todos.ts
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useAppStore } from '@/lib/store'
+
+const API = process.env.NEXT_PUBLIC_API_URL
+
+export function useTodos() {
+  const accessToken = useAppStore((s) => s.accessToken)
+
+  return useQuery({
+    queryKey: ['todos'],
+    queryFn: async () => {
+      const res = await fetch(`${API}/todos`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      if (!res.ok) throw new Error('Failed to fetch todos')
+      return res.json()
+    },
+    enabled: !!accessToken,
+    staleTime: 30_000,
+  })
+}
+
+export function useCreateTodo() {
+  const queryClient = useQueryClient()
+  const accessToken = useAppStore((s) => s.accessToken)
+
+  return useMutation({
+    mutationFn: async (data: { title: string; priority: string }) => {
+      const res = await fetch(`${API}/todos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error('Failed to create todo')
+      return res.json()
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
+  })
+}</code></pre>
+
+    <h3>Forms — React Hook Form + Zod</h3>
+    <pre class="language-typescript" data-lang="tsx"><code class="language-typescript">// src/components/create-todo-form.tsx
+'use client'
+
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { useCreateTodo } from '@/hooks/use-todos'
+
+const todoSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(200),
+  priority: z.enum(['low', 'medium', 'high']).default('medium'),
+})
+type TodoFormValues = z.infer&lt;typeof todoSchema&gt;
+
+export function CreateTodoForm() {
+  const { mutate: createTodo, isPending, error } = useCreateTodo()
+  const { register, handleSubmit, reset, formState: { errors } } =
+    useForm&lt;TodoFormValues&gt;({ resolver: zodResolver(todoSchema) })
+
+  const onSubmit = (data: TodoFormValues) => {
+    createTodo(data, { onSuccess: () => reset() })
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)} className="flex gap-2"&gt;
+      &lt;div className="flex-1"&gt;
+        &lt;input
+          {...register('title')}
+          placeholder="What needs to be done?"
+          className="w-full border rounded-lg px-3 py-2"
+        /&gt;
+        {errors.title &amp;&amp; &lt;p className="text-red-500 text-sm mt-1"&gt;{errors.title.message}&lt;/p&gt;}
+      &lt;/div&gt;
+      &lt;button type="submit" disabled={isPending}
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg disabled:opacity-50"&gt;
+        {isPending ? 'Adding...' : 'Add'}
+      &lt;/button&gt;
+    &lt;/form&gt;
+  )
+}</code></pre>
+
+    <hr>
+
+    <!-- ── PART 4 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-4">
+      <div class="section-number">4</div>
+      <div>
+        <div class="section-title-text">Backend Engineering</div>
+        <div class="section-subtitle">Fastify server + CRUD routes + service + repository layers.</div>
+      </div>
+    </div>
+
+    <h3>Backend architecture — the layers</h3>
+    <div class="mermaid-wrapper">
+      <div class="mermaid">
+graph TB
+  R[HTTP Request] --> Logger[Logger]
+  Logger --> RL[Rate Limiter]
+  RL --> Auth[Auth Check]
+  Auth --> ZOD[Zod Validation]
+  ZOD --> Route[Route Handler - thin]
+  Route --> Service[Service Layer - business logic]
+  Service --> Repo[Repository - DB queries]
+  Service --> Cache[Redis Cache]
+  Repo --> PG[(PostgreSQL)]
+  Cache --> Redis[(Redis)]
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div><strong>Golden Rule:</strong> Routes call services. Services contain logic. Repositories contain SQL. Never put DB code in routes.</div>
+    </div>
+
+    <h3>Complete Fastify server</h3>
+    <pre class="language-typescript" data-lang="typescript"><code class="language-typescript">// api/src/index.ts
+import Fastify from 'fastify'
+import cors from '@fastify/cors'
+import helmet from '@fastify/helmet'
+import { authRoutes } from './routes/auth'
+import { todoRoutes } from './routes/todos'
+import { prisma } from './lib/prisma'
+
+const server = Fastify({ logger: true })
+
+await server.register(helmet)
+await server.register(cors, {
+  origin: process.env.ALLOWED_ORIGINS?.split(',') ?? ['http://localhost:3000'],
+  credentials: true,
+})
+
+// Health check — no auth, always live
+server.get('/health', async () => ({
+  status: 'ok',
+  timestamp: new Date().toISOString(),
+  db: await prisma.$queryRaw`SELECT 1`.then(() => 'ok').catch(() => 'error'),
+}))
+
+await server.register(authRoutes, { prefix: '/auth' })
+await server.register(todoRoutes, { prefix: '/todos' })
+
+// Global error handler
+server.setErrorHandler((error, _req, reply) => {
+  if (error.name === 'ZodError') {
+    return reply.status(400).send({ error: 'Validation failed', code: 'VALIDATION_ERROR' })
+  }
+  const code = error.statusCode ?? 500
+  return reply.status(code).send({
+    error: code === 500 ? 'Internal server error' : error.message,
+  })
+})
+
+process.on('SIGTERM', async () => {
+  await server.close()
+  await prisma.$disconnect()
+  process.exit(0)
+})
+
+await server.listen({ port: Number(process.env.PORT) || 4000, host: '0.0.0.0' })</code></pre>
+
+    <h3>CRUD routes</h3>
+    <pre class="language-typescript" data-lang="typescript"><code class="language-typescript">// api/src/routes/todos.ts
+import { FastifyPluginAsync } from 'fastify'
+import { z } from 'zod'
+import { TodoService } from '../services/todo.service'
+import { authenticate } from '../middleware/auth'
+
+const createTodoSchema = z.object({
+  title: z.string().min(1).max(200),
+  priority: z.enum(['low', 'medium', 'high']).default('medium'),
+})
+
+export const todoRoutes: FastifyPluginAsync = async (fastify) => {
+  const svc = new TodoService()
+
+  fastify.get('/', { preHandler: [authenticate] }, async (req, reply) => {
+    return reply.send(await svc.findAll(req.user.userId))
+  })
+
+  fastify.post('/', { preHandler: [authenticate] }, async (req, reply) => {
+    const body = createTodoSchema.parse(req.body)
+    return reply.status(201).send(await svc.create({ ...body, userId: req.user.userId }))
+  })
+
+  fastify.patch('/:id', { preHandler: [authenticate] }, async (req, reply) => {
+    const { id } = req.params as { id: string }
+    const body = z.object({ completed: z.boolean().optional() }).parse(req.body)
+    const todo = await svc.update(id, req.user.userId, body)
+    if (!todo) return reply.status(404).send({ error: 'Not found' })
+    return reply.send(todo)
+  })
+
+  fastify.delete('/:id', { preHandler: [authenticate] }, async (req, reply) => {
+    const { id } = req.params as { id: string }
+    await svc.delete(id, req.user.userId)
+    return reply.status(204).send()
+  })
+}</code></pre>
+
+    <hr>
+
+    <!-- ── PART 5 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-5">
+      <div class="section-number">5</div>
+      <div>
+        <div class="section-title-text">Database Engineering</div>
+        <div class="section-subtitle">Prisma schema, migrations, indexing, Redis caching.</div>
+      </div>
+    </div>
+
+    <h3>Prisma schema</h3>
+    <pre class="language-typescript" data-lang="prisma"><code class="language-typescript">// api/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  passwordHash String
+  role         Role      @default(USER)
+  createdAt    DateTime  @default(now())
+  todos        Todo[]
+  sessions     Session[]
+  @@index([email])
+}
+
+model Todo {
+  id        String   @id @default(cuid())
+  title     String
+  completed Boolean  @default(false)
+  priority  Priority @default(MEDIUM)
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+  @@index([userId, completed])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  refreshToken String   @unique
+  expiresAt    DateTime
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([refreshToken])
+}
+
+enum Role     { USER ADMIN }
+enum Priority { LOW MEDIUM HIGH }</code></pre>
+
+    <pre class="language-bash" data-lang="bash"><code class="language-bash">npx prisma migrate dev --name init   # Create + apply migration
+npx prisma migrate deploy            # Apply in production
+npx prisma studio                    # Open data browser
+npx prisma generate                  # Regenerate client after schema change</code></pre>
+
+    <div class="callout callout-warning">
+      <div class="callout-icon">⚠️</div>
+      <div><strong>N+1 Query Bug:</strong> Fetching 10 users then 10 separate queries for their todos = 11 DB trips. Fix: use <code>include: { todos: true }</code> for one query.</div>
+    </div>
+
+    <hr>
+
+    <!-- ── PART 6 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-6">
+      <div class="section-number">6</div>
+      <div>
+        <div class="section-title-text">Auth & Security</div>
+        <div class="section-subtitle">JWT + bcrypt + refresh tokens — complete implementation.</div>
+      </div>
+    </div>
+
+    <h3>JWT auth flow</h3>
+    <div class="mermaid-wrapper">
+      <div class="mermaid">
+sequenceDiagram
+  participant C as Client
+  participant API as API
+  participant DB as Database
+
+  Note over C,DB: LOGIN
+  C->>API: POST /auth/login { email, password }
+  API->>DB: Find user by email
+  API->>API: bcrypt.compare(password, hash)
+  API->>DB: INSERT session (refresh token)
+  API-->>C: { accessToken 15min, refreshToken 7days }
+
+  Note over C,DB: AUTHENTICATED REQUEST
+  C->>API: GET /todos Bearer {accessToken}
+  API->>API: jwt.verify(token, JWT_SECRET)
+  API-->>C: todos
+
+  Note over C,DB: REFRESH
+  C->>API: POST /auth/refresh { refreshToken }
+  API->>DB: Find session, check not expired
+  API-->>C: { accessToken }
+      </div>
+    </div>
+
+    <h3>Complete auth routes</h3>
+    <pre class="language-typescript" data-lang="typescript"><code class="language-typescript">// api/src/routes/auth.ts
+import bcrypt from 'bcrypt'
+import { FastifyPluginAsync } from 'fastify'
+import { z } from 'zod'
+import { prisma } from '../lib/prisma'
+import { generateTokens } from '../lib/jwt'
+import { authenticate } from '../middleware/auth'
+
+const registerSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+  name: z.string().min(1).max(100),
+})
+
+export const authRoutes: FastifyPluginAsync = async (fastify) => {
+  fastify.post('/register', async (req, reply) => {
+    const { email, password, name } = registerSchema.parse(req.body)
+    const existing = await prisma.user.findUnique({ where: { email } })
+    if (existing) return reply.status(409).send({ error: 'Email already in use' })
+
+    const passwordHash = await bcrypt.hash(password, 12)
+    const user = await prisma.user.create({ data: { email, passwordHash, name } })
+    const tokens = await generateTokens(user.id)
+    return reply.status(201).send({ user: { id: user.id, email, name }, ...tokens })
+  })
+
+  fastify.post('/login', async (req, reply) => {
+    const { email, password } = z.object({
+      email: z.string().email(), password: z.string()
+    }).parse(req.body)
+
+    const user = await prisma.user.findUnique({ where: { email } })
+    // Constant-time comparison — prevents email enumeration
+    const valid = user
+      ? await bcrypt.compare(password, user.passwordHash)
+      : await bcrypt.compare(password, '$2b$12$invalidhashfortimingattack')
+
+    if (!user || !valid) {
+      return reply.status(401).send({ error: 'Invalid email or password' })
+    }
+
+    const tokens = await generateTokens(user.id)
+    return reply.send({ user: { id: user.id, email, name: user.name }, ...tokens })
+  })
+
+  fastify.post('/refresh', async (req, reply) => {
+    const { refreshToken } = req.body as { refreshToken: string }
+    const session = await prisma.session.findUnique({
+      where: { refreshToken }, include: { user: true }
+    })
+    if (!session || session.expiresAt &lt; new Date()) {
+      if (session) await prisma.session.delete({ where: { id: session.id } })
+      return reply.status(401).send({ error: 'Invalid or expired refresh token' })
+    }
+    const { accessToken } = await generateTokens(session.userId)
+    return reply.send({ accessToken })
+  })
+
+  fastify.get('/me', { preHandler: [authenticate] }, async (req, reply) => {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.userId },
+      select: { id: true, email: true, name: true, role: true },
+    })
+    if (!user) return reply.status(404).send({ error: 'Not found' })
+    return reply.send(user)
+  })
+}</code></pre>
+
+    <h3>Auth middleware</h3>
+    <pre class="language-typescript" data-lang="typescript"><code class="language-typescript">// api/src/middleware/auth.ts
+import jwt from 'jsonwebtoken'
+import { FastifyRequest, FastifyReply } from 'fastify'
+
+declare module 'fastify' {
+  interface FastifyRequest { user: { userId: string } }
+}
+
+export async function authenticate(req: FastifyRequest, reply: FastifyReply) {
+  const token = req.headers.authorization?.replace('Bearer ', '')
+  if (!token) return reply.status(401).send({ error: 'Token required' })
+
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string }
+    req.user = { userId: payload.userId }
+  } catch (err) {
+    if (err instanceof jwt.TokenExpiredError)
+      return reply.status(401).send({ error: 'Token expired', code: 'TOKEN_EXPIRED' })
+    return reply.status(401).send({ error: 'Invalid token' })
+  }
+}</code></pre>
+
+    <div class="callout callout-danger">
+      <div class="callout-icon">🚫</div>
+      <div><strong>NEVER</strong> store passwords as plain text. NEVER store JWT secrets in source code. NEVER put <code>.env</code> in git.</div>
+    </div>
+
+    <hr>
+
+    <!-- ── PART 7 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-7">
+      <div class="section-number">7</div>
+      <div>
+        <div class="section-title-text">Testing</div>
+        <div class="section-subtitle">Unit + Integration + E2E — complete test patterns with Vitest and Playwright.</div>
+      </div>
+    </div>
+
+    <h3>The testing pyramid</h3>
+    <div class="mermaid-wrapper">
+      <div class="mermaid">
+graph TD
+  E2E["E2E Tests — 10%\nPlaywright — real browser\n1-2 critical user journeys"]
+  INT["Integration Tests — 30%\nFastify inject + test DB\nEvery API route"]
+  UNIT["Unit Tests — 60%\nVitest — pure functions\nAll Zod schemas + services"]
+  UNIT --> INT --> E2E
+      </div>
+    </div>
+
+    <h3>Unit tests — Zod schemas</h3>
+    <pre class="language-typescript" data-lang="typescript"><code class="language-typescript">// api/src/tests/validation.test.ts
+import { describe, it, expect } from 'vitest'
+import { z } from 'zod'
+
+const createTodoSchema = z.object({
+  title: z.string().min(1, 'Title required').max(200),
+  priority: z.enum(['low', 'medium', 'high']).default('medium'),
+})
+
+describe('createTodoSchema', () => {
+  it('accepts valid todo', () => {
+    expect(() => createTodoSchema.parse({ title: 'Buy milk' })).not.toThrow()
+  })
+  it('rejects empty title', () => {
+    expect(() => createTodoSchema.parse({ title: '' })).toThrow()
+  })
+  it('defaults priority to medium', () => {
+    const result = createTodoSchema.parse({ title: 'Test' })
+    expect(result.priority).toBe('medium')
+  })
+})</code></pre>
+
+    <h3>Integration tests — API routes</h3>
+    <pre class="language-typescript" data-lang="typescript"><code class="language-typescript">// api/src/tests/todos.test.ts
+import { describe, it, expect, beforeAll, afterAll } from 'vitest'
+import { buildApp } from '../app'
+import { prisma } from '../lib/prisma'
+import { generateAccessToken } from '../lib/jwt'
+
+describe('Todos API', () => {
+  let app: Awaited&lt;ReturnType&lt;typeof buildApp&gt;&gt;
+  let token: string
+  let userId: string
+
+  beforeAll(async () => {
+    app = await buildApp()
+    const user = await prisma.user.create({
+      data: { email: `test-${Date.now()}@test.com`, passwordHash: 'hash', name: 'Test' },
+    })
+    userId = user.id
+    token = generateAccessToken(userId)
+  })
+
+  afterAll(async () => {
+    await prisma.user.delete({ where: { id: userId } })
+    await app.close()
+  })
+
+  it('GET /todos returns empty array', async () => {
+    const res = await app.inject({
+      method: 'GET', url: '/todos',
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    expect(res.statusCode).toBe(200)
+    expect(JSON.parse(res.body)).toEqual([])
+  })
+
+  it('POST /todos creates todo', async () => {
+    const res = await app.inject({
+      method: 'POST', url: '/todos',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: 'Test todo', priority: 'high' }),
+    })
+    expect(res.statusCode).toBe(201)
+    expect(JSON.parse(res.body).title).toBe('Test todo')
+  })
+
+  it('POST /todos returns 401 without token', async () => {
+    const res = await app.inject({ method: 'POST', url: '/todos' })
+    expect(res.statusCode).toBe(401)
+  })
+})</code></pre>
+
+    <hr>
+
+    <!-- ── PART 8 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-8">
+      <div class="section-number">8</div>
+      <div>
+        <div class="section-title-text">DevOps & CI/CD</div>
+        <div class="section-subtitle">Multi-stage Docker + full GitHub Actions pipeline.</div>
+      </div>
+    </div>
+
+    <h3>Multi-stage Dockerfile (API)</h3>
+    <pre class="language-docker" data-lang="dockerfile"><code class="language-docker"># api/Dockerfile
+FROM node:22-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY prisma ./prisma
+RUN npx prisma generate
+COPY . .
+RUN npm run build
+
+FROM node:22-alpine AS runner
+WORKDIR /app
+RUN addgroup -g 1001 -S nodejs && adduser -S nodeapp -u 1001
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/prisma ./prisma
+USER nodeapp
+EXPOSE 4000
+HEALTHCHECK --interval=30s --timeout=5s CMD wget -qO- http://localhost:4000/health || exit 1
+CMD ["node", "dist/index.js"]</code></pre>
+
+    <h3>next.config.js — required for Docker to work</h3>
+    <div class="callout callout-danger">
+      <div class="callout-icon">🚨</div>
+      <div><strong>Missing this = silent Docker failure.</strong> The frontend Dockerfile copies <code>.next/standalone</code> — that directory only exists if <code>output: 'standalone'</code> is set. Without it, your build succeeds but the app crashes at startup.</div>
+    </div>
+    <pre class="language-typescript" data-lang="js"><code class="language-typescript">// frontend/next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'standalone', // ← required — makes Docker image 80-90% smaller
+  images: {
+    remotePatterns: [
+      // add domains for any external images you load:
+      // { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
+    ],
+  },
+}
+
+module.exports = nextConfig</code></pre>
+
+    <h3>GitHub Actions CI/CD</h3>
+    <pre class="language-yaml" data-lang="yaml"><code class="language-yaml"># .github/workflows/ci.yml
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: myapp_test
+          POSTGRES_USER: myapp
+          POSTGRES_PASSWORD: password
+        ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 10s --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: api/package-lock.json
+
+      - run: cd api && npm ci
+      - run: cd api && npx prisma migrate deploy
+        env:
+          DATABASE_URL: postgresql://myapp:password@localhost:5432/myapp_test
+      - run: cd api && npm test
+        env:
+          DATABASE_URL: postgresql://myapp:password@localhost:5432/myapp_test
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: test-secret
+          JWT_REFRESH_SECRET: test-refresh-secret
+      - run: cd api && npm run build
+      - run: cd frontend && npm ci && npm run build
+
+  build-push:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: ./api
+          push: true
+          tags: ghcr.io/${{ github.repository }}-api:${{ github.sha }}</code></pre>
+
+    <hr>
+
+    <!-- ── PART 9 ─────────────────────────────────────────────── -->
+    <div class="section-header" id="part-9">
+      <div class="section-number">9</div>
+      <div>
+        <div class="section-title-text">Cloud & Deploy</div>
+        <div class="section-subtitle">Railway (easy start) → AWS (production scale).</div>
+      </div>
+    </div>
+
+    <h3>Easy path — Railway or Fly.io</h3>
+    <pre class="language-bash" data-lang="bash"><code class="language-bash"># Railway (easiest — web UI)
+npm install -g @railway/cli
+railway login && railway init && railway up
+railway variables set JWT_SECRET=your-secret-here
+
+# Fly.io (great for global)
+brew install flyctl
+flyctl auth login && flyctl launch && flyctl deploy
+flyctl secrets set JWT_SECRET=your-secret-here</code></pre>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div>Start with Railway or Fly.io. Move to AWS ECS/EKS only when your team has DevOps capacity.</div>
+    </div>
+
+    <h3>AWS architecture (production scale)</h3>
+    <div class="mermaid-wrapper">
+      <div class="mermaid">
+graph TB
+  User --> R53[Route 53 DNS]
+  R53 --> CF[CloudFront CDN]
+  CF --> ALB[Load Balancer]
+  CF --> S3[S3 Static Assets]
+  ALB --> ECS[ECS Fargate Containers]
+  ECS --> RDS[(RDS PostgreSQL Multi-AZ)]
+  ECS --> EC[(ElastiCache Redis)]
+  ECS --> SM[Secrets Manager]
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ── PART 10 ────────────────────────────────────────────── -->
+    <div class="section-header" id="part-10">
+      <div class="section-number">10</div>
+      <div>
+        <div class="section-title-text">Observability & Monitoring</div>
+        <div class="section-subtitle">Logs + metrics + traces + alerts — know before users complain.</div>
+      </div>
+    </div>
+
+    <h3>Structured logging (always JSON)</h3>
+    <pre class="language-typescript" data-lang="typescript"><code class="language-typescript">// api/src/lib/logger.ts
+import pino from 'pino'
+
+export const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  transport: process.env.NODE_ENV === 'development'
+    ? { target: 'pino-pretty' }  // human-readable in dev
+    : undefined,                  // raw JSON in production
+  base: { service: 'my-backend', env: process.env.NODE_ENV },
+})
+
+// ✅ Good — has context
+logger.info({ userId: '123', action: 'todo.created', todoId: 'abc' }, 'Todo created')
+logger.error({ err, userId: '123' }, 'Failed to create todo')
+
+// ❌ Bad — useless in production
+console.log('Todo created')</code></pre>
+
+    <div class="table-wrapper"><table>
+      <tr><th>Alert</th><th>Threshold</th><th>Action</th></tr>
+      <tr><td>5xx rate</td><td>&gt; 1% of requests</td><td>Page on-call immediately</td></tr>
+      <tr><td>Health check down</td><td>2 consecutive fails</td><td>Page on-call immediately</td></tr>
+      <tr><td>p99 latency</td><td>&gt; 2 seconds</td><td>Investigate within 1 hour</td></tr>
+      <tr><td>DB connections</td><td>&gt; 80% of pool</td><td>Scale DB or add PgBouncer</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- ── PART 11 ────────────────────────────────────────────── -->
+    <div class="section-header" id="part-11">
+      <div class="section-number">11</div>
+      <div>
+        <div class="section-title-text">Performance</div>
+        <div class="section-subtitle">Measure first, then fix. Never optimize blindly.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>Symptom</th><th>Likely fix</th></tr>
+      <tr><td>API slow, DB CPU high</td><td>Missing index or N+1 query — run <code>EXPLAIN ANALYZE</code></td></tr>
+      <tr><td>API fast but page slow</td><td>Large JS bundle — code split, lazy load</td></tr>
+      <tr><td>Repeated same queries</td><td>Add Redis cache with 60s TTL</td></tr>
+      <tr><td>Images slow to load</td><td>Use <code>next/image</code> + CDN</td></tr>
+    </table></div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>Metric</th><th>Target</th><th>Fix</th></tr>
+      <tr><td>LCP</td><td>&lt; 2.5s</td><td>Preload hero image, use CDN</td></tr>
+      <tr><td>INP</td><td>&lt; 200ms</td><td>Code split, reduce JS bundle</td></tr>
+      <tr><td>CLS</td><td>&lt; 0.1</td><td>Set width/height on images</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- ── PART 12 ────────────────────────────────────────────── -->
+    <div class="section-header" id="part-12">
+      <div class="section-number">12</div>
+      <div>
+        <div class="section-title-text">Production Launch Checklist</div>
+        <div class="section-subtitle">Run this before every deploy. Ship only when all critical boxes are green.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-success">
+      <div class="callout-icon">✅</div>
+      <div>Check every box before going live. Boxes marked <strong>critical</strong> are blocking — do not ship with these unresolved.</div>
+    </div>
+
+    <h3>Frontend (critical)</h3>
+    <ul>
+      <li><input type="checkbox"> Loading, error, and empty states on every data view</li>
+      <li><input type="checkbox"> Env vars set in hosting platform (not hardcoded)</li>
+      <li><input type="checkbox"> No API keys or secrets in client bundle</li>
+      <li><input type="checkbox"> Forms disabled during submit, validation errors shown</li>
+    </ul>
+
+    <h3>Backend (critical)</h3>
+    <ul>
+      <li><input type="checkbox"> Auth enforced on all private routes</li>
+      <li><input type="checkbox"> Input validation on all write endpoints</li>
+      <li><input type="checkbox"> <code>GET /health</code> returns 200</li>
+      <li><input type="checkbox"> Global error handler — no stack traces to clients</li>
+      <li><input type="checkbox"> Graceful shutdown on SIGTERM</li>
+    </ul>
+
+    <h3>Database (critical)</h3>
+    <ul>
+      <li><input type="checkbox"> Migrations applied successfully</li>
+      <li><input type="checkbox"> Automated backups enabled</li>
+      <li><input type="checkbox"> Indexes on columns used in WHERE and JOIN</li>
+    </ul>
+
+    <h3>Security (critical)</h3>
+    <ul>
+      <li><input type="checkbox"> HTTPS with valid certificate</li>
+      <li><input type="checkbox"> Secrets in env/vault, not in code or git</li>
+      <li><input type="checkbox"> Rate limiting on auth endpoints</li>
+    </ul>
+
+    <h3>Observability (critical)</h3>
+    <ul>
+      <li><input type="checkbox"> Logs visible in aggregator</li>
+      <li><input type="checkbox"> Alert on 5xx spike and health failure</li>
+    </ul>
+
+    <h3>Deploy safety (critical)</h3>
+    <ul>
+      <li><input type="checkbox"> Rollback procedure documented (previous image tag)</li>
+      <li><input type="checkbox"> Staging smoke test: health + login + create item</li>
+      <li><input type="checkbox"> DB migrations ran BEFORE app deployed</li>
+    </ul>
+
+    <hr>
+
+    <!-- ── PART 13 ────────────────────────────────────────────── -->
+    <div class="section-header" id="part-13">
+      <div class="section-number">13</div>
+      <div>
+        <div class="section-title-text">Troubleshooting — 25 Fixes</div>
+        <div class="section-subtitle">Find your exact error and fix it in minutes.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>Error / Problem</th><th>Cause</th><th>Fix</th></tr>
+      <tr><td><code>Cannot find module 'fastify-cors'</code></td><td>Abandoned package</td><td><code>npm install @fastify/cors</code> and update import</td></tr>
+      <tr><td>API CORS blocked in browser</td><td>CORS not configured</td><td>Register <code>@fastify/cors</code> with frontend origin</td></tr>
+      <tr><td><code>EADDRINUSE :4000</code></td><td>Port in use</td><td><code>lsof -ti:4000 | xargs kill -9</code></td></tr>
+      <tr><td><code>ECONNREFUSED 127.0.0.1:5432</code></td><td>Postgres not running</td><td><code>docker-compose up postgres</code></td></tr>
+      <tr><td><code>P2002: Unique constraint failed</code></td><td>Duplicate email</td><td>Return 409 with "Email already in use"</td></tr>
+      <tr><td><code>P2025: Record not found</code></td><td>Row doesn't exist</td><td>Add null check: <code>if (!result) return 404</code></td></tr>
+      <tr><td><code>JsonWebTokenError: invalid signature</code></td><td>Wrong JWT_SECRET</td><td>Same secret for sign and verify</td></tr>
+      <tr><td><code>TokenExpiredError: jwt expired</code></td><td>15min access token expired</td><td>Implement token refresh or re-login</td></tr>
+      <tr><td>401 on every request</td><td>JWT_SECRET wrong or token expired</td><td>Check env var, implement refresh flow</td></tr>
+      <tr><td>Docker image is 1GB+</td><td>Single-stage build</td><td>Multi-stage — only copy <code>dist/</code> to final stage</td></tr>
+      <tr><td>Tests pass locally, fail in CI</td><td>Missing CI env vars</td><td>Add env vars to GitHub Actions <code>env:</code> block</td></tr>
+      <tr><td>Secret committed to git</td><td>Forgot .gitignore</td><td>Rotate immediately, add to .gitignore, use git-filter-repo</td></tr>
+      <tr><td>Random 502 Bad Gateway</td><td>App crash on unhandled error</td><td>Add global error handler</td></tr>
+      <tr><td>Migration failed in production</td><td>Wrong order or conflict</td><td>Restore backup, fix migration, retry</td></tr>
+      <tr><td>DB connection pool exhausted</td><td>Too many connections</td><td>Set <code>connection_limit</code> in DATABASE_URL</td></tr>
+      <tr><td>CORS preflight failing</td><td>Missing OPTIONS method</td><td>Add <code>methods: ['GET','POST','PATCH','DELETE']</code> to CORS config</td></tr>
+      <tr><td><code>Hydration mismatch</code></td><td>Server/client render different</td><td>Move component to Client Component or add <code>suppressHydrationWarning</code></td></tr>
+      <tr><td><code>useQuery is not a function</code></td><td>Missing QueryClientProvider</td><td>Wrap app in <code>&lt;QueryClientProvider&gt;</code></td></tr>
+      <tr><td>Can't reach DB at postgres:5432</td><td>Wrong hostname in Docker</td><td>Use service name <code>postgres</code> not <code>localhost</code> in docker-compose</td></tr>
+      <tr><td><code>prisma.todo.findMany is not a function</code></td><td>Prisma client not generated</td><td><code>npx prisma generate</code></td></tr>
+      <tr><td>API slow on list endpoint</td><td>Missing index</td><td><code>CREATE INDEX idx_todos_user_id ON todos(user_id)</code></td></tr>
+      <tr><td>No logs in production</td><td>Wrong log format</td><td>Log JSON to stdout — platform aggregates stdout</td></tr>
+      <tr><td>HTTPS cert error</td><td>Cert expired</td><td>Renew cert in load balancer / cert-manager</td></tr>
+      <tr><td>Flaky E2E tests</td><td>Race condition</td><td>Use <code>await expect(locator).toBeVisible()</code> not <code>sleep()</code></td></tr>
+      <tr><td>Disk full in production</td><td>Unbounded logs</td><td>Set log rotation + retention policy</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- ── PART 14 ────────────────────────────────────────────── -->
+    <div class="section-header" id="part-14">
+      <div class="section-number">14</div>
+      <div>
+        <div class="section-title-text">Real-World App Blueprints</div>
+        <div class="section-subtitle">SaaS, e-commerce, chat, admin tool — what to build and in what order.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>App type</th><th>Start with</th><th>Add later</th></tr>
+      <tr><td>SaaS MVP</td><td>Auth + org model + one CRUD entity</td><td>Queues, Stripe billing</td></tr>
+      <tr><td>E-commerce</td><td>Products + cart + Stripe checkout</td><td>Search, inventory, microservices at scale</td></tr>
+      <tr><td>Chat</td><td>Monolith + WebSockets + Redis pub/sub</td><td>Shard by room at scale</td></tr>
+      <tr><td>Admin tool</td><td>Next.js + Fastify + Postgres</td><td>SSO (NextAuth + Google)</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- ── PART 15 ────────────────────────────────────────────── -->
+    <div class="section-header" id="part-15">
+      <div class="section-number">15</div>
+      <div>
+        <div class="section-title-text">Team & Git Workflow</div>
+        <div class="section-subtitle">Branches, commits, PRs — the professional way.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>Practice</th><th>Rule</th></tr>
+      <tr><td>Branch naming</td><td><code>feature/short-description</code>, <code>fix/bug-name</code></td></tr>
+      <tr><td>PR size</td><td>&lt; 400 lines — smaller = faster reviews</td></tr>
+      <tr><td>Merging</td><td>1 approval + CI green = merge</td></tr>
+      <tr><td>Commits</td><td><code>feat:</code>, <code>fix:</code>, <code>chore:</code> + why in body</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- ── PART 16 ────────────────────────────────────────────── -->
+    <div class="section-header" id="part-16">
+      <div class="section-number">16</div>
+      <div>
+        <div class="section-title-text">Think Like a Senior Engineer</div>
+        <div class="section-subtitle">5 rules that separate senior from junior.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>#</th><th>Rule</th><th>Junior</th><th>Senior</th></tr>
+      <tr><td>1</td><td><strong>Ship small</strong></td><td>3-week branch</td><td>Working PR daily</td></tr>
+      <tr><td>2</td><td><strong>Measure before optimizing</strong></td><td>Adds Redis "for scale"</td><td>Runs EXPLAIN ANALYZE first</td></tr>
+      <tr><td>3</td><td><strong>Automate everything</strong></td><td>Deploys by hand</td><td>CI/CD — zero manual steps</td></tr>
+      <tr><td>4</td><td><strong>Simple > clever</strong></td><td>Fancy abstractions</td><td>Readable code that works</td></tr>
+      <tr><td>5</td><td><strong>Secure by default</strong></td><td>"Add auth later"</td><td>Auth is Day 4</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- ── PART 17 ────────────────────────────────────────────── -->
+    <div class="section-header" id="part-17">
+      <div class="section-number">17</div>
+      <div>
+        <div class="section-title-text">90-Day Growth Path</div>
+        <div class="section-subtitle">Fresher to confident engineer — what to focus each month.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>Month</th><th>Focus</th><th>Proof</th></tr>
+      <tr><td>1</td><td>First app live</td><td>Deployed URL + monitoring dashboard</td></tr>
+      <tr><td>2</td><td>Code quality</td><td>Tests added, fewer regressions</td></tr>
+      <tr><td>3</td><td>Design thinking</td><td>Architecture diagram before coding</td></tr>
+      <tr><td>4</td><td>Advanced topics</td><td>OAuth, Prisma migrations, queues</td></tr>
+      <tr><td>5</td><td>Observability</td><td>Grafana dashboard live in production</td></tr>
+      <tr><td>6</td><td>System design</td><td>Second service: payments or notifications</td></tr>
+    </table></div>
+
+    <div class="callout callout-success">
+      <div class="callout-icon">🚀</div>
+      <div><strong>Deployed beats perfect.</strong> One working app live on the internet is worth more than ten half-started projects.</div>
+    </div>
+
+    <hr>
+
+    <!-- ── APPENDIX A ──────────────────────────────────────────── -->
+    <div class="section-header" id="appendix-a">
+      <div class="section-number">A</div>
+      <div>
+        <div class="section-title-text">Copy-Paste Commands</div>
+        <div class="section-subtitle">All the terminal commands you need.</div>
+      </div>
+    </div>
+
+    <pre class="language-bash" data-lang="bash"><code class="language-bash"># Bootstrap frontend
+npx create-next-app@latest frontend --typescript --tailwind --eslint --app --src-dir
+cd frontend
+npm install @tanstack/react-query zustand react-hook-form zod @hookform/resolvers
+npx shadcn-ui@latest init && npx shadcn-ui@latest add button input card
+
+# Bootstrap backend
+mkdir api && cd api && npm init -y
+npm install fastify @fastify/cors @fastify/helmet
+npm install jsonwebtoken   # use jsonwebtoken directly — NOT @fastify/jwt
+npm install @prisma/client zod bcrypt jsonwebtoken ioredis pino pino-pretty
+npm install -D typescript tsx @types/node @types/bcrypt @types/jsonwebtoken prisma vitest
+npx prisma init
+
+# Docker
+docker-compose up --build
+docker-compose down -v && docker-compose up --build   # Wipe + restart
+
+# Prisma
+npx prisma migrate dev --name init
+npx prisma migrate deploy
+npx prisma studio
+
+# Secrets
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+# Kill processes on ports
+lsof -ti:3000 | xargs kill -9
+lsof -ti:4000 | xargs kill -9
+
+# Auth flow test
+curl -s -X POST http://localhost:4000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@test.com","password":"secret123","name":"Test User"}' | jq .
+
+TOKEN=$(curl -s -X POST http://localhost:4000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@test.com","password":"secret123"}' | jq -r '.accessToken')
+
+curl -s http://localhost:4000/auth/me -H "Authorization: Bearer $TOKEN" | jq .</code></pre>
+
+    <hr>
+
+    <!-- ── APPENDIX B ──────────────────────────────────────────── -->
+    <div class="section-header" id="appendix-b">
+      <div class="section-number">B</div>
+      <div>
+        <div class="section-title-text">Environment Variables</div>
+        <div class="section-subtitle">All env vars — what they're for and where they go.</div>
+      </div>
+    </div>
+
+    <pre class="language-bash" data-lang="bash"><code class="language-bash"># api/.env
+DATABASE_URL="postgresql://user:pass@localhost:5432/myapp"
+REDIS_URL="redis://localhost:6379"
+JWT_SECRET="generate-32-random-bytes"
+JWT_REFRESH_SECRET="different-32-random-bytes"
+PORT=4000
+NODE_ENV=development
+ALLOWED_ORIGINS="http://localhost:3000"
+LOG_LEVEL=info
+
+# frontend/.env.local
+NEXT_PUBLIC_API_URL=http://localhost:4000
+NEXT_PUBLIC_APP_URL=http://localhost:3000</code></pre>
+
+    <div class="callout callout-danger">
+      <div class="callout-icon">🚫</div>
+      <div><strong>Never commit <code>.env</code> to git.</strong> Use <code>.env.example</code> with empty values as documentation. Use <code>NEXT_PUBLIC_</code> only for URLs that are truly public.</div>
+    </div>
+
+    <hr>
+
+    <!-- ── APPENDIX C ──────────────────────────────────────────── -->
+    <div class="section-header" id="appendix-c">
+      <div class="section-number">C</div>
+      <div>
+        <div class="section-title-text">Error Decoder</div>
+        <div class="section-subtitle">See an error? Find it here and fix it.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>Error message</th><th>What it means</th><th>How to fix</th></tr>
+      <tr><td><code>Cannot find module '@fastify/cors'</code></td><td>Package not installed</td><td><code>npm install @fastify/cors</code></td></tr>
+      <tr><td><code>Cannot find module 'fastify-cors'</code></td><td>Old abandoned package</td><td>Change to <code>@fastify/cors</code></td></tr>
+      <tr><td><code>EADDRINUSE 0.0.0.0:4000</code></td><td>Port in use</td><td><code>lsof -ti:4000 | xargs kill -9</code></td></tr>
+      <tr><td><code>ECONNREFUSED 127.0.0.1:5432</code></td><td>Postgres not running</td><td><code>docker-compose up postgres</code></td></tr>
+      <tr><td><code>P2002: Unique constraint failed</code></td><td>Duplicate value</td><td>Return 409 "Email already in use"</td></tr>
+      <tr><td><code>P2025: Record not found</code></td><td>Row doesn't exist</td><td><code>if (!result) return reply.status(404).send()</code></td></tr>
+      <tr><td><code>JsonWebTokenError: invalid signature</code></td><td>Wrong JWT_SECRET</td><td>Ensure same secret for sign and verify</td></tr>
+      <tr><td><code>TokenExpiredError: jwt expired</code></td><td>15min token age</td><td>Return 401 TOKEN_EXPIRED — client refreshes</td></tr>
+      <tr><td><code>Hydration mismatch</code></td><td>Server/client render different</td><td>Add 'use client' or move to Server Component</td></tr>
+      <tr><td><code>useQuery is not a function</code></td><td>No QueryClientProvider</td><td>Wrap app in <code>&lt;QueryClientProvider&gt;</code></td></tr>
+      <tr><td><code>prisma.todo.findMany is not a function</code></td><td>Client not generated</td><td><code>npx prisma generate</code></td></tr>
+      <tr><td>API returns HTML instead of JSON</td><td>Route not registered</td><td>Check Fastify plugin registration + prefix</td></tr>
+      <tr><td>CORS error in browser</td><td>Wrong origin or CORS not setup</td><td>Register <code>@fastify/cors</code> with your frontend URL</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- ── APPENDIX D ──────────────────────────────────────────── -->
+    <div class="section-header" id="appendix-d">
+      <div class="section-number">D</div>
+      <div>
+        <div class="section-title-text">Glossary</div>
+        <div class="section-subtitle">Every term explained in 30 seconds.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper"><table>
+      <tr><th>Term</th><th>Meaning</th></tr>
+      <tr><td><strong>API</strong></td><td>Backend HTTP service your UI calls</td></tr>
+      <tr><td><strong>CRUD</strong></td><td>Create, Read, Update, Delete — the four DB operations</td></tr>
+      <tr><td><strong>JWT</strong></td><td>Signed token proving who the user is, no DB lookup needed</td></tr>
+      <tr><td><strong>bcrypt</strong></td><td>Algorithm for hashing passwords — never store plain text</td></tr>
+      <tr><td><strong>ORM</strong></td><td>Library (Prisma) that lets you query DB with TypeScript not raw SQL</td></tr>
+      <tr><td><strong>Migration</strong></td><td>Versioned change to your DB schema, applied in order</td></tr>
+      <tr><td><strong>Docker</strong></td><td>Packages app + dependencies into a container that runs identically everywhere</td></tr>
+      <tr><td><strong>CI/CD</strong></td><td>Automated: test → build → deploy on every push</td></tr>
+      <tr><td><strong>CORS</strong></td><td>Browser security blocking frontend from calling different-origin API</td></tr>
+      <tr><td><strong>Rate limiting</strong></td><td>Block users sending too many requests (prevents brute force)</td></tr>
+      <tr><td><strong>N+1 query</strong></td><td>Bug: 10 users × 1 query for todos each = 11 DB trips. Use JOIN instead</td></tr>
+      <tr><td><strong>Index</strong></td><td>DB structure making lookups fast. Add to columns you filter on</td></tr>
+      <tr><td><strong>p95 latency</strong></td><td>95% of requests are faster than this number</td></tr>
+      <tr><td><strong>Rollback</strong></td><td>Deploy the previous known-good version</td></tr>
+      <tr><td><strong>Staging</strong></td><td>Production-like environment for testing before real users</td></tr>
+      <tr><td><strong>TTL</strong></td><td>Time-To-Live — how long a cache entry stays valid</td></tr>
+      <tr><td><strong>Health check</strong></td><td><code>GET /health</code> — returns 200 when app is ready</td></tr>
+      <tr><td><strong>Graceful shutdown</strong></td><td>Finish in-flight requests before stopping on SIGTERM</td></tr>
+    </table></div>
+
+    <hr>
+
+    <!-- Final CTA -->
+    <div style="background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(34,211,238,0.05) 100%); border: 1px solid var(--border); border-radius: 20px; padding: 48px; text-align: center; margin-top: 48px;">
+      <div style="font-size: 48px; margin-bottom: 16px;">🚀</div>
+      <h2 style="border: none; margin: 0 0 12px; font-size: 28px; background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">You are ready to ship</h2>
+      <p style="color: var(--muted); max-width: 480px; margin: 0 auto 28px; font-size: 16px;">
+        Open <code>starter-app/</code>, run <code>docker-compose up --build</code>, and follow PART 0 day by day. Every senior engineer started exactly here.
+      </p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="#part-0" class="btn btn-primary" style="font-size: 15px; padding: 10px 24px;">Start Day 1 →</a>
+        <a href="#part-12" class="btn btn-outline" style="font-size: 15px; padding: 10px 24px;">Launch Checklist</a>
+        <a href="#part-13" class="btn btn-outline" style="font-size: 15px; padding: 10px 24px;">Troubleshooting</a>
+      </div>
+    </div>
+
+  </article>
+</div><!-- #content -->
+
+<script>
+  // Initialize Mermaid
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#6366f1',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#4f46e5',
+      lineColor: '#8892a4',
+      secondaryColor: '#1a1d27',
+      tertiaryColor: '#0f1117',
+      background: '#1a1d27',
+      mainBkg: '#1a1d27',
+      nodeBorder: '#2a2d3e',
+      clusterBkg: '#0f1117',
+      titleColor: '#e2e8f0',
+      edgeLabelBackground: '#1a1d27',
+      fontFamily: '"Inter", sans-serif',
+      fontSize: '13px',
+    },
+    flowchart: { curve: 'basis', padding: 16 },
+    sequence: { mirrorActors: false, fontSize: 13 },
+  })
+
+  // Sidebar toggle for mobile
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open')
+  }
+
+  // Active nav link on scroll
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]')
+  const sections = Array.from(navLinks)
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean)
+
+  function updateActiveLink() {
+    let current = ''
+    sections.forEach(section => {
+      if (section.getBoundingClientRect().top <= 80) current = section.id
+    })
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current)
+    })
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true })
+  updateActiveLink()
+
+  // Close sidebar when clicking a link on mobile
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 960) {
+        document.getElementById('sidebar').classList.remove('open')
+      }
+    })
+  })
+
+  // Make checkboxes functional (save state in sessionStorage)
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+    const key = `handbook-cb-${i}`
+    cb.checked = sessionStorage.getItem(key) === 'true'
+    cb.addEventListener('change', () => sessionStorage.setItem(key, cb.checked))
+  })
+</script>
+
+</body>
+</html>
